@@ -1,0 +1,9 @@
+\babel@toc {french}{}
+\contentsline {section}{\numberline {1}Parcours \& Comp\IeC {\'e}tences}{3}{section.1}
+\contentsline {section}{\numberline {2}Activit\IeC {\'e} d'Enseignement}{4}{section.2}
+\contentsline {section}{\numberline {3}Activit\IeC {\'e} Administrative \& Autres Responsabilit\IeC {\'e}s Collectives}{5}{section.3}
+\contentsline {section}{\numberline {4}Activit\IeC {\'e} de Recherche}{6}{section.4}
+\contentsline {section}{\numberline {5}Publications \& Communications}{13}{section.5}
+\contentsline {section}{\numberline {6}Projet de Recherche \& d'Enseignement}{15}{section.6}
+\contentsline {section}{7\hspace {0.4cm}R\IeC {\'e}f\IeC {\'e}rences}{15}{section.6}
+\contentsline {section}{\numberline {8}Annexes}{18}{section.8}
