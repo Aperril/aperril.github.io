@@ -171,7 +171,7 @@ dl dd a:hover {color:#fff}
 .btns {text-align:left; padding-top:20px}
 .btns a {display:inline-block; margin:0 10px 0 0px}
 
-.move {margin-top:0em; margin-right: 30em}
+.move {margin-top:0em; margin-right: 0em}
 
 a#pdf {display: block; float: left; background: #d2d2d2; color: black; padding: 3px 10px 3px 10px; text-decoration: none;  }
 a#pdf:hover { background: #222; color:white; }
