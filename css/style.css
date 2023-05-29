@@ -93,6 +93,7 @@ h1 {margin:27px 0 0 23px; display:inline-block; z-index:100}
 .icon-2 {background:url(../images/social2.png) 0 0 no-repeat; margin-left:7px; width:30px; height:30px; display:block; background-size:30px;}
 .icon-3 {background:url(../images/social3.png) 0 0 no-repeat; margin-left:7px; width:30px; height:30px; display:block; background-size:30px;}
 .icon-4 {background:url(../images/social4.png) 0 0 no-repeat; margin-left:7px; width:30px; height:30px; display:block; background-size:30px;}
+.icon-5 {background:url(../images/social5.png) 0 0 no-repeat; margin-left:7px; width:30px; height:30px; display:block; background-size:34px;}
 .social-icons a:hover {background-color:#e7dfcc}
 
 nav {z-index:100; border-radius:8px; background:#ececec; margin:22px 6px 0 6px; padding:4px} 
@@ -117,6 +118,7 @@ ul.menu2 li:hover , ul.menu2 li.current {background:url(../images/nav2.jpg) 0 0 
 
 .line-1 {background:url(../images/line.png) 0 bottom repeat-x; padding-bottom:29px; margin-bottom:24px}
 .img-border {border:#d2c29d 4px solid; border-radius:12px}
+.img-nova{border:#d2c29d 4px solid; border-radius:12px}
 
 .block-1>div {background:#e0e0e1; float:left; width:200px; margin-right:27px}
 .block-1>div h3 {background:#e0e0e1; margin-bottom:16px}
