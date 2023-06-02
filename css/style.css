@@ -192,6 +192,10 @@ textarea {vertical-align: top;height: 5em;}
 .button {padding-left: 90px;}
 button {margin-left: .5em;}
 
+.align-icon {
+    vertical-align: middle;
+    margin-right: 5px; /* Optional: Add some spacing between the icon and the heading */
+}
 
 /**********************no java no spoil**********************/
 div.spoiler {padding: 20px 10px 10px 10px; width: 100%; border: 1px solid; border-color: #d2d2d2; position: relative;}
