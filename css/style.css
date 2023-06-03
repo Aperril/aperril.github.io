@@ -117,8 +117,8 @@ ul.menu2 li:hover , ul.menu2 li.current {background:url(../images/nav2.jpg) 0 0 
 .border-1 {background:url(../images/border-1.gif) 0 bottom repeat-x}
 
 .line-1 {background:url(../images/line.png) 0 bottom repeat-x; padding-bottom:29px; margin-bottom:24px}
-.img-border {border:#d2c29d; 4px solid; border-radius:12px}
-.img-nova{border:#d2c29d; 4px solid; border-radius:12px}
+.img-border{border:#d2c29d 4px solid; border-radius:12px}
+.img-nova{border:#d2c29d 4px solid; border-radius:12px}
 
 .block-1>div {background:#e0e0e1; float:left; width:200px; margin-right:27px}
 .block-1>div h3 {background:#e0e0e1; margin-bottom:16px}
