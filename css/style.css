@@ -134,8 +134,11 @@ ul.menu2 li:hover , ul.menu2 li.current {background:url(../images/nav2.jpg) 0 0 
 .box-1 {overflow:hidden; padding-bottom:10px}
 .box-1>span {display:inline-block; width:50px; font-size:14px; line-height:25px; color:#d2c29d; font-weight:bold; float:left}
 
-.block-4>div {float:left; width:208px; margin-right:18px}
-.block-4>div img {margin-bottom:18px}
+.block-4 {display: flex; flex-wrap: wrap;}
+.block-4 > div {margin-right: 18px;}
+.block-4 > div.formulaire {width: calc(50% - 9px);}
+.block-4bis {width: calc(90% - 9px); display: flex; align-items: center;}
+.block-4bis .twitter-timeline {width: 90%;}
 
 .block-5 {float:left; width:270px; margin-right:36px}
 .block-6 {float:left; width:580px}
