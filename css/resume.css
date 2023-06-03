@@ -10,7 +10,7 @@ h2 { font-size: 152% }
 h3, h4 { font-size: 122%; } 
 h1, h2, h3, h4 { color: #333; }
 p { font-size: 100%; line-height: 18px; padding-right: 3em; }
-a { color: #d2c29d } 
+a { color: #D2C29D} 
 a:hover { text-decoration: none; } 
 strong { font-weight: bold; } 
 p.enlarge { font-size: 144%; padding-right: 6.5em; line-height: 24px; }
