@@ -98,7 +98,7 @@ h1 {margin:27px 0 0 23px; display:inline-block; z-index:100}
 
 nav {z-index:100; border-radius:8px; background:#ececec; margin:22px 6px 0 6px; padding:4px} 
 nav>div {background:url(../images/nav.jpg) 0 0 repeat-x #e0e0e1; border-radius:12px 8px 8px 12px}
-ul.menu {margin:0 1px 0 0;  border-right:#e0e0e1 1px solid; display:inline-block; float:left}
+ul.menu {margin:0 0px 0 0;  border-right:#e0e0e1 1px solid; display:inline-block; float:left}
 ul.menu li {float:left; line-height:17px; margin:0 0 0 0; background:url(../images/transp.png) 0 0 repeat; border-right:#e0e0e1 1px solid; border-left:#e0e0e1 1px solid}
 ul.menu li a {font-size:13px; line-height:17px; color:#000000; font-weight:bold; display:block; padding:23px 28px 24px 28px}
 ul.menu li.home-page {display:inline-block; background:url(../images/transp.png) 0 0 repeat; border-radius:8px 0 0 8px; border:none !important}
