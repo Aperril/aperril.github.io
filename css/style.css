@@ -107,8 +107,8 @@ ul.menu li.home-page a {padding:21px 22px 24px 23px !important}
 ul.menu li.home-page span {background:url(../images/home-page-imag.png) 0 0 no-repeat; width:20px; height:20px; display:block; background-size:20px; background-color:transparent;}
 ul.menu li.home-page img {width:50%; height:50%;}
 
-ul.menu2 li {float:left; line-height:13px; margin:0 0 0 0; background:url(../images/transp.png) 0 0 repeat; border-right:#e0e0e1 0px solid; border-left:#e0e0e1 1px solid} 
-ul.menu2 li a {font-size:13px; line-height:19px; color:#000000; font-weight:bold; display:block; padding:10px 43px 10px 44px}
+ul.menu2 li {float:left; line-height:13px; margin:0 0 0 0; background:url(../images/transp.png) 0 0 repeat; border-right:#e0e0e1 0px solid; border-left:#e0e0e1 0px solid} 
+ul.menu2 li a {font-size:13px; line-height:19px; color:#000000; font-weight:bold; display:block; padding:10px 43px 10px 40px}
 ul.menu2 li:hover , ul.menu2 li.current {background:url(../images/nav2.jpg) 0 0 repeat-x #fff; border-right:#fff 1px solid; border-left:#fff 1px solid}
 
 /*********************************content*************************************/
