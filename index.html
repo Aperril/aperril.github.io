@@ -5,26 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>QSP/PK Modeler – Lead Scientist | Lyon</title>
   <meta name="description" content="Lead Scientist & QSP–PK modeler in Lyon. Biomath expert in mechanistic modeling (ODE/PDE), oncology & neurosciences. Collaboration-driven and results-focused." />
-  <link rel="canonical" href="https://example.com/" />
+  <link rel="canonical" href="https://aperril.github.io/" />
   <meta property="og:title" content="Lead Scientist & QSP–PK Modeler" />
   <meta property="og:description" content="Biomathematics, QSP/PBPK, oncology & neurosciences. Projects, publications, toolbox and contact." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="headshot.jpg" />
   <meta name="theme-color" content="#2a7ae2" />
   <style>
-:root {
-  --bg: #E0F2E9;          /* Honeydew - fond global */
-  --text: #4D6A6D;        /* Payne’s Gray - texte principal */
-  --muted: #5B787A;       /* Freedom’s Green - texte secondaire */
-  --line: #CEB5A7;        /* Pale Dogwood - bordures */
-  --accent: #A1B5D8;      /* Powder Blue - liens & accent */
-  --accent-strong: #B76D68; /* Indian Red - hover & focus */
-  --card: #ffffff;        /* cartes blanches pour contraste */
-  --shadow: 0 10px 25px rgba(0,0,0,.05);
-  --radius-lg: 18px;
-  --radius-xl: 26px;
-  --maxw: 1080px;
-}
+:root { --bg: #E0F2E9; /* Honeydew - fond global */ --text: #4D6A6D; /* Payne’s Gray - texte principal */ --muted: #5B787A; /* Freedom’s Green - texte secondaire */ --line: #CEB5A7; /* Pale Dogwood - bordures */ --accent: #A1B5D8; /* Powder Blue - liens & accent */ --accent-strong: #B76D68; /* Indian Red - hover & focus */ --card: #ffffff; /* cartes blanches pour contraste */ --shadow: 0 10px 25px rgba(0,0,0,.05); --radius-lg: 18px; --radius-xl: 26px; --maxw: 1080px; }
 
     * { box-sizing: border-box; }
     html, body { height: 100%; }
@@ -280,6 +268,39 @@ html {overflow-y: scroll}
   display: inline-block;
 }
 
+/* Hide toggle button on desktop */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+}
+
+/* Mobile nav styles */
+@media (max-width: 720px) {
+  .tabs {
+    display: none;          /* hidden by default */
+    flex-direction: column; /* vertical stack */
+    width: 100%;
+    margin-top: 8px;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 10px;
+  }
+  .tabs.show {
+    display: flex; /* shown when toggled */
+  }
+  .menu-toggle {
+    display: block; /* visible only on mobile */
+    margin-left: auto;
+  }
+  .nav {
+    flex-wrap: wrap;
+  }
+}
 
 
 
@@ -291,6 +312,13 @@ html {overflow-y: scroll}
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   </style>
   <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".menu-toggle");
+  const tabs = document.querySelector(".tabs");
+  toggle.addEventListener("click", () => {
+    tabs.classList.toggle("show");
+  });
+});
     // Simple hash router for tabs, with ARIA current updates
     const routes = ["home","experience","projects","publications","toolbox","contact"]; 
     function activate(target){
@@ -314,34 +342,42 @@ html {overflow-y: scroll}
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Your Lead Scientist - Project Manager - QSP-PK Modeler",
+    "name": "Angélique Perrillat-Mercerot",
     "jobTitle": "Your Lead Scientist - Project Manager - QSP-PK Modeler",
     "address": {"@type":"PostalAddress","addressLocality":"Lyon","addressCountry":"France"},
-    "url": "https://example.com",
-    "knowsAbout": ["QSP","PBPK","PKPD","Mathematical modeling","Oncology","Neurosciences"],
-    "image": "headshot.jpg"
+    "url": "https://aperril.github.io/",
+    "knowsAbout": ["QSP","PBPK","PKPD","ODE","Mathematical modeling","Oncology","Neurosciences"],
+    "image": "images/nova3.JPG"
   }
   </script>
 </head>
 <body>
-  <div class="topbar" role="navigation" aria-label="Primary">
-    <nav class="nav">
-<a class="brand" href="#home">
-  <img src="images/nova3.JPG" alt="Portrait of a QSP–PK modeler in Lyon" />
-  <span>
-    <span style="color: indianred; font-weight:700;">Angélique Perrillat-Mercerot, PhD</span><br/>
-    Driving Scientific Impact & Innovation<br/>
-    <small style="font-weight:500;color:var(--muted);">Lyon • Modeling • QSP/PBPK • Oncology • Neurosciences</small>
-  </span>
-</a>
+<div class="topbar" role="navigation" aria-label="Primary">
+  <nav class="nav">
+    <a class="brand" href="#home">
+      <img src="images/nova3.JPG" alt="Portrait of a QSP–PK modeler in Lyon" />
+      <span>
+        <span style="color: indianred; font-weight:700;">Angélique Perrillat-Mercerot, PhD</span><br/>
+        Driving Scientific Impact & Innovation<br/>
+        <small style="font-weight:500;color:var(--muted);">Lyon • Modeling • QSP/PBPK • Oncology • Neurosciences</small>
+      </span>
+    </a>
+
+    <!-- Mobile menu toggle -->
+    <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+
+    <!-- Tabs (nav links) -->
+    <div class="tabs">
       <a class="tab" data-tab="home" href="#home" aria-current="page">Home</a>
       <a class="tab" data-tab="experience" href="#experience">Experience</a>
       <a class="tab" data-tab="projects" href="#projects">Projects</a>
       <a class="tab" data-tab="publications" href="#publications">Publications</a>
       <a class="tab" data-tab="toolbox" href="#toolbox">Toolbox</a>
       <a class="tab" data-tab="contact" href="#contact">Contact</a>
-    </nav>
-  </div>
+    </div>
+  </nav>
+</div>
+
 
   <!-- HERO -->
   <header class="hero" id="hero">
@@ -388,7 +424,7 @@ html {overflow-y: scroll}
         </div>
       </div>
 
- <!-- HERO: Laptop with PK app + typing text -->
+<!-- HERO: Laptop with PK app + typing text -->
 <section class="hero2">
   <div class="laptop">
     <!-- camera notch -->
@@ -402,7 +438,7 @@ html {overflow-y: scroll}
           <h5>PK Inputs</h5>
           <label>CL <input type="range" id="cl" min="1" max="20" step="0.5" value="5"></label>
           <label>V <input type="range" id="v" min="10" max="100" step="1" value="30"></label>
-          
+
           <!-- Oral-only inputs -->
           <div class="oral-only">
             <label>Ka <input type="range" id="ka" min="0.1" max="3" step="0.1" value="1.2"></label>
@@ -425,7 +461,9 @@ html {overflow-y: scroll}
         <!-- chart area -->
         <div class="chart-area">
           <header>Time - Concentration - Solution</header>
-          <svg id="chart" viewBox="0 0 600 400" class="pk-chart"></svg>
+          <div class="chart-wrapper">
+            <svg id="chart" viewBox="0 0 600 400" class="pk-chart"></svg>
+          </div>
         </div>
       </div>
     </div>
@@ -444,7 +482,6 @@ html {overflow-y: scroll}
     });
   }
 
-  // simple PK solver (1-compartment with first-order absorption or IV bolus)
   function simulate() {
     const CL = +document.getElementById("cl").value;
     const V = +document.getElementById("v").value;
@@ -452,9 +489,8 @@ html {overflow-y: scroll}
     const route = document.getElementById("route").value;
 
     const k = CL / V;
-    const times = [...Array(61).keys()].map(t => t * 0.5); // 0–30 h in 0.5 h steps
+    const times = [...Array(61).keys()].map(t => t * 0.5);
     let conc = [];
-
     let typedStrings = [];
 
     if (route === "oral") {
@@ -464,37 +500,34 @@ html {overflow-y: scroll}
         (F * Dose * Ka / (V * (Ka - k))) * (Math.exp(-k * t) - Math.exp(-Ka * t))
       );
       typedStrings = [
-        'What is the solution you are looking for ?',
+        'What is the solution you are looking for?',
         'Simulation Completed.',
         `CL=${CL}, V=${V}, Ka=${Ka}, F=${F}, Dose=${Dose}`,
-        'What is the solution you are looking for ?'
+        'What is the solution you are looking for?'
       ];
     } else {
       conc = times.map(t => (Dose / V) * Math.exp(-k * t));
       typedStrings = [
-        'What is the solution you are looking for ?',
+        'What is the solution you are looking for?',
         'Simulation Complete.',
         `CL=${CL}, V=${V}, Dose=${Dose}`,
-        'What is the solution you are looking for ?'
+        'What is the solution you are looking for?'
       ];
     }
 
     // Draw chart
     const svg = document.getElementById("chart");
-    svg.innerHTML = ""; // reset
+    svg.innerHTML = "";
 
-    // axes/grid
     for (let i = 0; i <= 4; i++) {
       let y = 240 - i * 60;
       svg.innerHTML += `<line x1="0" y1="${y}" x2="600" y2="${y}" stroke="rgba(255,255,255,.15)" />`;
     }
 
-    // scale
     const maxC = Math.max(...conc) * 1.2;
     const scaleX = 600 / times[times.length - 1];
     const scaleY = 220 / maxC;
 
-    // path for curve
     let d = "";
     conc.forEach((c, i) => {
       const x = times[i] * scaleX;
@@ -503,7 +536,6 @@ html {overflow-y: scroll}
     });
     svg.innerHTML += `<path d="${d}" fill="none" stroke="white" stroke-width="2" />`;
 
-    // points (every 2 h)
     times.forEach((t, i) => {
       if (t % 2 === 0) {
         const x = t * scaleX;
@@ -512,12 +544,11 @@ html {overflow-y: scroll}
       }
     });
 
-    // dynamic caption (Typed.js inside SVG foreignObject)
     svg.innerHTML += `
       <foreignObject x="20" y="290" width="600" height="2500">
-<div xmlns="http://www.w3.org/1999/xhtml" id="typed"
-     style="font-family:monospace; font-size:24px; color:#00b4dc; line-height:1.4;">
-</div>
+        <div xmlns="http://www.w3.org/1999/xhtml" id="typed"
+          style="font-family:monospace; font-size:24px; color:#00b4dc; line-height:1.4;">
+        </div>
       </foreignObject>
     `;
 
@@ -537,59 +568,172 @@ html {overflow-y: scroll}
 
 <style>
 
-.bmc-wrapper {
-  display: inline-flex;
-  font-family: ui-sans-serif, system-ui;
-}
-
-.footer-bar .bmc-wrapper {
-  margin: 0 1em;
-}
-
-.hero2 {
+  .hero2 {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 3rem 1rem;
   background: linear-gradient(180deg, #f7fafc, #eef4ff);
-}
-.laptop{
-  position:relative;
-  width:min(800px,92vw);
-  aspect-ratio: 16 / 10;
-  border-radius:18px;
-  background:var(--bezel);
-  box-shadow:0 20px 50px rgba(8,20,48,.25);
-  overflow:hidden;
-}
-.camera{position:absolute; top:8px; left:50%; transform:translateX(-50%);
-  width:68px; height:12px; background:#060a12; border-radius:8px;
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,.05);}
-.screen{position:absolute; inset:18px 18px 28px 18px;background:var(--screen);
-  border-radius:12px; overflow:hidden;box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);}
-.pk-app{display:grid; grid-template-columns: 260px 1fr; height:100%;}
-.panel{background:var(--panel);padding:1rem; color:var(--ink);
-  border-right:1px solid rgba(255,255,255,.06);}
-.panel h5{ margin:0 0 .75rem 0; font-size:0.95rem; }
-.panel label{display:flex; flex-direction:column; font-size:.85rem; margin:.4rem 0;}
-.panel input, .panel select{ width:100%; }
-.panel button{margin-top:.8rem; width:100%; padding:.55rem .8rem;
-  border:none; border-radius:10px; background:var(--accent); color:#04202a;
-  font-weight:600; cursor:pointer;}
-.chart-area{position:relative; padding:1rem; color:var(--ink); display:flex; flex-direction:column; height:100%;}
-.chart-area header{font-size:1rem; opacity:.9; margin-bottom:.4rem;}
-.pk-chart{ width:100%; height:100%; max-height:260px; background:#101826;}
-.base{position:absolute; left:-3%; right:-3%; bottom:-14px; height:22px;
-  background:linear-gradient(#aab3c0,#8f98a5); border-radius:0 0 22px 22px;
-  box-shadow: 0 8px 18px rgba(10,20,40,.25);}
-@media (max-width: 800px){
-  .pk-app{ grid-template-columns: 1fr; }
-  .panel{ border-right:none; border-bottom:1px solid rgba(255,255,255,.06); display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
-  .panel h5{ grid-column:1/-1; }
-  .panel button{ grid-column:1/-1; }
-  .pk-chart{ max-height:200px; }
+  
+  /* app-local colors */
+  --bezel: #202A3F;
+  --screen: #101826;
+  --panel: #1C2536;
+  --ink: #fff;
+  --accent: #00b4dc;
 }
 
+.laptop {
+  position: relative;
+  width: min(800px, 92vw);
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  background: var(--bezel);
+  box-shadow: 0 20px 50px rgba(8,20,48,.25);
+  overflow: hidden;
+}
+
+.camera {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 68px;
+  height: 12px;
+  background: #060a12;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.05);
+}
+
+.screen {
+  position: absolute;
+  inset: 18px 18px 28px 18px;
+  background: var(--screen);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+.pk-app {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  height: 100%;
+}
+
+.panel {
+  background: var(--panel);
+  padding: 1rem;
+  color: var(--ink);
+  border-right: 1px solid rgba(255,255,255,.06);
+}
+
+.panel h5 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+}
+
+.panel label {
+  display: flex;
+  flex-direction: column;
+  font-size: .85rem;
+  margin: 0.4rem 0;
+}
+
+.panel input,
+.panel select {
+  width: 100%;
+}
+
+.panel button {
+  margin-top: 0.8rem;
+  width: 100%;
+  padding: 0.55rem 0.8rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #04202a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chart-area {
+  position: relative;
+  padding: 1rem;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-x: auto;
+}
+
+.chart-area header {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 0.4rem;
+}
+
+.pk-chart {
+  width: 100%;
+  height: 100%;
+  max-height: 260px;
+  background: var(--screen);
+}
+
+.base {
+  position: absolute;
+  left: -3%;
+  right: -3%;
+  bottom: -14px;
+  height: 22px;
+  background: linear-gradient(#aab3c0,#8f98a5);
+  border-radius: 0 0 22px 22px;
+  box-shadow: 0 8px 18px rgba(10,20,40,.25);
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 800px) {
+  .pk-app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 1rem;
+    height: auto;
+  }
+
+  .panel {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .panel h5,
+  .panel button {
+    width: 100%;
+  }
+
+  .pk-chart {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .laptop {
+    width: 90vw;
+    aspect-ratio: auto;
+  }
+
+  .screen {
+    inset: 12px 12px 20px 12px;
+  }
+
+  .panel input[type="range"] {
+    height: 28px;
+  }
+
+  .panel label {
+    margin: 0.6rem 0;
+  }
+}
 </style>
 
 
@@ -785,8 +929,8 @@ During this program, I consolidated my expertise in R, Python, and Machine Learn
 <section class="section" id="projects" hidden>
   <header><h2>Selected Projects</h2></header>
   <div class="content">
-  <iframe src="the_game.html" width="1000" height="450" style="border:1px solid var(--line);"></iframe>
-      <div class="grid">    </div>
+    <div id="gameContainer"></div>
+    <div class="grid"></div>
   </div>
 </section>
 
@@ -816,35 +960,52 @@ During this program, I consolidated my expertise in R, Python, and Machine Learn
     transform: translateY(-2px);
   }
 
-.learn-more {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: var(--accent);
-  color: white;
-  font-size: 0.85rem;
-  padding: 4px 8px;
-  border-radius: 4px;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out, background 0.3s ease;
-  pointer-events: none;
-}
+  .learn-more {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: var(--accent);
+    color: white;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out, background 0.3s ease;
+    pointer-events: none;
+  }
 
-article.card:hover .learn-more {
-  opacity: 1;
-  background: var(--accent-strong); /* Changes color on hover */
-}
+  article.card:hover .learn-more {
+    opacity: 1;
+    background: var(--accent-strong);
+  }
 
   .tag-label, .software-label {
     border-radius: 4px;
     padding: 2px 6px;
     font-size: 0.75rem;
   }
+
+  /* Responsive iframe and fallback */
+  #gameContainer iframe, #gameContainer p {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 1rem;
+    display: block;
+  }
+  #gameContainer p {
+    text-align: center;
+    font-size: 1.2rem;
+    background: #f9f9f9;
+    color: #333;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
 </style>
 
 <script>
 (() => {
-  const projects = [
+const projects = [
   {
   "id": "adc-breast-to-gastric-cancer",
   "title": "In Silico Translation of ADC Therapy from Breast to Gastric Cancer",
@@ -1187,8 +1348,30 @@ article.card:hover .learn-more {
   const modalContent = modal.querySelector("#modalContent");
   const modalImage = modal.querySelector("#modalImage");
   const closeBtn = modal.querySelector("#modalCloseBtn");
+  const gameContainer = document.getElementById("gameContainer");
 
-  // Show projects
+  // Function to load game iframe or fallback message
+  function loadGame() {
+    gameContainer.innerHTML = "";
+    if (window.innerWidth >= 800) {
+      const iframe = document.createElement("iframe");
+      iframe.src = "the_game.html";
+      iframe.width = "100%";
+      iframe.height = "450";
+      iframe.style.border = "1px solid var(--line)";
+      iframe.style.borderRadius = "8px";
+      gameContainer.appendChild(iframe);
+    } else {
+      const message = document.createElement("p");
+      message.textContent = "🐾 This kitty needs more screen real estate. Try opening the game on another device!";
+      gameContainer.appendChild(message);
+    }
+  }
+
+  window.addEventListener("load", loadGame);
+  window.addEventListener("resize", loadGame);
+
+  // Show project cards
   projects.forEach(proj => {
     const article = document.createElement("article");
     article.className = "col-6 card";
@@ -1211,32 +1394,29 @@ article.card:hover .learn-more {
   // Unhide section
   document.getElementById("projects").hidden = false;
 
-  // Open modal
-function openModal(proj) {
-  modalTitle.textContent = proj.title;
-  modalContent.innerHTML = proj.details; // <-- Replace with project details HTML
-  modalImage.style.display = "none";     // Optional: if details contain their own images
-  modalImage.src = "";
-  modalImage.alt = "";
-  modal.style.display = "flex";
-  document.body.style.overflow = "hidden";
-  closeBtn.focus();
-}
-
-  // Close modal
+  // Modal functions
+  function openModal(proj) {
+    modalTitle.textContent = proj.title;
+    modalContent.innerHTML = proj.details;
+    modalImage.style.display = "none";
+    modalImage.src = "";
+    modalImage.alt = "";
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+    closeBtn.focus();
+  }
   function closeModal() {
     modal.style.display = "none";
     document.body.style.overflow = "";
   }
 
-  // Event listeners for open modal
+  // Event listeners
   grid.addEventListener("click", e => {
     const card = e.target.closest("article.card");
     if (!card) return;
     const proj = projects.find(p => p.id === card.dataset.id);
     if (proj) openModal(proj);
   });
-
   grid.addEventListener("keydown", e => {
     if ((e.key === "Enter" || e.key === " ") && e.target.matches("article.card")) {
       e.preventDefault();
@@ -1244,17 +1424,12 @@ function openModal(proj) {
       if (proj) openModal(proj);
     }
   });
-
-  // Close modal handlers
   closeBtn.addEventListener("click", closeModal);
-  modal.addEventListener("click", e => {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && modal.style.display === "flex") closeModal();
-  });
+  modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.style.display === "flex") closeModal(); });
 })();
 </script>
+
 
 
 <!-- PUBLICATIONS -->
@@ -1918,3 +2093,8 @@ function openModal(proj) {
 
 </body>
 </html>
+
+
+
+
+
