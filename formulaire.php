@@ -1,32 +1,38 @@
 <?php
-    // S'il y des données de postées
-    if ($_SERVER['REQUEST_METHOD']=='POST') {
-     
-      // (1) Code PHP pour traiter l'envoi de l'email
-     
-      // Récupération des variables et sécurisation des données
-      $nom = htmlentities($_POST['nom']); // htmlentities() convertit des caractères "spéciaux" en équivalent HTML
-      $objet = htmlentities($_POST['objet']);
-      $mail = htmlentities($_POST['mail']);
-      $message = htmlentities($_POST['message']);
-     
-      // Variables concernant l'email
-     
-      $destinataire = 'a.perrillat@live.fr'; // Adresse email du webmaster (à personnaliser)
-      $contenu = '<html><head><title> '.$objet.' </title></head><body>';
-      $contenu .= '<p>Tu as un nouveau message !</p>';
-      $contenu .= '<p><strong>Nom</strong>: '.$nom.'</p>';
-      $contenu .= '<p><strong>Email</strong>: '.$mail.'</p>';
-      $contenu .= '<p><strong>Message</strong>: '.$message.'</p>';
-      $contenu .= '</body></html>'; // Contenu du message de l'email (en XHTML)
-     
-      // Pour envoyer un email HTML, l'en-tête Content-type doit être défini
-      $headers = 'MIME-Version: 1.0'."\r\n";
-      $headers .= 'Content-type: text/html; charset=iso-8859-1'."\r\n";
-     
-      // Envoyer l'email
-      mail($destinataire, $objet, $contenu, $headers); // Fonction principale qui envoi l'email
-      header("location:index.html"); // Afficher un message pour indiquer que le message a été envoyé
-      // (2) Fin du code pour traiter l'envoi de l'email
+// Only run if form was submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // Get and sanitize input
+    $nom = htmlspecialchars($_POST['nom']);
+    $objet = htmlspecialchars($_POST['objet']);
+    $mail = htmlspecialchars($_POST['mail']);
+    $message = htmlspecialchars($_POST['message']);
+
+    // Recipient
+    $destinataire = 'a.perrillat@live.fr';
+
+    // Email content (HTML)
+    $contenu = '<html><head><title>' . $objet . '</title></head><body>';
+    $contenu .= '<p>You have a new message!</p>';
+    $contenu .= '<p><strong>Name</strong>: ' . $nom . '</p>';
+    $contenu .= '<p><strong>Email</strong>: ' . $mail . '</p>';
+    $contenu .= '<p><strong>Message</strong>: ' . nl2br($message) . '</p>';
+    $contenu .= '</body></html>';
+
+    // Headers for HTML email
+    $headers = "MIME-Version: 1.0\r\n";
+    $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+    $headers .= "From: " . $mail . "\r\n";  // Optional: sender email
+
+    // Send email
+    if (mail($destinataire, $objet, $contenu, $headers)) {
+        // Redirect back to homepage with success message
+        header("Location: index.html?success=1");
+        exit;
+    } else {
+        // Redirect back with error
+        header("Location: index.html?error=1");
+        exit;
     }
-    ?>
+}
+?>

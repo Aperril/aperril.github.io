@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QSP Cat Adventure</title>
+  <style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background: white;
+      margin: 0;
+      text-align: center;
+      color: black;
+    }
+
+    canvas {
+      display: block;
+      margin: 20px auto;
+      border: 3px solid #eee;
+      background-color: white;
+      image-rendering: pixelated;
+    }
+
+    h1 {
+      margin: 5px 0 10px;
+    }
+
+    #infoBar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 10px 20px;
+      background-color: #f0f0f0;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      max-width: fit-content;
+      margin: 0 auto;
+    }
+
+    #infoBar p {
+      margin: 0;
+      font-size: 14px;
+      color: black;
+    }
+
+    #playAgainBtn {
+      padding: 6px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      border: 2px solid #333;
+      background-color: #eee;
+      border-radius: 5px;
+    }
+
+    #playAgainBtn:hover {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐾 In Silico Kitten Adventures</h1>
+  <div id="infoBar">
+    <p>Press <strong>Space</strong> to jump. You get one double-jump in midair!</p>
+    <button id="playAgainBtn">Play Again</button>
+  </div>
+  <canvas id="gameCanvas" width="700" height="250"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const playAgainBtn = document.getElementById("playAgainBtn");
+
+    const gravity = 0.6;
+    const jumpStrength = -10;
+    const speed = 5;
+    let animationFrameId = null;
+    let jumpCount = 0;
+    const maxJumps = 2;
+    let inCrashFall = false;
+    let gameOver = false;
+    let finalMessage = "";
+    let score = 0;
+    let bestScore = 0;
+    let showQuote = "";
+    let quoteTimer = 0;
+    let lastLevelIndex = -1;
+
+    // Level Definitions
+const levels = [
+  {
+    name: "In Silico Kitten",
+    emoji: "🐱",
+    obstacles: ["💻", "📊", "🧪", "📚", "🐭", "☕"],
+    deathQuotes: [
+      "Accidentally ran a 10,000-hour simulation… without saving.",
+      "Used seconds instead of hours-model aged nine cat lives in an instant.",
+      "Misread 'steady state' as 'sleep state.'",
+      "Poured coffee on the laptop-simulation and cat both fried.",
+      "Cited Chat GPT as a primary source-game over.",
+      "Thought PK stood for 'Pretty Kitty.'",
+      "Fell asleep during parameter tuning-woke up to chaos.",
+      "Confused placebo with play-dough.",
+      "Uploaded the wrong version to the team folder-deleted reality.",
+      "Tried to debug with yarn… literally.",
+      "Modeled a cat with opposable thumbs-broke biology.",
+      "Assumed zero variability-universal implosion.",
+      "Ran stochastic model deterministically-unlucky.",
+      "Forgot to lock Excel cells-formulas ran feral.",
+      "Dropped a data USB into a litter box.",
+      "Accidentally simulated 10^12 cats-server melted.",
+      "Unit mismatch caused lethal nanogram overdose.",
+      "Misheard 'Monte Carlo' as 'Monte Cat-lo.'",
+      "Exported model to PowerPoint-permanent freeze.",
+      "Feline curiosity led to division by zero.",
+      "Crashed while learning ODEs-ordinary death equations.",
+      "Tried to calibrate by intuition. RIP.",
+      "Trapped in a loop of unending tutorials.",
+      "Thought Bayesian was a cat breed.",
+      "Discovered negative volume compartments...",
+      "Data folder accidentally sent to the recycle bin-forever.",
+      "Accidentally pressed Ctrl+Alt+Del on reality.",
+      "Overdosed on catnip during journal club.",
+      "Uploaded raw data without QC-career and cat ended.",
+      "Simulated nine lives… lost all nine.",
+      "Pet a dog. Seriously.",
+      "Presented the wrong slide deck, turns out it was cat's photo.",
+      "Forgot to unmute, gave a silent keynote.",
+"Laser pointer died, resorted to interpretive dance.",
+"Accidentally showed confidential trial data",
+"Charts were upside down, audience applauded anyway.",
+"Poster fell on me, death by impact factor.",
+"Forgot the p-value, lost statistical significance… and consciousness.",
+"Q&A session turned into a cage match.",
+"Laptop updated mid-presentation, eternal reboot.",
+"Conference coffee was actually dosed-overdosed."
+    ],
+    bg: "images/back1.png"
+  },
+  {
+    name: "Parameters Whisperer",
+    emoji: "😼",
+    obstacles: ["🧬", "📝", "🔬", "🕰️", "⚖️", "📦"],
+    deathQuotes: [
+      "Whispered priors into the wrong likelihood.",
+      "Misread a 1998 paper-whole model cursed.",
+      "Overfitted until reality didn't fit.",
+      "Tried to explain eigenvalues to a PI… fatal.",
+      "Published in predatory journal-academic demise.",
+      "Ran MCMC with no convergence check-lost in chains forever.",
+      "Assumed linear kinetics for nonlinear chaos.",
+      "Mistook placebo effect for feline telepathy.",
+      "Died searching for a missing supplementary table.",
+      "Spilled reagents on a critical dataset-dissolved knowledge.",
+      "Tried to optimize while sleep-deprived-never woke up.",
+      "Forgot to cite a PI-academic assassination.",
+      "Reviewer 2. It is always Reviewer 2.",
+      "Ran a sensitivity analysis-turned out to be allergic.",
+      "Tried to harmonize legacy data-discord killed the cat.",
+      "Mixed up log10 and natural log-exponential death.",
+      "Ran 500 simulations-none reproducible.",
+      "Predicted efficacy… in the wrong species.",
+      "Death by overconfidence in sparse data.",
+      "Crashed cluster with a single line of code.",
+      "Over-parameterized until model collapsed.",
+      "Died of embarrassment at conference Q&A.",
+      "Used reviewer comments as litter. Fatal mistake.",
+      "Parameter bounds accidentally set to infinity.",
+      "Mistook 'in silico' for a Mocktail.",
+      "Tried to merge incompatible datasets-exploded metadata.",
+      "Laplace transform turned Lap-cat trap.",
+      "Quantum of solace? No, quantum of nonsense.",
+      "Oversold model predictions to investors.",
+      "Whispered secrets to the wrong pathway-fatal pathway revolt."
+    ],
+    bg: "images/back.png"
+  },
+  {
+    name: "Dose Dealer",
+    emoji: "😺",
+    obstacles: ["💊", "📑", "📞", "🔥", "🧮", "🤝"],
+    deathQuotes: [
+      "Delivered the wrong dose-career ended in a flash.",
+      "Misaligned clinical and preclinical scales-bridged to oblivion.",
+      "Proposed a trial design-doomed from the first slide.",
+      "Forgot to communicate modeling assumptions. Chaos.",
+      "Dose escalation led straight to cat heaven.",
+      "Oversaw a model update that wiped historical validation.",
+      "Sent wrong PK file to regulatory-catastrophic review.",
+      "Misjudged patient variability-trial failed, cat faded.",
+      "Ignored QC report-ignored life expectancy.",
+      "Overpromised delivery timelines-under-delivered oxygen.",
+      "Calculated therapeutic index backward-fatal math.",
+      "Dose dumped into wrong compartment-explosive outcome.",
+      "Missed critical literature update",
+      "Cited a meta-analysis of dog studies.",
+      "Approved irreversible parameter tweak.",
+      "Presented a 300-slide deck-died mid-slide.",
+      "Fell victim to Excel macro carnage.",
+      "Misread regulatory guideline from 2008.",
+      "Proposed personalized dosing-personal demise followed.",
+      "Ignored junior's warning about unstable ODE solver.",
+      "Modeled toxicity-accidentally made it real.",
+      "Dose simulation ran past heat death of universe.",
+      "Pushed a hotfix that deleted the model.",
+      "Claimed model could predict immortality-proven wrong.",
+      "Miscommunicated PK/PD endpoints-deadly misunderstanding.",
+      "Purr-jected the wrong biomarker.",
+      "Predicted survival-forgot own.",
+      "Tried to balance risk–benefit ratio-fell off.",
+      "Lost track of version control-rolled back to extinction.",
+      "Accidentally modeled Schrödinger's cat. Confirmed dead."
+    ],
+    bg: "images/back3.png"
+  },
+  {
+    name: "Meawdel Overlord",
+    emoji: "😸",
+    obstacles: ["🌐", "📈", "⚡", "🏛️", "🕹️", "💣"],
+    deathQuotes: [
+      "Approved funding for a model that disproved reality.",
+      "Misbriefed regulatory body, catastrophic compliance failure.",
+      "Forgot which drug was in pipeline, doomed all.",
+      "Signed off on simulation predicting doomsday.",
+      "Approved 10,000-compartment model... implosion.",
+      "Declared 'no uncertainty',universal backlash.",
+      "Overruled statisticians, overruled survival.",
+      "Misjudged program timeline, accelerated mortality.",
+      "Greenlit model using imaginary data.",
+      "Modeled infinite efficacy, caused finite catastrophe.",
+      "Lost negotiation with FDA, lost nine lives.",
+      "Decided to skip validation phase, skipped existence.",
+      "Chose lowest bidder for data QC, life cost high.",
+      "Predicted disease eradication, eradicated self.",
+      "Mismanaged global modeling consortium-imploded world.",
+      "Forecasted revenue for 2050, did not live to see it.",
+      "Ignored ethics committee-ethically erased.",
+      "Claimed AI cat would replace human, first victim.",
+      "Presented impossible confidence interval-collapsed in disbelief.",
+      "Overstated predictive power, unpredictable death followed.",
+      "Signed off wrong PK species, cross-species catastrophe.",
+      "Announced drug launch date, drug (and cat) failed.",
+      "Modeled competitor's drug instead, spontaneous combustion.",
+      "Neglected to read final report. Sad.",
+      "Canceled entire modeling program, modeled own demise.",
+      "Claimed to control uncertainty, uncertainty struck back.",
+      "Gave keynote speech, forgot slides, forgot pulse.",
+      "Approved catnip budget cut, riot ensued.",
+      "Died of decision fatigue at steering meeting.",
+      "Promised nine more lives, ran out instantly."
+    ],
+    bg: "images/back4.png"
+  }
+];
+
+
+    const motivationalQuotes = [
+      "Keep pushing forward!",
+      "Great job, keep it up!",
+      "You're mastering QSP modeling!",
+      "Success is just a jump away!",
+      "Model on, champion!"
+    ];
+
+    function getCurrentLevel(score) {
+      if (score >= 0 && score <= 15) return 0;
+      if (score >= 16 && score <= 30) return 1;
+      if (score >= 31 && score <= 46) return 2;
+      if (score >= 46 && score <= 60) return 3;
+      return 3;
+    }
+
+    let bgImage = new Image();
+    function updateBackgroundForLevel(levelIndex) {
+      bgImage.src = levels[levelIndex].bg;
+    }
+
+    function drawBackground() {
+      if (!bgImage.complete) return;
+      const scale = canvas.height / bgImage.height;
+      const w = bgImage.width * scale;
+      const h = canvas.height;
+      ctx.save();
+      ctx.globalAlpha = 0.3;
+      for (let x = 0; x < canvas.width; x += w) {
+        ctx.drawImage(bgImage, x, 0, w, h);
+      }
+      ctx.restore();
+    }
+
+    const cat = {
+      x: 60,
+      y: 180,
+      width: 32,
+      height: 32,
+      velocityY: 0,
+      draw(face) {
+        ctx.font = "28px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText(face, this.x, this.y);
+      },
+      update() {
+        this.velocityY += gravity;
+        this.y += this.velocityY;
+        if (this.y > 180) {
+          this.y = 180;
+          this.velocityY = 0;
+          jumpCount = 0;
+        }
+      },
+      jump() {
+        if (!inCrashFall && jumpCount < maxJumps) {
+          this.velocityY = jumpStrength;
+          jumpCount++;
+        }
+      }
+    };
+
+    const obstacles = [];
+
+    function createObstacle() {
+      const level = levels[getCurrentLevel(score)];
+      const symbol = level.obstacles[Math.floor(Math.random() * level.obstacles.length)];
+      obstacles.push({ x: canvas.width, y: 180, symbol: symbol, width: 30, height: 30 });
+    }
+
+    function drawScore() {
+      ctx.fillStyle = "black";
+      ctx.font = "16px Arial";
+      ctx.fillText("Score: " + score, 10, 20);
+      ctx.fillText("Best: " + bestScore, 120, 20);
+      ctx.font = "14px Arial";
+      const level = levels[getCurrentLevel(score)];
+      ctx.fillText("Level: " + level.name, 240, 20);
+    }
+
+    function resetGame() {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      obstacles.length = 0;
+      score = 0;
+      inCrashFall = false;
+      gameOver = false;
+      finalMessage = "";
+      cat.y = 180;
+      cat.velocityY = 0;
+      jumpCount = 0;
+      showQuote = "";
+      quoteTimer = 0;
+      lastLevelIndex = -1;
+      gameLoop();
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const currentLevelIndex = getCurrentLevel(score);
+      const level = levels[currentLevelIndex];
+
+      if (currentLevelIndex !== lastLevelIndex) {
+        updateBackgroundForLevel(currentLevelIndex);
+        lastLevelIndex = currentLevelIndex;
+      }
+
+      drawBackground();
+      drawScore();
+
+      if (gameOver) {
+        ctx.font = "18px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText(finalMessage, 130, 110);
+        ctx.fillText("Final Score: " + score, 250, 150);
+        return;
+      }
+
+      if (score > 61) {
+        gameOver = true;
+        finalMessage = "🎉 Congratulations! You defeated the FDA!";
+        if (score > bestScore) bestScore = score;
+        return gameLoop();
+      }
+
+      if (Math.random() < 0.015 && !inCrashFall) createObstacle();
+      cat.update();
+
+      for (let i = 0; i < obstacles.length; i++) {
+        let o = obstacles[i];
+        o.x -= speed;
+        ctx.font = "22px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillText(o.symbol, o.x, o.y);
+
+        if (!inCrashFall && cat.x < o.x + o.width && cat.x + cat.width > o.x && cat.y < o.y + o.height && cat.y + cat.height > o.y) {
+          inCrashFall = true;
+          cat.velocityY = -8;
+          finalMessage = level.deathQuotes[Math.floor(Math.random() * level.deathQuotes.length)];
+          gameOver = true;
+          if (score > bestScore) bestScore = score;
+        }
+      }
+
+      if (obstacles.length && obstacles[0].x < -40) {
+        obstacles.shift();
+        if (!inCrashFall) {
+          score++;
+          if (score % 10 === 0) {
+            const index = ((score / 10) - 1) % motivationalQuotes.length;
+            showQuote = motivationalQuotes[index];
+            quoteTimer = 120;
+          }
+        }
+      }
+
+      cat.draw(inCrashFall ? "😿" : level.emoji);
+
+      if (quoteTimer > 0) {
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        const textWidth = ctx.measureText(showQuote).width;
+        ctx.fillText(showQuote, (canvas.width - textWidth) / 2, 50);
+        quoteTimer--;
+      }
+
+      animationFrameId = requestAnimationFrame(gameLoop);
+    }
+
+    window.addEventListener("keydown", function (e) {
+      if (e.code === "Space") {
+        e.preventDefault();
+        if (!gameOver) {
+          cat.jump();
+        }
+      }
+    });
+
+    playAgainBtn.addEventListener("click", resetGame);
+
+    gameLoop();
+  </script>
+</body>
+</html>

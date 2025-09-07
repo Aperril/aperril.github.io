@@ -1,128 +1,1920 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="Description" CONTENT="Angélique Perrillat-Mercerot : ingénieur de recherche, post-doctorante en bio-mathématiques depuis octobre 2019 à Poitiers.">
-<title>Home -  Angélique Perrillat-Mercerot </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QSP/PK Modeler – Lead Scientist | Lyon</title>
+  <meta name="description" content="Lead Scientist & QSP–PK modeler in Lyon. Biomath expert in mechanistic modeling (ODE/PDE), oncology & neurosciences. Collaboration-driven and results-focused." />
+  <link rel="canonical" href="https://example.com/" />
+  <meta property="og:title" content="Lead Scientist & QSP–PK Modeler" />
+  <meta property="og:description" content="Biomathematics, QSP/PBPK, oncology & neurosciences. Projects, publications, toolbox and contact." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="headshot.jpg" />
+  <meta name="theme-color" content="#2a7ae2" />
+  <style>
+:root {
+  --bg: #E0F2E9;          /* Honeydew - fond global */
+  --text: #4D6A6D;        /* Payne’s Gray - texte principal */
+  --muted: #5B787A;       /* Freedom’s Green - texte secondaire */
+  --line: #CEB5A7;        /* Pale Dogwood - bordures */
+  --accent: #A1B5D8;      /* Powder Blue - liens & accent */
+  --accent-strong: #B76D68; /* Indian Red - hover & focus */
+  --card: #ffffff;        /* cartes blanches pour contraste */
+  --shadow: 0 10px 25px rgba(0,0,0,.05);
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --maxw: 1080px;
+}
 
-    <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/grid_12.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/slider.css">
-    <link href='http://fonts.googleapis.com/css?family=Condiment' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-    <link rel = "canonical" href="https://aperril.github.io/">
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+html {overflow-y: scroll}
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover, a:focus { color: var(--accent-strong); text-decoration: underline; }
+
+.footer-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: #E0F2E9; 
+  border-top: 1px solid var(--line);
+}
+
+.footer-bar .copyright {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.social-icons {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.social-icons span {
+  font-size: 13px;
+  font-weight: normal;
+  color: var(--muted);
+}
+
+.social-icons a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999px;
+}
+
+.icon-0 { background-image: url('images/social0.png'); }
+.icon-1 { background-image: url('images/social1.png'); }
+.icon-2 { background-image: url('images/social2.png'); }
+.icon-3 { background-image: url('images/social3.png'); }
+.icon-4 { background-image: url('images/social4.png'); }
+.icon-5 { background-image: url('images/social5.png'); }
+
+.social-icons a:hover {
+  background-color: #a1b5d8;
+  border-radius: 4px;
+}
+
+
+    /* Top bar */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.85);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; gap: 12px; padding: 12px 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .3px; }
+.brand img {width: 70px; height: 70px;border-radius: 50%;object-fit: cover;border: 2px solid var(--line);}
+    .tabs { margin-left: auto; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tab {
+      padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line);
+      background: #fff; font-weight: 600; font-size: 14px;
+    }
+    .tab[aria-current="page"] { background: var(--accent); color: #fff; border-color: transparent; box-shadow: var(--shadow); }
+
+  .hero {max-width: var(--maxw);margin: 24px auto 0;padding: 24px 20px 0;display: grid;grid-template-columns: 2.6fr 1fr; 
+  gap: 28px;align-items: center;}
+    .hero h1 { font-size: clamp(20px, 2.2vw, 34px); line-height: 1.15; margin: 0 0 8px; }
+    .hero p.lead { font-size: clamp(16px, 1.6vw, 19px); color: var(--muted); margin: 0; }
+    .hero-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-xl); padding: 15px; box-shadow: var(--shadow); }
+    .hero-card {max-width: 320px; padding: 16px;}
+    .hero-card img { width: 100%; height: auto; border-radius: var(--radius-lg); display: block;}
+
+    /* Section container */
+    main { max-width: var(--maxw); margin: 24px auto 60px; padding: 0 20px; }
+    section[hidden] { display: none !important; }
+
+    .section { margin-top: 24px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-xl); box-shadow: var(--shadow); }
+    .section header { padding: 22px 22px 8px; border-bottom: 1px solid var(--line); }
+    .section header h2 { margin: 0; font-size: clamp(20px, 2.4vw, 28px); }
+    .section .content { padding: 16px 22px 22px; }
+
+    /* Cards grid */
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .col-12 { grid-column: span 12; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+      .col-6, .col-4 { grid-column: span 12; }
+    }
+
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 18px; box-shadow: var(--shadow); height: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .card h3 { margin: 0; font-size: 18px; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; color: var(--muted); background: #fff; }
+
+    .list { display: grid; gap: 10px; }
+    .list li { padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+
+/* Timeline container */
+.timeline {
+  position: relative;
+  margin: 20px 0;
+  border-left: 3px solid #93876d;
+  padding-left: 40px;
+}
+
+.timeline-item {
+  position: relative;
+  margin: 0 0 28px 0;
+}
+
+/* Dot */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  background-color: #93876d;
+  border-radius: 50%;
+}
+
+/* Inline date + title */
+.timeline-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.timeline-date {
+  font-weight: 700;
+  color: #93876d;
+  padding-left: 10px; /* pushes date slightly away from the line/dot */
+
+}
+
+.timeline-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.timeline-content p {
+  margin: 0;
+}
+
+.download-btn-small {
+  display: inline-block;
+  padding: 8px 24px;      /* small size */
+  background-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 20px;
+  transition: background 0.2s;
+}
+
+.download-btn-small:hover,
+.download-btn-small:focus {
+  background-color: var(--accent-strong);
+}
+
+  /* Reduce space between list items and inline text */
+  #publications ul li {
+    margin: 0.3rem 0; /* tighter than default 1rem */
+    line-height: 1.4; /* keeps readability */
+  }
+
+  /* Reduce gap between date and text if you're using "–" */
+  #publications ul li {
+    display: flex;
+    gap: 0.4rem; /* smaller space between date and text */
+  }
+
+  /* Add more space between cards */
+
+  #publications .card {
+  margin-bottom: 2.5rem;  /* more space between cards */
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+#publications .stats-bar {
+  background-color: #e8f0ff;  /* light bar background */
+  color: #003366;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.2rem;     /* bigger text */
+  font-weight: 600;
+  display: block;
+  margin: 0 auto;
+}
+
+#publications .stats-bar a {
+  color: #003366;
+  text-decoration: none;
+  margin: 0 0.6rem;
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+#publications .stats-bar a:hover {
+  color: #0055aa;
+  border-bottom: 2px solid #0055aa; /* highlight on hover */
+  padding-bottom: 0.1rem;
+}
+
+.tag-label {
+  padding: 0.3em 0.6em;
+  border-radius: var(--radius-lg);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background-color: var(--bg);
+  color: var(--accent-strong);
+  border: 1px solid var(--accent-strong);
+  display: inline-block;
+}
+
+.software-label {
+  padding: 0.3em 0.6em;
+  border-radius: var(--radius-lg);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background-color: var(--accent);
+  color: var(--card);
+  border: 1px solid var(--accent);
+  display: inline-block;
+}
+
+
+
+
+    /* Footer */
+    footer { max-width: var(--maxw); margin: 30px auto; padding: 0 20px 60px; color: var(--muted); }
+    .foot { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
+
+    /* Accessibility helpers */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  </style>
+  <script>
+    // Simple hash router for tabs, with ARIA current updates
+    const routes = ["home","experience","projects","publications","toolbox","contact"]; 
+    function activate(target){
+      routes.forEach(id => {
+        const tab = document.querySelector(`[data-tab="${id}"]`);
+        const sec = document.getElementById(id);
+        if (!tab || !sec) return;
+        const on = id === target;
+        tab.setAttribute('aria-current', on ? 'page' : 'false');
+        sec.hidden = !on;
+      });
+    }
+    function syncFromHash(){
+      const h = (location.hash.replace('#','')||'home').toLowerCase();
+      activate(routes.includes(h) ? h : 'home');
+    }
+    window.addEventListener('hashchange', syncFromHash);
+    window.addEventListener('DOMContentLoaded', syncFromHash);
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Your Lead Scientist - Project Manager - QSP-PK Modeler",
+    "jobTitle": "Your Lead Scientist - Project Manager - QSP-PK Modeler",
+    "address": {"@type":"PostalAddress","addressLocality":"Lyon","addressCountry":"France"},
+    "url": "https://example.com",
+    "knowsAbout": ["QSP","PBPK","PKPD","Mathematical modeling","Oncology","Neurosciences"],
+    "image": "headshot.jpg"
+  }
+  </script>
 </head>
 <body>
-  <div class="main">
-  <!--==============================header=================================-->
-    <header>
-        <h1><a href="index.html"><img src="images/logo.png" alt="" style="width:900px;"></a></h1>
-        <h6 class="top-1 p0" align="left"> &nbsp;  &nbsp;  Driving Scientific Impact And Innovation through Collaboration, Lyon</h6>
-        <div class="clear"></div>    
-        <nav>
-            <div>
-                <ul class="menu">
-                    <li class="home-page current"><a href="index.html"><span></span></a></li>
-                    <li><a href="about.html">About me</a></li>
-                    <li><a href="publications.html">Publications</a></li>
-                    <li><a href="teaching.html">Teaching</a></li>
-                    <li><a href="popularization.html">Popularization</a></li>
-                    <li><a href="contacts.html">Contacts</a></li>
-                </ul>
-                <div class="social-icons">
-                    <span></span>
-                    <a href="https://github.com/Aperril" class="icon-5" target="_blank"></a>
-                    <a href="http://www.theses.fr/2019POIT2285" class="icon-4" target="_blank"></a>
-                    <a href="https://scholar.google.com/citations?user=IST0DUIAAAAJ&hl=fr&oi=ao" class="icon-3" target="_blank"></a>
-                    <a href="https://www.researchgate.net/profile/Angelique_Perrillat-Mercerot" class="icon-2" target="_blank" ></a>
-                    <a href="https://www.linkedin.com/in/angelique-perrillat/" class="icon-1" target="_blank"></a>
-                    <a href="mailto:angelique.perrillat@gmail.com" class="icon-0" target="_blank"></a>
-                </div>
-                <div class="clear"></div>
-            </div>
-        </nav>
-    </header>   
-  <!--==============================content================================-->
-    <section id="content">
-        <div class="container_12">
-          <div class="grid_12">
-            <div class="pad-0 border-1">
-                <center><img src="images/nova.JPG" alt="" class="img-nova" width="600"></center>
-                <h2 class="top-1 p0"><center>Welcome !</center></h2>
-                <p class="p2">Hello there ! </p>
-                <p> &nbsp;</p>
-                <p class="p2"> I am an accomplished Lead Scientist and QSP-PK modeler. Ready for a dynamic collaboration? Let's connect on LinkedIn and push the boundaries of scientific research together 🚀<p>
-                <p> &nbsp;</p>
-                <p> 📊 My expertise lies in Biomathematics and Mathematical QSP - PK modeling – decoding complexity is my game!</p>
-                <p> &nbsp;</p>
-                <p> 🧠 As a Doctor in mathematics and Research Engineer, I am the data wizard who crafts mathematical models to unlock biological mysteries.</p>
-                <p> &nbsp;</p>
-                <p>🌱 I am all about understanding complex biological systems, especially when it comes to cancer and neurosciences dynamics – Ordinary Differential Equations, I'm looking at you!</p>
-                <p> &nbsp;</p>
-                <p>📚 Presentations and publications? I've got a knack for turning numbers into insights that shine. I'm on a mission to spread the scientific word – conferences and publications are my jam, in particular when it comes to open sciences.</p>
-                <p> &nbsp;</p>
-                <p>🤝 Collaboration and knowledge swapping? Count me in! Let's connect within the scientific community and take it to the next level.</p>
-                <p> &nbsp;</p>
-                <p>🤹 Resource juggling? Consider it done – all for the sake of achieving shared goals and making magic happen.</p>
-                <p> &nbsp;</p>
-                <p>🎯 Results-driven is my middle name. I've consistently hit project goals that bring positive business vibes.</p>
-                <p> &nbsp;</p>
-                <p>💪 Challenges? Bring 'em on! I thrive in uncertain situations, ensuring accountability and sparkling results.</p>
-                <p> &nbsp;</p>
-                <p>🌟 Leadership? You got it! From assembling dream teams to handling tough talks, I'm your go-to guide.</p>
+  <div class="topbar" role="navigation" aria-label="Primary">
+    <nav class="nav">
+<a class="brand" href="#home">
+  <img src="images/nova3.JPG" alt="Portrait of a QSP–PK modeler in Lyon" />
+  <span>
+    <span style="color: indianred; font-weight:700;">Angélique Perrillat-Mercerot, PhD</span><br/>
+    Driving Scientific Impact & Innovation<br/>
+    <small style="font-weight:500;color:var(--muted);">Lyon • Modeling • QSP/PBPK • Oncology • Neurosciences</small>
+  </span>
+</a>
+      <a class="tab" data-tab="home" href="#home" aria-current="page">Home</a>
+      <a class="tab" data-tab="experience" href="#experience">Experience</a>
+      <a class="tab" data-tab="projects" href="#projects">Projects</a>
+      <a class="tab" data-tab="publications" href="#publications">Publications</a>
+      <a class="tab" data-tab="toolbox" href="#toolbox">Toolbox</a>
+      <a class="tab" data-tab="contact" href="#contact">Contact</a>
+    </nav>
+  </div>
 
-            </div>
-            <div class="wrap block-1 pad-1">
-                <div>
-                    <p>&nbsp;</p>
-                    <h3><center>About me</center></h3>
-                    <a href="about.html"><img src="images/page1-img1.jpg" alt="" class="img-border"></a>
-                    <p> <center>Formations, expérience, etc. </center></p>
-                    <p> <center><a href="about.html" class="button">Learn more</a> </center></p> 
-                    <p> &nbsp;</p>
-                </div>
-                <div>
-                    <p>&nbsp;</p>
-                    <h3><center>Publications</center></h3>
-                    <a href="publications.html"><img src="images/page1-img2.jpg" alt="" class="img-border"></a>
-                    <p> <center>Articles, communications, etc.</center></p>
-                    <p> <center><a href="publications.html" class="button">Learn more</a> <center></p> 
-                    <p> &nbsp;</p>
-                </div>
-                <div>
-                    <p>&nbsp;</p>
-                    <h3><center>Teaching</center></h3>
-                    <a href="teaching.html"><img src="images/page1-img3.png" alt="" class="img-border"></a>
-                    <p> <center> Ressources enseignement.</center></p>
-                    <p> <center> <a href="teaching.html" class="button">Learn more</a> </center></p> 
-                    <p> &nbsp;</p>
-                </div>
-                <div class="last">
-                    <p>&nbsp;</p>
-                    <h3><center>Popularization</center></h3>
-                    <a href="popularization.html"><img src="images/page1-img4.png" alt="" class="img-border"></a>
-                    <p> <center> Médiation, interventions, etc. </center></p>
-                    <p> <center><a href="popularization.html" class="button">Learn more</a> </center></p> 
-                    <p> &nbsp;</p>
-                </div>
-            </div>
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div>
+      <h1>Your Lead QSP PK - Project Manager</h1>
+<p class="lead">
+  Cat-powered researcher geekin' out on pharmacometrics & real-world maths. Accomplished bio-mathematician focused on mechanistic modeling (QSP, PK, ODE) for oncology & neurosciences. Collaboration-minded, results-driven, and ready to push boundaries together. I currently work at 
+  <a href="/vantage-research" style="color:#93876d;">Vantage-Research</a>, your partner in drug-dev.
+</p>
+
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <span class="pill">QSP • PBPK • PKPD</span>
+        <span class="pill">Oncology</span>
+        <span class="pill">Neurosciences</span>
+        <span class="pill">Open science</span>
+        <span class="pill">Cats 😼</span>
+      </div>
+    </div>
+<div class="hero-card">
+  <img src="images/nova3.JPG" alt="Professional headshot, Lyon - QSP/PK modeler" />
+
+  <div class="social-icons" style="justify-content: center; margin-top: 10px;">
+    <a href="mailto:angelique.perrillat@gmail.com" class="icon-0" target="_blank" aria-label="Email"></a>
+    <a href="https://www.linkedin.com/in/angelique-perrillat/" class="icon-1" target="_blank" aria-label="LinkedIn"></a>
+    <a href="https://www.researchgate.net/profile/Angelique_Perrillat-Mercerot" class="icon-2" target="_blank" aria-label="ResearchGate"></a>
+    <a href="https://scholar.google.com/citations?user=IST0DUIAAAAJ&hl=fr&oi=ao" class="icon-3" target="_blank" aria-label="Google Scholar"></a>
+    <a href="http://www.theses.fr/2019POIT2285" class="icon-4" target="_blank" aria-label="Thesis"></a>
+    <a href="https://github.com/Aperril" class="icon-5" target="_blank" aria-label="GitHub"></a>
+  </div>
+</div>
+
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section class="section" id="home">
+      <header><h2>Welcome</h2></header>
+      <div class="content">
+        <div class="grid">
+          <div class="col-12">
+            <p>Hello there! I am a Lead Scientist and QSP–PK modeler. My game is decoding biological complexity with mathematical models from ODEs to PDEs, from NCA to PBPK, to illuminate mechanisms in cancer and neurosciences. I love turning numbers into insights, sharing science, and collaborating across disciplines to make meaningful impact</p>
+            <p>I thrive in uncertain contexts, keep teams accountable and upbeat, and consistently deliver against project goals. From building strong teams and navigating tough discussions to resource juggling, I have got you covered</p>
           </div>
-          <div class="clear"></div>
         </div>
-    </section> 
-  </div>    
-<!--==============================footer=================================-->
+      </div>
+
+ <!-- HERO: Laptop with PK app + typing text -->
+<section class="hero2">
+  <div class="laptop">
+    <!-- camera notch -->
+    <div class="camera"></div>
+
+    <!-- screen -->
+    <div class="screen">
+      <div class="pk-app">
+        <!-- sidebar -->
+        <aside class="panel">
+          <h5>PK Inputs</h5>
+          <label>CL <input type="range" id="cl" min="1" max="20" step="0.5" value="5"></label>
+          <label>V <input type="range" id="v" min="10" max="100" step="1" value="30"></label>
+          
+          <!-- Oral-only inputs -->
+          <div class="oral-only">
+            <label>Ka <input type="range" id="ka" min="0.1" max="3" step="0.1" value="1.2"></label>
+            <label>F <input type="range" id="f" min="0.1" max="1" step="0.05" value="1"></label>
+          </div>
+
+          <label>Dose <input type="range" id="dose" min="50" max="1000" step="50" value="200"></label>
+
+          <label>
+            Route
+            <select id="route" onchange="toggleRoute()">
+              <option value="oral" selected>Oral</option>
+              <option value="iv">IV Bolus</option>
+            </select>
+          </label>
+
+          <button onclick="simulate()">Simulate</button>
+        </aside>
+
+        <!-- chart area -->
+        <div class="chart-area">
+          <header>Time - Concentration - Solution</header>
+          <svg id="chart" viewBox="0 0 600 280" class="pk-chart"></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- base/keyboard -->
+    <div class="base"></div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+  function toggleRoute() {
+    const route = document.getElementById("route").value;
+    document.querySelectorAll(".oral-only").forEach(el => {
+      el.style.display = (route === "oral") ? "block" : "none";
+    });
+  }
+
+  // simple PK solver (1-compartment with first-order absorption or IV bolus)
+  function simulate() {
+    const CL = +document.getElementById("cl").value;
+    const V = +document.getElementById("v").value;
+    const Dose = +document.getElementById("dose").value;
+    const route = document.getElementById("route").value;
+
+    const k = CL / V;
+    const times = [...Array(61).keys()].map(t => t * 0.5); // 0–30 h in 0.5 h steps
+    let conc = [];
+
+    let typedStrings = [];
+
+    if (route === "oral") {
+      const Ka = +document.getElementById("ka").value;
+      const F = +document.getElementById("f").value;
+      conc = times.map(t =>
+        (F * Dose * Ka / (V * (Ka - k))) * (Math.exp(-k * t) - Math.exp(-Ka * t))
+      );
+      typedStrings = [
+        'What is the solution you are looking for ?',
+        'Simulation Complete.',
+        `CL=${CL}, V=${V}, Ka=${Ka}, F=${F}, Dose=${Dose}`,
+        'What is the solution you are looking for ?'
+      ];
+    } else {
+      conc = times.map(t => (Dose / V) * Math.exp(-k * t));
+      typedStrings = [
+        'What is the solution you are looking for ?',
+        'Simulation Complete.',
+        `CL=${CL}, V=${V}, Dose=${Dose}`,
+        'What is the solution you are looking for ?'
+      ];
+    }
+
+    // Draw chart
+    const svg = document.getElementById("chart");
+    svg.innerHTML = ""; // reset
+
+    // axes/grid
+    for (let i = 0; i <= 4; i++) {
+      let y = 240 - i * 60;
+      svg.innerHTML += `<line x1="0" y1="${y}" x2="600" y2="${y}" stroke="rgba(255,255,255,.15)" />`;
+    }
+
+    // scale
+    const maxC = Math.max(...conc) * 1.2;
+    const scaleX = 600 / times[times.length - 1];
+    const scaleY = 220 / maxC;
+
+    // path for curve
+    let d = "";
+    conc.forEach((c, i) => {
+      const x = times[i] * scaleX;
+      const y = 240 - c * scaleY;
+      d += (i === 0 ? "M" : "L") + x + "," + y;
+    });
+    svg.innerHTML += `<path d="${d}" fill="none" stroke="white" stroke-width="2" />`;
+
+    // points (every 2 h)
+    times.forEach((t, i) => {
+      if (t % 2 === 0) {
+        const x = t * scaleX;
+        const y = 240 - conc[i] * scaleY;
+        svg.innerHTML += `<circle cx="${x}" cy="${y}" r="3" fill="#00b4dc" />`;
+      }
+    });
+
+    // dynamic caption (Typed.js inside SVG foreignObject)
+    svg.innerHTML += `
+      <foreignObject x="20" y="290" width="600" height="2500">
+<div xmlns="http://www.w3.org/1999/xhtml" id="typed"
+     style="font-family:monospace; font-size:24px; color:#00b4dc; line-height:1.4;">
+</div>
+      </foreignObject>
+    `;
+
+    new Typed("#typed", {
+      strings: typedStrings,
+      typeSpeed: 40,
+      backSpeed: 20,
+      backDelay: 1200,
+      loop: true
+    });
+  }
+
+  // run once on load
+  toggleRoute();
+  simulate();
+</script>
+
+<style>
+
+.bmc-wrapper {
+  display: inline-flex;
+  font-family: ui-sans-serif, system-ui;
+}
+
+.footer-bar .bmc-wrapper {
+  margin: 0 1em;
+}
+
+.hero2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(180deg, #f7fafc, #eef4ff);
+}
+.laptop{
+  position:relative;
+  width:min(700px,92vw);
+  aspect-ratio: 16 / 10;
+  border-radius:18px;
+  background:var(--bezel);
+  box-shadow:0 20px 50px rgba(8,20,48,.25);
+  overflow:hidden;
+}
+.camera{position:absolute; top:8px; left:50%; transform:translateX(-50%);
+  width:68px; height:12px; background:#060a12; border-radius:8px;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.05);}
+.screen{position:absolute; inset:18px 18px 28px 18px;background:var(--screen);
+  border-radius:12px; overflow:hidden;box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);}
+.pk-app{display:grid; grid-template-columns: 260px 1fr; height:100%;}
+.panel{background:var(--panel);padding:1rem; color:var(--ink);
+  border-right:1px solid rgba(255,255,255,.06);}
+.panel h5{ margin:0 0 .75rem 0; font-size:0.95rem; }
+.panel label{display:flex; flex-direction:column; font-size:.85rem; margin:.4rem 0;}
+.panel input, .panel select{ width:100%; }
+.panel button{margin-top:.8rem; width:100%; padding:.55rem .8rem;
+  border:none; border-radius:10px; background:var(--accent); color:#04202a;
+  font-weight:600; cursor:pointer;}
+.chart-area{position:relative; padding:1rem; color:var(--ink); display:flex; flex-direction:column; height:100%;}
+.chart-area header{font-size:1rem; opacity:.9; margin-bottom:.4rem;}
+.pk-chart{ width:100%; height:100%; max-height:260px; background:#101826;}
+.base{position:absolute; left:-3%; right:-3%; bottom:-14px; height:22px;
+  background:linear-gradient(#aab3c0,#8f98a5); border-radius:0 0 22px 22px;
+  box-shadow: 0 8px 18px rgba(10,20,40,.25);}
+@media (max-width: 800px){
+  .pk-app{ grid-template-columns: 1fr; }
+  .panel{ border-right:none; border-bottom:1px solid rgba(255,255,255,.06); display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+  .panel h5{ grid-column:1/-1; }
+  .panel button{ grid-column:1/-1; }
+  .pk-chart{ max-height:200px; }
+}
+
+</style>
+
+
+<h2> </h2>
+
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="aperrillat" data-description="Support me on Buy me a coffee!" data-message="" data-color="#4D6A6D" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+    </section>
+
+<!-- EXPERIENCE (About-equivalent) -->
+<section class="section" id="experience" hidden>
+<header>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+    <h2>Skills, Experience & More</h2>
+    <a href="pdf/resume.pdf" download class="download-btn-small" rel="nofollow" target="_blank">Download My Resume</a>
+  </div>
+</header>
+
+
+  <div class="content">
+    <div class="grid">
+
+      <!-- Skills -->
+      <article class="col-12 card">
+        <h3>Skills </h3>
+        <div class="grid">
+          <div class="col-4">
+            <h4>Lead & Manager 👨‍💼</h4>
+            <p>Planning and prioritizing work aligned with organizational roadmap and company vision. Driving changes proactively with positive business impact.</p>
+              <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+    <span class="pill">Inclusive leadership</span>
+    <span class="pill">Empowering Coaching 👩‍🏫</span>
+  </div>
+          </div>
+          <div class="col-4">
+            <h4>Executive Assistant 📅</h4>
+            <p>Operating effectively in uncertainty. Ensuring accountability and consistently achieving results under challenging circumstances.</p>
+              <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <span class="pill">Operative organization 📈</span>
+    <span class="pill">Adaptability 🌱</span>
+  </div>
+          </div>
+          <div class="col-4">
+            <h4>Coordinator 🧑‍🤝‍🧑</h4>
+            <p>Building strong identity teams that leverage diverse skills. Managing sensitive discussions, resource allocation, and opportunity distribution.</p>
+              <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+    <span class="pill">Conciliation 🤝</span>
+    <span class="pill">Problem anticipation 🔮</span>
+  </div>
+          </div>
+          <div class="col-4">
+            <h4>Researcher 🔬</h4>
+            <p>Conducting literature reviews, hypothesis management, research methodology, and project oversight.</p>
+              <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+    <span class="pill">Creativity & strategic thinking 🎨</span>
+    <span class="pill">Curiosity 🔍</span>
+  </div>
+          </div>
+          <div class="col-4">
+            <h4>Data Scientist 📊</h4>
+            <p>Modeling: QSP, PBPK, PKPD, NCA PK, ODE, DDE, PDE  – SimBiology, Matlab, Scilab, Haskell, Jinko. Data Processing: R, Python.</p>
+              <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+    <span class="pill">Problem solving 🧩</span>
+    <span class="pill">Analytical skills 🧠</span>
+  </div>
+          </div>
+          <div class="col-4">
+            <h4>Scientific Writer ✍️</h4>
+            <p>Clear and logical communication. Collaboration, feedback integration, publication compliance.</p>
+              <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+    <span class="pill">Efficient communication 📢</span>
+    <span class="pill">Critical-thinking 🤔</span>
+  </div>
+          </div>
+        </div>
+
+      </article>
+
+
+<!-- Experience -->
+<article class="col-12 card">
+  <h3>Experience </h3>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-date">  2024 – Ongoing</span>
+        <h4>Lead Scientist (<a href="https://vantage-research.net/" target="_blank" style="color:#93876d;">Vantage-Research</a>)</h4>
+      </div>
+      <div class="timeline-content">
+        <p>Project manager for 4 client projects, leading a team of 3–4 using Scrum. Specializing in QSP, PBPK, PKPD, and NCA PK models. People manager. Exposure: ACoP, PAGE, GMP, local events.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-date">2023</span>
+        <h4>Re-Train Me Certified in Bioinformatics (<a href="https://www.almahealthdb.it/re-train/" target="_blank" style="color:#93876d;">University of Bologna)</a></h4>
+      </div>
+      <div class="timeline-content">
+        <p>
+Medical Informatics, In Silico Medicine, Bioinformatics, and Health Data Science.
+During this program, I consolidated my expertise in R, Python, and Machine Learning and gained proficiency in Bash, SQL, Computer Sciences, and Medical Record Analysis.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-date">2020 – 2023</span>
+        <h4>Research Fellow & Scientific Dissemination Leader (<a href="https://www.novadiscovery.com/" target="_blank" style="color:#93876d;">Novadiscovery</a>)</h4>
+      </div>
+      <div class="timeline-content">
+        <p>Quantative system pharmacologist (QSP/PBPK). Developement of an ODE model toward tumor growth neoangiogenesis from literature review to calibration. integration of the model in a lung cancer collaborative approach (12 biomodelers). Project manager of a knowledge-based model credibility evaluation</p>
+        <p>Set up, organization and management of the internal and external actions toward scientific dissemination. Set up and maintain the organization and animation of internal events (up to 90 participants) Facilitator for exposure and knowledge sharing actions.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-date">2019 – 2020</span>
+        <h4>Research Engineer, Postdoc (<a href="https://www.chu-poitiers.fr/" target="_blank" style="color:#93876d;">University Hospital of Poitiers</a>, <a href="http://rech-math.sp2mi.univ-poitiers.fr/" target="_blank" style="color:#93876d;">Laboratory of Mathematics (UMR 7348)</a>)</h4>
+      </div>
+      <div class="timeline-content">
+        <p>Postdoctoral position in applied mathematics, focused on the dynamic study of cerebral energy metabolism through mathematical modeling, in collaboration with the Cellular Physiology, Signaling, and Membrane Ionic Transport Laboratory (STIM, ERL CNRS 7003).</p>
+        <p> Part-time contract at the University of Poitiers (64 hours/year).</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-date">2016 – 2019</span>
+        <h4>Ph.D. Student in Applied Mathematics (<a href="https://www.univ-poitiers.fr/" target="_blank" style="color:#93876d;">University of Poitiers</a>, <a href="http://rech-math.sp2mi.univ-poitiers.fr/" target="_blank" style="color:#93876d;">Laboratory of Mathematics (UMR 7348)</a>)</h4>
+      </div>
+      <div class="timeline-content">
+        <p>Ph.D. in applied mathematics for biology and medicine: "Study of the kinetics of energy substrates in the brain. Application to low-grade gliomas." Supervised by Alain Miranville and Rémy Guillevin.</p>
+        <p> Part-time contract at the University of Poitiers (64 hours/year).</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-date">2011 – 2016</span>
+        <h4>Mathematics Student (<a href="https://www.univ-lyon1.fr/" target="_blank" style="color:#93876d;">Claude Bernard Lyon 1 University</a>)</h4>
+      </div>
+      <div class="timeline-content">
+        <p>Bachelor's degree in general and applied mathematics, followed by a master's degree in mathematical engineering, specializing in mathematics applied to biology and medicine (deterministic and probabilistic models).</p>
+<p> Master's internship at <a href="https://www.inria.fr/fr/centre-inria-grenoble-rhone-alpes" target="_blank" style="color:#93876d;">Inria de Lyon</a>, Dracula team (UMR 5208 & 5534): "Contribution to the mathematical study of the interaction between prion and Abeta peptide responsible for Alzheimer's disease" under the supervision of Laurent Pujo-Menjouet, Léon Matar Tine, Pauline Mazzocco, and Human Rezaei.</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+      <!-- Additional -->
+      <article class="col-12 card">
+        <h3>Additional </h3>
+        <div class="grid">
+          <div class="col-4">
+            <h4>Languages 🗣️</h4>
+            <p>French - Well I am French (CEF C2)<br>English - Excellent (CEF C1)<br>Italian - Excellent (CEF C1, CLES B2, trainings 2013–2014)</p>
+          </div>
+          <div class="col-4">
+            <h4>AI & Coding 💻</h4>
+            <p>Python, AI, statistical modeling, machine learning (ML), FUN-MOOCs and OpenClassrooms trainings (2019-2025).</p>
+          </div>
+          <div class="col-4">
+            <h4>Leadership 👑</h4>
+            <p>Project Management Professional (Lyon 2023), Leadership training week (Lyon 2022), PhD team management training and Pedagogy (Poitiers 2018)</p>
+          </div>
+          <div class="col-4">
+            <h4>Volunteering 🤝</h4>
+            <p>Youth centers, mentoring through <a href="https://www.dema1n.org/" target="_blank" style="color:#93876d;">Dema1n.org</a> (2023-Ongoing) <br> Homework assistance with "Centre Sociaux Français" (2018-2025)</p>
+          </div>
+          <div class="col-4">
+            <h4>Dissemination 📚</h4>
+            <p>Scientific publications & copyright (URFIST Paris 2023), IP (INPI, 2023) & open science (Sorbonne University, 2023)</p>
+          </div>
+          <div class="col-4">
+            <h4>Pets Time! 🐾</h4>
+            <p>I live with 3 mischievous cats<br> ACACED Chien, Chat & NAC - (Lyon 2023)</p>
+          </div>
+        </div>
+      </article>
+    </div>
+     </div>
+   </section>
+
+
+
+
+<!-- PROJECTS -->
+<section class="section" id="projects" hidden>
+  <header><h2>Selected Projects</h2></header>
+  <div class="content">
+  <iframe src="the_game.html" width="1000" height="450" style="border:1px solid var(--line);"></iframe>
+      <div class="grid">    </div>
+  </div>
+</section>
+
+<!-- Modal container -->
+<div id="projectModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:10000;">
+  <div style="background:#fff; padding:20px; max-width:600px; max-height:80vh; overflow-y:auto; position:relative; border-radius:8px;">
+    <button id="modalCloseBtn" style="position:absolute; top:10px; right:10px; font-size:1.5rem; background:none; border:none; cursor:pointer;">&times;</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalContent">[Projects]</div>
+    <img id="modalImage" alt="" style="max-width:100%; margin-top:10px; display:none; border-radius:6px;">
+  </div>
+</div>
+
+<style>
+  article.card {
+    position: relative;
+    background-color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  article.card:hover {
+    background-color: #f0f8ff;
+    transform: translateY(-2px);
+  }
+
+.learn-more {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: var(--accent);
+  color: white;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, background 0.3s ease;
+  pointer-events: none;
+}
+
+article.card:hover .learn-more {
+  opacity: 1;
+  background: var(--accent-strong); /* Changes color on hover */
+}
+
+  .tag-label, .software-label {
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+  }
+</style>
+
+<script>
+(() => {
+  const projects = [
+  {
+  "id": "adc-breast-to-gastric-cancer",
+  "title": "In Silico Translation of ADC Therapy from Breast to Gastric Cancer",
+  "shortDesc": "Developed and applied a tailored in silico approach to extend antibody-drug conjugate (ADC) efficacy predictions from breast cancer to gastric cancer, leveraging multi-level data and mechanistic modeling",
+  "role": "Pharmacometric Scientist / Modeler",
+  "date": "2023 – 2025",
+  "software": ["MATLAB", "SimBiology", "Python"],
+  "tags": [
+    "QSP","PBPK","ODE","Oncology", "ADC", "Translational"
+  ],
+  "details": `
+
+    <h4>Problematic</h4>
+    <p>Antibody-drug conjugates (ADCs) are advanced oncology therapeutics offering targeted cytotoxic delivery. However, understanding their pharmacokinetics, tumor growth inhibition, and payload mechanisms is limited by indication-specific contexts. This limits the ability to predict efficacy when extending ADCs across different cancer types, such as from breast to gastric cancer.</p>
+
+    <h4>Approach</h4>
+    <p>Implemented a mechanistic in silico modeling framework integrating pharmacokinetics (PK), pharmacodynamics (PD), tumor dynamics, and payload characteristics, tailored to breast cancer data. This framework was recalibrated and extended to predict ADC efficacy in gastric cancer patients, incorporating multi-level data and xenograft preclinical results.</p>
+    <ul>
+      <li>Selection and tailoring of a published model to incorporate tumor clone sensitivities and payload pharmacology.</li>
+      <li>Calibration using xenograft data, clinical breast cancer data, and translational clinical gastric cancer data.</li>
+      <li>Parameter reparameterization and sensitivity analysis to identify key drivers for indication expansion.</li>
+      <li>Qualitative and quantitative validation comparing simulated and observed clinical responses in both cancers.</li>
+    </ul>
+
+    <h4>Challenges</h4>
+    <ul>
+      <li>Capturing differences in tumor biology and ADC pharmacology between breast and gastric cancer.</li>
+      <li>Limited clinical data for gastric cancer ADC treatment to robustly calibrate models.</li>
+      <li>Ensuring mechanistic accuracy while enabling efficient computational translation across contexts.</li>
+      <li>Complexity of integrating multi-scale data (molecular to tumor population levels) into a unified framework.</li>
+    </ul>
+
+    <h4>Productions & Communications</h4>
+    <ul>
+      <li>Posters at the Page conference (2024) and the GMP conference (2024) - <a href="https://vantage-research.net/poster/a-comprehensive-multi-scale-in-silico-approach-for-predicting-antibody-drug-conjugate-clinical-efficacy-across-oncological-indications/" target="_blank">Link</a></li>
+    </ul>
+
+    <p><strong>Partner:</strong> Vantage-Research </p>
+  `
+},
+  {
+  "id": "mab-nca-pkpkpd",
+  "title": "NCA & PK/PD Analysis for Monoclonal Antibodies in Drug Discovery",
+  "shortDesc": "Performed NCA and PK/PD modeling to guide drug discovery and engineering decisions for multiple monoclonal antibodies under data-scarce conditions",
+  "role": "Pharmacometric Analyst",
+  "date": "2023 – 2024",
+  "software": ["Matlab","R"],
+  "tags": [
+    "PKPD","ODE","Oncology", "mAb", "Drug Discovery"
+  ],
+  "details": `
+    <h4>Problematic</h4>
+    <p>In early-stage biologics discovery, characterizing the pharmacokinetics (PK) and pharmacodynamics (PD) of monoclonal antibodies is essential for informing research decisions and guiding the design of downstream studies. However, this phase is often constrained by very limited and noisy preclinical or exploratory clinical data, making robust analysis and decision-making a challenge.</p>
+
+    <h4>Approach</h4>
+    <p>Conducted non-compartmental analysis (NCA) and population PK/PD modeling for several monoclonal antibodies across different indications and engineering strategies. Leveraged advanced modeling techniques and statistical validation to extract actionable insights, even from sparse datasets.</p>
+    <ul>
+      <li>Developed custom code for non-compartmental analysis (NCA), implementing core PK metrics (AUC, Cmax, Tmax, t1/2, CL) and benchmarked performance against established software to validate accuracy and robustness.</li>
+      <li>Created reproducible workflows and visualizations for internal decision-making committees.</li>
+      <li>Iterative model refinement in close collaboration with stakeholders.</li>
+    </ul>
+
+    <h4>Challenges</h4>
+    <ul>
+      <li>Very limited, often noisy, concentration-time data made standard parameter estimation difficult.</li>
+      <li>Frequent changes in candidate structure (eg Fc region modifications) required re-adapting models quickly.</li>
+      <li>High decision pressure despite uncertainty in parameter estimates and model stability.</li>
+      <li>Maintaining reproducibility and documentation across rapid model iterations.</li>
+    </ul>
+
+    <h4>Productions & Communications</h4>
+    <ul>
+      <li>Internal reports with visual exposure summaries and model diagnostics.</li>
+      <li>PK/PD support for go/no-go decisions at project gates.</li>
+    </ul>
+
+    <p><strong>Partner:</strong> Vantage-Research in collaboration with a pharmaceutical company</p>
+  `
+},
+ {
+  "id": "ball-immune-modeling",
+  "title": "Immune System Modeling in B-Cell Acute Lymphoblastic Leukemia (B-ALL)",
+  "shortDesc": "Multi-compartment mechanistic model simulates immune-tumor dynamics in B-ALL using ODEs and parameter calibration from literature-based assumptions.",
+  "role": "Computational Biology Intern",
+  "date": "January 2024",
+  "software": ["Python", "Tellurium", "Google Colab"],
+  "tags": [
+    "QSP","ODE","Oncology", "TCE"
+  ],
+  "details": `
+    <img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f6bf2f9f-147c-45ca-a201-d52c0970b260/BALL-immune-model.png" alt="B-ALL Immune Model Dynamics" style="max-width:100%; margin-bottom:1em;" />
+
+    <h4>Problematic</h4>
+    <p>Understanding immune response dynamics in B-cell Acute Lymphoblastic Leukemia (B-ALL) is critical for predicting disease progression and evaluating treatment strategies. Due to the complexity of immune-tumor interactions across different biological compartments, and limited quantitative in vivo data, there's a growing need for mechanistic in silico models to investigate systemic behaviors and guide therapeutic development.</p>
+
+    <h4>Approach</h4>
+    <p>This project presents a multi-compartment ODE model of the immune system in the context of B-ALL, incorporating three physiological compartments (bone marrow, lymph node, blood) and 12 immune and tumor-related variables.</p>
+    <p>The model includes:</p>
+    <ul>
+      <li>Literature-based parameterization using values and structures derived from 6 publications.</li>
+      <li>Biologically relevant interactions, including proliferation, decay, and differentiation, and enzymatic regulation through Michaelis-Menten kinetics.</li>
+      <li>Parameter calibration via constrained grid search to identify biologically plausible behaviors (e.g., tumor containment, immune rebound).</li>
+      <li>Dynamic visualizations across compartments for exploring behavior under different parameter scenarios.</li>
+    </ul>
+
+    <h4>Challenges</h4>
+    <ul>
+      <li>Data integration from multiple models created inconsistencies (eg incompatible NK/CD8 decay rates).</li>
+      <li>Limited control over certain parameters during calibration hindered some biological constraints.</li>
+      <li>Mismatch with existing models due to structural differences (shared vs. separated compartments).</li>
+      <li>Strong coupling between immune variables increased analysis complexity.</li>
+      <li>Computational cost.</li>
+    </ul>
+
+    <h4>Productions & Communications</h4>
+    <ul>
+      <li>Jupyter Notebook: <a href="https://colab.research.google.com/drive/1xoIIqmzXOhw8cLvNUQ3imBwLDTWdluU0?authuser=2" target="_blank">APM_Immuno_Submodel.ipynb</a>, hosted on Google Colab</li>
+    </ul>
+
+    <p><strong>Note:</strong> This model is part of a broader in silico immuno-oncology framework under development. Stay tuned via LinkedIn!</p>
+        <p><strong>Partner:</strong>  Nicoletta Ceres (Reviewer and Owner of the complementary submodel)</p>
+  `
+},
+{
+  id: "egfr-lung-adenocarcinoma",
+  title: "EGFR+ Lung Adenocarcinoma & Disease Progression",
+  shortDesc: "Mechanistic modeling predicts disease progression and treatment response for EGFR-mutant lung adenocarcinoma using multi-scale data calibration.",
+  role: "Research Fellow in modeling",
+  date: "2020 - 2023",
+  software: ["Haskell", "Jinko", "R"],
+  tags: [
+    "QSP", "PBPK", "ODE","Statistics", "Oncology", "Combo"
+  ],
+  details: `
+
+    <h4>Problematic</h4>
+    <p>Low survival rates in advanced lung adenocarcinoma and resistance to targeted therapies create challenges in treatment and clinical trials, requiring in silico models for outcome prediction and ethical trial design.</p>
+
+    <h4>Approach</h4>
+    <p>The approach used in this project involves the development of an in silico EGFR mutant LUAD model (ISELA) that links patients' individual characteristics, including tumor genetic heterogeneity, to tumor size evolution and progression over time under first-generation EGFR-tyrosine kinase inhibitor gefitinib. The model is based on extensive knowledge of LUAD and has been calibrated on multiple scales, incorporating in vitro, human tumor xenograft mouse, and human data. The model is therefore composed of a set of 27-97 variables, 108-258 parameters and 13-83 ODEs, based on the number of tumor clones (i.e. groups of cells that harbor different phenotypes due to specific mutations) each virtual patient possesses. This translational mechanistic model accurately reproduces experimental data and clinical trial results, supporting its high predictive value. The model serves as a valuable tool to support the development of new therapies against EGFR mutant LUAD and enables the generation of synthetic control arms based on mechanistic models for ethical clinical trials.</p>
+
+<p>In particular, from downstream protein pathways to vessel density, we here suggest a novel mathematical model capable of describing the impact of neoangiogenesis on the main 3D tumor using a set of ordinary differential equations and linear exchanges. This knowledge-based model has been built in line with lung cancer knowledge and data. It could be considered as a stand-alone submodel for reuse in other contexts. The model of neoangiogenesis has been successfully calibrated using a CMAES approach integrating in silico data on tumor evolution, in vitro data related to lung cancer (human cell lines) and in vivo data from mice experiments and human trials..</p>
+
+    <h4>Challenges</h4>
+    <ul>
+      <li> Clinical data availability. Low survival rate of lung adenocarcinoma (LUAD) at advanced stages limitating the number of clinical data available. In particular, we found no data to follow tumor natural evolution. Ethical challenges in creating control arms in clinical trials for NSCLC with treatment-resistant mutations.</li>
+<li>Integrating and calibrating the in silico model using data from multiple sources, including in vitro studies, mouse experiments, and human trials.</li>
+<li>Computational costs for considering multi-compartmental evolutions** and manage the spatial evolution in the neoangiogenesis model.</li>
+<li>Ensuring accuracy and reliability of the model's predictions, through rigorous validation and benchmarking, to support drug use</li>
+<li>Developping an important model.  In a team composed of persons from different business units. This management done in an agile context using scrum was possible thanks to Git.</li>
+    </ul>
+
+    <h4>Productions & Communications</h4>
+    <ul>
+      <li>L'Hostis, A., et al. (2023). Mechanistic modeling predicts gefitinib response in EGFR-mutant lung adenocarcinoma. npj Systems Biology and Applications.</li>
+      <li>Jacob, E., et al. (2023). Validation methods for Time-To-Event models with uncertainty: EGFR+ Lung Adenocarcinoma. BMC Bioinformatics.</li>
+      <li>Palgen, J. L., et al. (2022). Multiscale mechanistic model calibration in lung adenocarcinoma. Acta Biotheoretica.</li>
+    </ul>
+
+    <p><strong>Partner:</strong>  Johnson & Johnson France</p>
+  `
+},
+   {
+  id: "subcellular-dynamics",
+  title: "Subcellular dynamics - Models for energetic substrates kinetics (glioma, stroke)",
+  shortDesc: "Mathematical modeling of brain metabolism, calcium signaling, and metabolic profiling after ischemic stroke, integrating biology and imaging.",
+  role: "Research Engineer - PhD & Postdoctoral Fellow",
+  date: "2016 - 2020",
+  software: ["Matlab", "Maple", "R", "Python"],
+  tags: [
+    "ODE", "Statistics","Oncology", "Neurology", "Imaging", "MRS", "MRI"
+  ],
+  details: `
+ <h4>Problematic</h4>
+<p>The project focuses on addressing several key problematic areas related to brain metabolism, calcium signaling, and metabolic profiling following an ischemic stroke. These issues pose significant challenges in understanding the underlying mechanisms and potential therapeutic implications for neurological conditions. The project seeks to elucidate the following problematic areas:</p>
+<ul>
+  <li><strong>Brain metabolism and pathological conditions:</strong> The project investigates brain metabolism in pathological conditions, particularly the presence of tumors. Understanding the interactions between the Krebs cycle, glutamate cycle, and lactate dynamics in these conditions is crucial for developing targeted therapeutic strategies.</li>
+  <li><strong>Calcium signaling and cellular processes:</strong> The study of calcium fluxes and their impact on various cellular processes in brain cells is complex. The project aims to build mathematical models to explain calcium oscillations and the functioning of pumps with multiple parameters, which play significant roles in cellular proliferation, self-renewal, and migration.</li>
+  <li><strong>Metabolic profiling in ischemic stroke:</strong> Identifying correlations between metabolic profiles and clinical outcomes following an ischemic stroke is a challenging task. The project aims to analyze multiparametric MRI data to establish predictive parameters for patient recovery and to compare metabolic profiles of stroke patients with those of healthy subjects.</li>
+</ul>
+
+<h4>Approach</h4>
+<ul>
+  <li><strong>Mathematical modeling:</strong> For the study of brain metabolism, calcium signaling, and cellular processes, the project uses Ordinary Differential Equations (ODEs). These models help simulate and analyze the dynamic behavior of metabolic substrates, calcium fluxes, and their interactions within brain cells.</li>
+  <li><strong>Statistical analysis:</strong> To analyze the metabolic profiles obtained from multiparametric MRI data after an ischemic stroke, the project employs statistical methods to establish correlations between these profiles and clinical outcomes. Predictive parameters are identified to assess the patient's recovery prospects.</li>
+  <li><strong>Biological description:</strong> Collaborations with researchers from biology and medicine allow for a deeper understanding of the underlying cellular processes, ion transporters, and metabolic pathways involved in brain metabolism and calcium signaling.</li>
+  <li><strong>Medical imaging:</strong> The project utilizes multiparametric MRI data to create metabolic profiles and visualize brain activity. The imaging data allow exploring the potential relationship between metabolic alterations and clinical outcomes.</li>
+</ul>
+
+<h4>Challenges</h4>
+<ul>
+  <li><strong>Complexity of brain metabolism:</strong> Brain metabolism is a highly intricate and dynamic process involving various metabolic substrates and interactions. Developing accurate mathematical models to represent this complexity requires careful consideration of multiple factors and feedback mechanisms.</li>
+  <li><strong>Integration of multidisciplinary data:</strong> Integrating data from multiple sources, such as biological experiments, medical imaging, and clinical information, poses challenges in harmonizing and analyzing diverse datasets cohesively.</li>
+  <li><strong>Validation of mathematical models:</strong> Validating the mathematical models against experimental data and ensuring their biological relevance is essential to establish the credibility of the research findings.</li>
+  <li><strong>Clinical relevance:</strong> Establishing the clinical relevance of metabolic profiles in ischemic stroke patients and translating them into predictive parameters for patient recovery requires thorough clinical investigations and validation.</li>
+  <li><strong>Interpreting calcium signaling mechanisms:</strong> Understanding the intricate mechanisms of calcium signaling, including calcium oscillations and the functioning of pumps, is challenging due to the involvement of various ion transporters and feedback loops.</li>
+</ul>
+
+<h4>Productions & Communications</h4>
+<ul>
+  <li>Perrillat-Mercerot, A., Deliot, N., Miranville, A., Guillevin, R., & Constantin, B. (2022). Mathematical Analysis of Membrane Transporters Dynamics: A Calcium Fluxes Case Study. <em>Acta Biotheoretica</em>, 70(2), 1-32.</li>
+  <li>Perrillat-Mercerot A., Bourmeyster N., Guillevin C., Miranville A. and Guillevin R. (2019). Analyse of a mathematical model for the glutamate/glutamine cycle. <em>Bulletin of Mathematical Biology</em>, 1-20.</li>
+  <li>Additionally, two talks and one internship supervision.</li>
+</ul>
+
+        <p><strong>Partner:</strong> 
+<ul>
+  <li>Joint project between the Matjematical Laboratory of Poitiers (LMA) and the research hospital of Poitiers </li>
+  <li> Establishing a research project with the Laboratory of Cell Signaling and Membrane Ion Transport (STIM, CNRS ERL 7003 - EA 7349), in the research team "Calcium Channels and Connexins in Stem Cells" (4CS).</li>
+    </ul>
+  `
+},
+{
+  id: "glioma-lactate-journey",
+  title: "ODE and PDE to predict Glioma evolution thanks to Lactate",
+  shortDesc: "Modeling lactate metabolism in the brain using ODEs and PDEs, with applications to gliomas.",
+  software: ["Matlab", "Maple", "R", "Python"],
+  tags: [
+    "ODE", "PDE", "DDE", "Statistics","Oncology", "Neurology", "Imaging", "MRS", "MRI"
+  ],
+  details: `
+ <h4>Problematic</h4>
+<p>The main focus of this project is to address the complex energy exchanges occurring in the brains of both healthy individuals and those affected by gliomas. Understanding the brain's energy management is particularly challenging because it involves not only the survival of neurons but also the cost of cerebral activity. The brain's metabolic processes are coordinated rather than competitive, making the energetic considerations for neurons unique.</p>
+<p>The use of various energy substrates, such as glucose, lactate, and oxygen, has been observed through medical imaging techniques like MRI. However, when tumors like gliomas develop, they alter their energy metabolism to support their growth and survival. Cancer cells selectively take up substrates like lactate based on the availability of oxygen. Mathematical modeling offers a powerful tool to describe and predict these energy fluxes in different scenarios.</p>
+
+<h4>Approach</h4>
+<ul>
+  <li><strong>Historical synthesis of mathematical modeling:</strong> We conduct a historical synthesis of the contributions of mathematical modeling to the understanding of glioma behavior, with a particular focus on energy exchanges. This section provides valuable insights into the current state of knowledge on cerebral mechanisms.</li>
+  <li><strong>1D modeling of energy substrate fluxes:</strong> The second axis involves 1D modeling of energy substrate fluxes in the brain, along with an in-depth analysis and simulations. Collaborating with the Laboratory of Cellular Physiology Signalization and Membrane Ionic Transport (STIM, ERL CNRS 7003), we explore various dynamics modified in tumor clusters. These include mathematical models describing lactate fluxes between cells and the bloodstream through monocarboxylate transporters. Additionally, we consider interactions between neurons, astrocytes, and glioma cells, considering substrates like glucose, oxygen, and lactate, and how they contribute to energy production and cell activity and, finally, tumor growth.</li>
+  <li><strong>Higher-dimensional modeling of lactate exchanges:</strong> In the third axis, we delve into higher-dimensional modeling of lactate exchanges between neurons and astrocytes. This approach involves studying systems of Partial Differential Equations (PDEs) with complex boundary conditions to understand brain maps resulting from SRM data. We explore reaction-diffusion models and systems with interfaces, which introduce challenging boundary conditions. We obtain valuable insights into the dynamics of lactate exchanges in these higher-dimensional scenarios, opening doors to transporter drug development.</li>
+</ul>
+
+<h4>Challenges</h4>
+<ul>
+  <li><strong>Complex system:</strong> Modeling the brain's energy management involves complex interactions between different cell types and energy substrates, making it challenging to capture all relevant dynamics accurately.</li>
+  <li><strong>Parameter estimation:</strong> Estimating the parameters of mathematical models from experimental data and medical imaging requires careful calibration and consideration of uncertainties.</li>
+  <li><strong>Multi-dimensional models:</strong> Developing and analyzing multi-dimensional PDE models with complex boundary conditions presents mathematical and computational challenges.</li>
+  <li><strong>Biological interpretation:</strong> Ensuring that the mathematical models align with biological reality and interpreting the mathematical results in the context of cellular behavior and glioma growth is essential. Ultimately, the findings of this research must have clinical relevance and potential applications in glioma management. The challenges lie in translating mathematical insights into practical and beneficial medical interventions.</li>
+  <li><strong>Analytical solutions:</strong> Obtaining analytical solutions for complex PDE models with non-linear terms and complex boundary conditions is difficult, requiring advanced mathematical techniques.</li>
+</ul>
+
+<h4>Productions & Communications</h4>
+<ul>
+  <li>Perrillat-Mercerot, A., Miranville, A., Agosti, A., Rocca, E., Ciarletta, P., et Guillevin, R. (2021). Partial differential model of lactate neuro-energetics: analytic results and numerical simulations. <em>Mathematical Medicine and Biology: A Journal of the IMA</em>.</li>
+  <li>Perrillat-Mercerot A., Guillevin C., Miranville A et Guillevin R. (2019) Using mathematics in MRI data management for glioma assessment. <em>Journal of Neuroradiology</em>.</li>
+  <li>Perrillat-Mercerot A., Miranville A., Bourmeyster N., Guillevin C., Naudin M., and Guillevin R. (2019) What mathematical models can or cannot do in glioma description and understanding. <em>Discrete & Continuous Dynamical Systems-S</em>.</li>
+  <li>Perrillat-Merceot A., Bourmeyster N., Guillevin C., Miranville, A., and Guillevin, R. (2019). Mathematical Modeling of Substrate Fluxes and Tumor Growth in the Brain. <em>Acta Biotheoretica</em>, 1-27.</li>
+  <li>Guillevin C., Guillevin, R., Miranville, A., and Perrillat-Mercerot, A. (2018). Analysis of a mathematical model for brain lactate kinetics. <em>Mathematical Biosciences & Engineering</em>, 15(5), 1225-1242 (alphabetical order).</li>
+  <li>Guillevin R., Miranville A., and Perrillat-Mercerot A. (2017). On a reaction-diffusion system associated with brain lactate kinetics. <em>Electronic Journal of Differential Equations</em>, 2017 (23), 1-16 (alphabetical order).</li>
+  <li>Additionally, 12 talks.</li>
+  <li>Lactate two variables <a href="https://github.com/Aperril/Code-sharing/tree/main/Matlab/ODE%20lactate%20two%20variables">[Matlab code]</a> / Tumor growth <a href="https://github.com/Aperril/Code-sharing/tree/main/Matlab/ODE%20global%20tumor">[Matlab code]</a></li>
+</ul>
+
+<p><strong>Partner:</strong>  
+<ul>
+  <li>Joint project between the Matjematical Laboratory of Poitiers (LMA) and the research hospital of Poitiers </li>
+  <li> Set up a joint research project with the Mathematics departments of Pavie and Milan (Italy), delivering four presentations in three different laboratories and during a workshop between 2018 and 2019, securing scholarships from the International Associated Laboratory LYSM AMU CNRS ECM INdAM, and the European Campus of City-Universities (EC2U), conducting interviews for EC2U support.</li>
+    </ul>
+
+  `
+},
+{
+  id: "alzheimer-prion-abeta",
+  title: "Mathematical study of the interaction between prion and Abeta peptide responsible for Alzheimer's disease",
+  shortDesc: "Modeling Abeta peptide aggregation and prion interaction in Alzheimer’s disease using delay-based differential equations.",
+  software: ["Matlab", "Maple"],
+  tags: [
+    "ODE", "DDE", "Neurology", "In Vitro"
+  ],
+  details: `
+   <h4>Problematic</h4>
+<p>Alzheimer's disease (AD) is a devastating neurodegenerative disorder that primarily affects the elderly population. One of the key pathological features of AD is the accumulation of amyloid-beta (Aβ) peptides in the brain, which eventually leads to the formation of amyloid plaques. Understanding the dynamics of Aβ peptides and their interactions with other molecules, such as prion PrPc, is crucial for gaining insights into the progression of AD and identifying potential therapeutic targets.</p>
+<p>The main problematic addressed in this project is to develop a mathematical model to study the behavior of Aβ peptides in an in vitro context and how they interact with prion PrPc. The model aims to explain the observed dynamics of Aβ peptides, including the presence of delays, the formation of oligomers and fibrils, and the influence of the environment. Furthermore, the model seeks to compare its simulations with experimental data, particularly the fluorescence measurements obtained from solutions mixed with Thioflavin T. By investigating these aspects, the project aims to shed light on the underlying mechanisms of Aβ aggregation and its role in AD pathogenesis.</p>
+
+<h4>Approach</h4>
+<ul>
+  <li><strong>Becker-Döring equations:</strong> The model is based on Becker-Döring equations, which describe the polymerization and depolymerization processes of Aβ peptides. The approach involves discretizing the model and considering two varieties of Aβ peptides, Aβ-40 and Aβ-42. The ODE model includes delays and mass equations to simulate peptide evolution over time and study equilibrium states.</li>
+  <li><strong>Micellization:</strong> The phenomenon of micellization is included, where monomers bind together weakly before polymerization, leading to micelle formation. This accounts for the lag time observed in experimental data and helps better match the sigmoidal fluorescence curves.</li>
+  <li><strong>Simulation and validation:</strong> The approach compares the model's simulations with experimental data to validate its predictions. Sensitivity analysis is performed to determine the impact of different parameters on Aβ peptide dynamics and to identify key factors influencing the system’s behavior.</li>
+  <li><strong>Secondary study on delays:</strong> A secondary study investigates the impact of considering delays in the model, adding an additional layer of complexity to better match experimental observations.</li>
+</ul>
+
+<h4>Challenges</h4>
+<ul>
+  <li><strong>Parameter estimation:</strong> The model involves a significant number of parameters, and estimating their values from experimental data is challenging. There might be uncertainty in the parameter values, which could affect the model's predictions and match with experimental results.</li>
+  <li><strong>Biological complexity:</strong> Alzheimer's disease and Aβ peptide dynamics are complex biological phenomena. The model's simplifications and assumptions might not capture all the intricate details of the disease's progression, limiting its predictive power.</li>
+  <li><strong>Integration of experimental data:</strong> Integrating experimental data into the model and interpreting fluorescence measurements as proxies for peptide mass require careful consideration and calibration.</li>
+  <li><strong>Generalization to in vivo context:</strong> The in vitro model might not fully reflect the dynamics of Aβ peptides in an in vivo environment, where various factors, such as brain structure, blood-brain barrier, and interactions with other molecules, play significant roles.</li>
+</ul>
+
+<h4>Productions & Communications</h4>
+<ul>
+  <li>Helal M, Igel-Egalon A, Lakmeche A, Mazzocco P, Perrillat-Mercerot A, Pujo-Menjouet L, Rezaei H, Tine LM. Stability analysis of a steady state of a model describing Alzheimer's disease and interactions with prion proteins. <em>J Math Biol</em>. 2019 Jan;78(1-2):57-81. Doi: 10.1007/s00285-018-1267-1. Epub 2018 Aug 11. PMID: 30099569.</li>
+  <li>Polymerisation Matlab codes: <a href="https://github.com/Aperril/Code-sharing/tree/main/Matlab/ODE%20polymerization%20prion">One lag</a> / <a href="https://github.com/Aperril/Code-sharing/tree/main/Matlab/ODE%20polymerization%20two%20delays">Two lags</a></li>
+</ul>
+
+            <p><strong>Partner:</strong>  Joint Project between the Inria DRACULA (Lyon) and the INRAE MAP² (Jouy-en-Josas) </p>
+
+  `
+},
+{
+  id: "robert-model-credibility",
+  title: "The ROBERT project – toward Credibility & Trustworthiness of mathematical models",
+  shortDesc: "Development of an evaluation framework to assess the credibility of mathematical models in pharmaceutical R&D.",
+  software: [],
+  tags: [
+    "QSP","PBPK","D&D", "Regulatory"
+  ],
+  details: `
+
+<h4>Problematic</h4>
+<p>Pharmaceutical research and development rely on developing systemic hypotheses about the effect of novel drug mechanisms on the pathophysiology. However, trust issues surrounding quantitative systems pharmacology (QSP) approaches may hinder the strategic use of this type of approach. While QSP can reveal unexpected systemically emergent large dangers and opportunities, not otherwise knowable, there is a need to establish safeguards and evaluate the credibility of model predictions. Quantitative validation assessment (QVA) is commonly used to evaluate the capacity of a model to provide trustworthy results for a specific intended use. However, QVA has its limitations, including the reliance on data amount, quality, range, uncertainty, and processing, which can make it difficult to perform or raise questions about its accuracy. Thus, the challenge lies in determining how to establish trust in in silico approaches and assess the associated risk, especially when faced with the limitations of QVA.</p>
+
+<h4>Approach</h4>
+<p>We conducted a literature review to identify formal and community standards communicated as guidelines and as a reflection of users' routine. From this review, they developed a comprehensive evaluation grid comprising credibility and well-posedness factors. This grid considers various aspects, such as process control, influence and risk, knowledge adequation, model construction, data comparator, software selection and use, fitting evaluation, and validity domains.</p>
+
+<h4>Challenges</h4>
+<ul>
+  <li><strong>Ensuring trustworthiness:</strong> The primary challenge is to establish trust in the in silico approach's results, given the potential consequences of decisions based on model predictions in pharmaceutical research and development.</li>
+  <li><strong>Addressing QVA limitations:</strong> The limitations of quantitative validation assessment, such as data availability, quality, and uncertainty, need to be overcome or mitigated to ensure more accurate evaluations of model credibility.</li>
+  <li><strong>Translating regulatory guidelines:</strong> Translating and incorporating regulatory guidelines from FDA, EMA, and other regulatory agencies into the evaluation grid to assess the trustworthiness of in silico approaches can be complex and requires careful consideration.</li>
+  <li><strong>Multidimensionality of in silico approaches:</strong> In silico models involve multiple dimensions, including assumptions, model construction, data comparison, and virtual populations, which need to be appropriately addressed in the evaluation grid.</li>
+  <li><strong>Balancing standards and continuous improvement:</strong> Striking a balance between the alignment of formal and community standards and the ongoing improvement of the evaluation grid to capture new challenges and advancements in the field.</li>
+</ul>
+
+<h4>Productions & Communications</h4>
+<ul>
+  <li>Confidential.</li>
+</ul>
+
+    <p><strong>Partner:</strong> Confidential</p>
+  `
+}
+
+  ];
+
+  const grid = document.querySelector("#projects .grid");
+  const modal = document.getElementById("projectModal");
+  const modalTitle = modal.querySelector("#modalTitle");
+  const modalContent = modal.querySelector("#modalContent");
+  const modalImage = modal.querySelector("#modalImage");
+  const closeBtn = modal.querySelector("#modalCloseBtn");
+
+  // Show projects
+  projects.forEach(proj => {
+    const article = document.createElement("article");
+    article.className = "col-6 card";
+    article.tabIndex = 0;
+    article.dataset.id = proj.id;
+    article.innerHTML = `
+      <h3>${proj.title}</h3>
+      <p>${proj.shortDesc}</p>
+      <div style="margin-top:auto; display:flex; gap:8px; flex-wrap:wrap;">
+        ${proj.tags.map(tag => `<span class="tag-label">${tag}</span>`).join('')}
+      </div>
+      <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+        ${(proj.software || []).map(soft => `<span class="software-label">${soft.trim()}</span>`).join('')}
+      </div>
+      <small class="learn-more">Learn More</small>
+    `;
+    grid.appendChild(article);
+  });
+
+  // Unhide section
+  document.getElementById("projects").hidden = false;
+
+  // Open modal
+function openModal(proj) {
+  modalTitle.textContent = proj.title;
+  modalContent.innerHTML = proj.details; // <-- Replace with project details HTML
+  modalImage.style.display = "none";     // Optional: if details contain their own images
+  modalImage.src = "";
+  modalImage.alt = "";
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+  closeBtn.focus();
+}
+
+  // Close modal
+  function closeModal() {
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+  // Event listeners for open modal
+  grid.addEventListener("click", e => {
+    const card = e.target.closest("article.card");
+    if (!card) return;
+    const proj = projects.find(p => p.id === card.dataset.id);
+    if (proj) openModal(proj);
+  });
+
+  grid.addEventListener("keydown", e => {
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches("article.card")) {
+      e.preventDefault();
+      const proj = projects.find(p => p.id === e.target.dataset.id);
+      if (proj) openModal(proj);
+    }
+  });
+
+  // Close modal handlers
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && modal.style.display === "flex") closeModal();
+  });
+})();
+</script>
+
+
+<!-- PUBLICATIONS -->
+<section class="section" id="publications">
+
+  <header>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+    <h2>Publications, Talks, Posters, Grants & More</h2>
+    <a href="pdf/these.pdf" download class="download-btn-small" rel="nofollow" target="_blank">PhD Manuscript</a>
+  </div>
+</header>
+
+  <div class="content">
+    
+    <!-- Upcoming -->
+    <article class="card">
+  <nav class="stats-bar">
+    Articles (12) | Talks (19) & Posters (9) | Prizes & Grants (5) |Other (10)
+  </nav>
+</article>
+
+
+  <!-- Publications -->
+<article class="card">
+  <h3>📚 Publications</h3>
+
+  <div class="pub-list">
+
+    <section>
+      <h4>2023</h4>
+      <ol>
+        <li>
+          L'Hostis, A., Palgen, J. L., Perrillat-Mercerot, A., Peyronnet, E., Jacob, E., Bosley J. R., Duruisseaux M., Toueg R., Lefèvre L., Kahoul R., Ceres, N. & Monteiro, C. (2023). 
+          Knowledge-based mechanistic modeling accurately predicts disease progression with gefitinib in EGFR-mutant lung adenocarcinoma. 
+          <i>npj Systems Biology and Applications</i> (accepted).
+        </li>
+        <li>
+          Jacob, E., Perrillat-Mercerot, A., Palgen, J. L., L’Hostis, A., Ceres, N., Boissel, J. P., Bosley J., Monteiro C. & Kahoul, R. (2023). 
+          Empirical methods for the validation of Time-To-Event mathematical models taking into account uncertainty and variability: Application to EGFR+ Lung Adenocarcinoma. 
+          <i>BMC Bioinformatics</i> (accepted).
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h4>2022</h4>
+      <ol>
+        <li>
+          Palgen, J. L., Perrillat-Mercerot, A., Ceres, N., Peyronnet, E., Coudron, M., Tixier, E., Illigens B., Bosley J., L’Hostis A. & Monteiro, C. (2022). 
+          Integration of heterogeneous biological data in multiscale mechanistic model calibration: application to lung adenocarcinoma. 
+          <i>Acta Biotheoretica</i>, 70(3), 1-24.
+        </li>
+        <li>
+          Perrillat-Mercerot, A., Deliot, N., Miranville, A., Guillevin, R., & Constantin, B. (2022). 
+          Mathematical Analysis of Membrane Transporters Dynamics: A Calcium Fluxes Case Study. 
+          <i>Acta Biotheoretica</i>, 70(2), 1-32.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h4>2021</h4>
+      <ol>
+        <li>
+          Perrillat-Mercerot, A., Miranville, A., Agosti, A., Rocca, E., Ciarletta, P., & Guillevin, R. (2021). 
+          Partial differential model of lactate neuro-energetics: analytic results and numerical simulations. 
+          <i>Mathematical Medicine and Biology: A Journal of the IMA</i>.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h4>2019</h4>
+      <ol>
+        <li>
+          Perrillat-Mercerot, A., Guillevin C., Miranville A., & Guillevin R. (2019). 
+          Using mathematics in MRI data management for glioma assessment. 
+          <i>Journal of Neuroradiology</i>.
+        </li>
+        <li>
+          Perrillat-Mercerot, A., Miranville A., Bourmeyster N., Guillevin C., Naudin M., & Guillevin R. (2019). 
+          What mathematical models can or cannot do in glioma description and understanding. 
+          <i>Discrete & Continuous Dynamical Systems - S</i>.
+        </li>
+        <li>
+          Perrillat-Mercerot, A., Bourmeyster N., Guillevin C., Miranville A., & Guillevin R. (2019). 
+          Analysis of a mathematical model for the glutamate/glutamine cycle. 
+          <i>Bulletin of Mathematical Biology</i>, 1-20.
+        </li>
+        <li>
+          Perrillat-Mercerot, A., Bourmeyster N., Guillevin C., Miranville A., & Guillevin R. (2019). 
+          Mathematical Modeling of Substrates Fluxes and Tumor Growth in the Brain. 
+          <i>Acta Biotheoretica</i>, 1-27.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h4>2018</h4>
+      <ol>
+        <li>
+          Helal, M., Igel-Egalon, A., Lakmeche, A., Mazzocco, P., Perrillat-Mercerot, A., Pujo-Menjouet, L., Rezaei H., & Tine, L. M. (2018). 
+          Stability analysis of a steady state of a model describing Alzheimer’s disease and interactions with prion proteins. 
+          <i>Journal of Mathematical Biology</i>, 1-25.
+        </li>
+        <li>
+          Guillevin C., Guillevin R., Miranville A., & Perrillat-Mercerot, A. (2018). 
+          Analysis of a mathematical model for brain lactate kinetics. 
+          <i>Mathematical Biosciences & Engineering</i>, 15(5), 1225-1242.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h4>2017</h4>
+      <ol>
+        <li>
+          Guillevin R., Miranville A., & Perrillat-Mercerot A. (2017). 
+          On a reaction-diffusion system associated with brain lactate kinetics. 
+          <i>Electronic Journal of Differential Equations</i>, 2017(23), 1-16.
+        </li>
+      </ol>
+    </section>
+
+  </div>
+
+</article>
+
+
+<!-- Talks -->
+<article class="card">
+  <h3>🎤 Oral Presentations</h3>
+
+  <div class="pub-list">
+
+    <section>
+      <h4>🌍 International</h4>
+      <ul class="talks-list">
+        <li>
+          <div class="date"><strong>Sept. 2019</strong></div>
+          <div class="details">Perrillat-Mercerot A., Investigation on complex nutrient fluxes, International Workshop Mathematical Biology on the Mediterranean Conference (MBMC), Samos (Greece)</div>
+        </li>
+        <li>
+          <div class="date"><strong>May 2019</strong></div>
+          <div class="details">Perrillat-Mercerot A., Substrate fluxes between cells and capillaries, Workshop Recent advances in Phase-Field modeling: from Engineering to Biology, Pavia (Italy)</div>
+        </li>
+        <li>
+          <div class="date"><strong>July 2018</strong></div>
+          <div class="details">Perrillat-Mercerot A., What about lactate kinetics in a (gliomatous) brain?, invited speaker at the special session <em>Recent Advances in Mathematical Biology, Ecology, Epidemiology, and Oncology</em> organized by Sophia Jang, Hsiu-Chuan Wei, Ting-Hui Yang, Jui-Ling Yu and Alain Miranville, The 12th <a href="http://www.aimspress.com/journal/Math" target="_blank" rel="nofollow" style="color:#93876d;">AIMS</a> Conference, Taipei (Taiwan)</div>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h4>🇫🇷 National</h4>
+      <ul class="talks-list">
+        <li>
+          <div class="date"><strong>Sept. 2020</strong></div>
+          <div class="details">Perrillat-Mercerot A., From MRS data to mathematical equations and back, Internal presentation, Grenoble.</div>
+        </li>
+        <li>
+          <div class="date"><strong>March 2020</strong></div>
+          <div class="details">Perrillat-Mercerot A., Modeling and study of cerebral energy metabolism, Internal presentation, Strasbourg.</div>
+        </li>
+        <li>
+          <div class="date"><strong>Dec. 2019</strong></div>
+          <div class="details">Perrillat-Mercerot A., Use of Mathematics in medical imaging, application to the study of brain tumors, Round table for the 80th anniversary of CNRS - Health division, Poitiers.</div>
+        </li>
+        <li>
+          <div class="date"><strong>Dec. 2019</strong></div>
+          <div class="details">Perrillat-Mercerot A., Models in neuro-oncology, Workshop Oncosphère Nouvelle-Aquitaine, Angoulême.</div>
+        </li>
+        <li>
+          <div class="date"><strong>June 2019</strong></div>
+          <div class="details">Perrillat-Mercerot A., Approach to cerebral lactate fluxes, from 1D to 3D, 39th <a href="http://sfbt.math.cnrs.fr/fr/sfbt/org/index.html" target="_blank" rel="nofollow" style="color:#93876d;">SFBT</a> Colloquium, Poitiers.</div>
+        </li>
+        <li>
+          <div class="date"><strong>June 2019</strong></div>
+          <div class="details">Perrillat-Mercerot A., Mathematics and glioma, a story of operations., 39th <a href="http://sfbt.math.cnrs.fr/fr/sfbt/org/index.html" target="_blank" rel="nofollow" style="color:#93876d;">SFBT</a> Colloquium, Poitiers.</div>
+        </li>
+        <li>
+          <div class="date"><strong>June 2019</strong></div>
+          <div class="details">Perrillat-Mercerot A., When mathematics uses operations against gliomas, <a href="https://www.anocef.org/" target="_blank" rel="nofollow" style="color:#93876d;">ANOCEF</a> Congress 2019, Poitiers.</div>
+        </li>
+        <li>
+          <div class="date"><strong>May 2019</strong></div>
+          <div class="details">Perrillat-Mercerot A., How MRI and mathematics can get together, Invited by the University of Pavia, Pavia (Italy).</div>
+        </li>
+        <li>
+          <div class="date"><strong>Nov. 2018</strong></div>
+          <div class="details">Perrillat-Mercerot A., When mathematics uses operations against gliomas, Young Mathematicians Forum, <a href="http://www.femmes-et-maths.fr/index.php?page=contenu&cat=3&cat2=50" target="_blank" rel="nofollow" style="color:#93876d;">Femmes & Mathématiques</a>, Orléans.</div>
+        </li>
+        <li>
+          <div class="date"><strong>Nov. 2018</strong></div>
+          <div class="details">Perrillat-Mercerot A., What about nutrient kinetics in a (gliomatous) brain?, Invited by Politecnico di Milano, Milan (Italy).</div>
+        </li>
+        <li>
+          <div class="date"><strong>Nov. 2018</strong></div>
+          <div class="details">Perrillat-Mercerot A., What about nutrient kinetics in a (gliomatous) brain?, Invited by University of Pavia, Pavia (Italy).</div>
+        </li>
+        <li>
+          <div class="date"><strong>Sept. 2017</strong></div>
+          <div class="details">Perrillat-Mercerot A., A model for studying tumor growth. Math and cancer day, Poitiers.</div>
+        </li>
+        <li>
+          <div class="date"><strong>June 2017</strong></div>
+          <div class="details">Perrillat-Mercerot A., Reduced model for lactate kinetics. 37th <a href="http://sfbt.math.cnrs.fr/fr/sfbt/org/index.html" target="_blank" rel="nofollow" style="color:#93876d;">SFBT</a> Colloquium, Poitiers.</div>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h4>🎓 Doctoral</h4>
+      <ul class="talks-list">
+        <li>
+          <div class="date"><strong>Feb. 2019</strong></div>
+          <div class="details">Presentation during the doctoral students seminar of the <a href="https://www.u-ldevinci.fr/sismi/" target="_blank" rel="nofollow" style="color:#93876d;">SISMI doctoral school</a> in Poitiers.</div>
+        </li>
+        <li>
+          <div class="date"><strong>Oct. 2018</strong></div>
+          <div class="details">Presentation during the doctoral students seminar in Amiens at <a href="https://www.lamfa.u-picardie.fr/" target="_blank" rel="nofollow" style="color:#93876d;">AMFA</a> in Amiens.</div>
+        </li>
+        <li>
+          <div class="date"><strong>March 2018</strong></div>
+          <div class="details">Presentation at thematic days of the bio-health doctoral school in <a href="https://www.u-ldevinci.fr/sbs/" target="_blank" rel="nofollow" style="color:#93876d;">Cussac</a>.</div>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h4>🧾 Presentations with support (poster & e-poster)</h4>
+      <ul class="talks-list">
+        <li>
+          <div class="date"><strong>June 2025</strong></div>
+          <div class="details"> Chadalavada S.M., Dey S., Pendsey N., Nair G., Packirisamy P., Joshi T., Rengaswamy M., Kumar R., Perrillat-Mercerot A., Build and explore your own mono and combo therapies to Optimize clinical outcomes in IBD, Population Approach Group in Europe (PAGE), Thessalinoki.</div>
+        </li> 
+        <li>
+          <div class="date"><strong>Oct. 2024</strong></div>
+          <div class="details">Paleja B., Dutta R., Srinivasan V., Sahoo S., and Kumar R., A quantitative systems pharmacology (QSP) model framework for combined clinical efficacy and hematological toxicity predictions for antibody-drug conjugates, American Conference on Pharmacometrics, Phoenix.</div>
+        </li> 
+        <li>
+          <div class="date"><strong>Oct. 2024</strong></div>
+          <div class="details">Perrillat-Mercerot A., Gangwar V., Bhardway A. Raman Aditya K., Sing R., Channavazzala M., Paleja B., A comprehensive multi-scale in silico approach for predicting antibody-drug conjugate clinical efficacy across oncological indications, Groupe de Métabolisme et Pharmacocinétique Meeting, Lyon.</div>
+        </li> 
+        <li>
+          <div class="date"><strong>June 2024</strong></div>
+          <div class="details">Perrillat-Mercerot A., Gangwar V., Bhardway A. Raman Aditya K., Sing R., Channavazzala M., Paleja B., A comprehensive multi-scale in silico approach for predicting antibody-drug conjugate clinical efficacy across oncological indications, Population Approach Group in Europe (PAGE), Rome.</div>
+        </li>        
+        <li>
+          <div class="date"><strong>Sept. 2019</strong></div>
+          <div class="details">Perrillat-Mercerot A., Bourmeyster N., Miranville A., Guillevin R., Guillevin C. Let’s make maths about lactate in the brain, 23rd ESN Biennial Meeting – 7th Conference on Molecular Mechanisms of Regulation in the Nervous System, Milan.</div>
+        </li>
+        <li>
+          <div class="date"><strong>March 2018</strong></div>
+          <div class="details">Perrillat-Mercerot A., Guillevin C., Guillevin R., Miranville A. Mathematical modeling of intracerebral glutamate fluxes integrating MR spectroscopy data. 45th <a href="https://www.sfnr.net/" target="_blank" rel="nofollow" style="color:#93876d;">SFNR</a> Congress, Paris.</div>
+        </li>
+        <li>
+          <div class="date"><strong>Sept. 2017</strong></div>
+          <div class="details">Perrillat-Mercerot A., Guillevin C., Guillevin R., Miranville A. Data Analysis and Computation Through Imaging and Modeling – Maths Image Santé. Francophone Radiology Days – <a href="https://jfr.radiologie.fr/" target="_blank" rel="nofollow" style="color:#93876d;">Innovation Village</a>, Paris.</div>
+        </li>
+        <li>
+          <div class="date"><strong>Sept. 2017</strong></div>
+          <div class="details">Perrillat-Mercerot A., Guillevin C., Guillevin R., Miranville A. A model for studying tumor growth. Math and cancer day, Poitiers.</div>
+        </li>
+        <li>
+          <div class="date"><strong>June 2017</strong></div>
+          <div class="details">Perrillat-Mercerot A., Guillevin C., Guillevin R., Miranville A. Dynamics of energy substrates in the brain affected by glioma. Poster – <a href="https://www.anocef.org/" target="_blank" rel="nofollow" style="color:#93876d;">ANOCEF</a> Congress 2017, Nancy.</div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+</article>
+
+
+<style>
+.talks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.talks-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+.talks-list .date {
+  width: 100px; 
+  flex-shrink: 0;
+  text-align: right;
+  font-weight: 300; 
+  line-height: 1.4;
+  padding-right: 0.5rem; 
+}
+.talks-list .details {
+  flex: 1;
+}
+</style>
+
+
+
+    <!-- Grants and Other -->
+<article class="card">
+  <h3>🌍 Awards, Grants & More</h3>
+
+  <div class="pub-list">
+
+    <section>
+      <h4>🎖️ Awards & Grants</h4>
+      <ul class="talks-list">
+        <li>
+          <div class="date"><strong>May 2019</strong></div>
+          <div class="details">
+            EC2U grant for a laboratory exchange with the University of Pavia (Italy). 
+            (<a style="color:#93876d;" href="https://ec2u.eu/" target="_blank" rel="nofollow">EC2U</a>). 
+            My report: <a style="color:#93876d;" href="https://ec2u.eu/ec2u-people/#cPW05x6sHztnIzD6a539" target="_blank" rel="nofollow">eng</a> - 
+            <a style="color:#93876d;" href="https://www.univ-poitiers.fr/angelique.perrillat.mercerot/" target="_blank" rel="nofollow">fr</a>.
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>Nov. 2018</strong></div>
+          <div class="details">
+            GDR Mamovi grant to present at the Young Mathematicians Forum. 
+            (<a style="color:#93876d;" href="http://gdr-mamovi.math.cnrs.fr/spip/spip.php?article1" target="_blank" rel="nofollow">GDR Mamovi</a>)
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>Nov. 2018</strong></div>
+          <div class="details">
+            LYSM grant for a laboratory exchange with the University of Pavia and the Polytechnic School of Milan (Italy). 
+            (<a style="color:#93876d;" href="https://www.lysm.eu/en/about" target="_blank" rel="nofollow">LYSM</a>)
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>June 2017</strong></div>
+          <div class="details">
+            Delattre prize awarded for an oral presentation at the 37th SFBT Colloquium. 
+            (<a style="color:#93876d;" href="http://sfbt.math.cnrs.fr/fr/sfbt/org/index.html" target="_blank" rel="nofollow">SFBT</a>)
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>Sept. 2017</strong></div>
+          <div class="details">
+            GDR Mamovi grant to attend the GDR Mamovi session. 
+            (<a style="color:#93876d;" href="http://gdr-mamovi.math.cnrs.fr/spip/spip.php?article1" target="_blank" rel="nofollow">GDR Mamovi</a>)
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h4>🌍 International & Other Activities</h4>
+      <ul class="talks-list">
+
+                <li>
+          <div class="date"><strong>Feb 2025 - Ongoing.</strong></div>
+          <div class="details">
+            Member of the <a style="color:#93876d;" href="https://www.isop.org/members-only/memberhome" target="_blank" rel="nofollow">ISoP community</a>. Community Manager for the ISoP-Connect.
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>March 2023</strong></div>
+          <div class="details">
+            Co-organization of a symposium: Credibility and Validation of knowledge-based models.
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>2020/2022</strong></div>
+          <div class="details">
+            Member of the editorial board for 
+            <a style="color:#93876d;" href="https://www.springer.com/journal/10441" target="_blank" rel="nofollow">Acta Biotheoretica</a>.
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>Sept. 2022</strong></div>
+          <div class="details">
+            Organization of a symposium: Knowledge model creation: Key points and traps.
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>Oct. 2021</strong></div>
+          <div class="details">
+            Co-organization of a conference: 
+            <a style="color:#93876d;" href="https://iboman2021.sciencesconf.org/" target="_blank" rel="nofollow">IbOMaN, focus on treatment studies</a>.
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>June 2020</strong></div>
+          <div class="details">
+            Co-organization of a videoconference: IbOMaN, focus on pre-treatment studies 
+            (<a style="color:#93876d;" href="https://iboman.sciencesconf.org/" target="_blank" rel="nofollow">website</a>).
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>Sept. 2019</strong></div>
+          <div class="details">
+            International summer school "Mathematical Biology on the Mediterranean Conference (MBMC)", Samos (Greece).
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>July 2018</strong></div>
+          <div class="details">
+            Summer school "CEMRACS: Numerical and mathematical modeling for biological and medical applications: deterministic, probabilistic and statistical descriptions" in Marseille.
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>Dec. 2017</strong></div>
+          <div class="details">
+            Winter school "Winter School on Deterministic and Stochastic Models in Neuroscience" in Toulouse.
+          </div>
+        </li>
+        <li>
+          <div class="date"><strong>Sept. 2017</strong></div>
+          <div class="details">
+            GDR Mamovi session (Mathematics of Living Modelling) in Lyon. 
+            (<a style="color:#93876d;" href="http://gdr-mamovi.math.cnrs.fr/spip/spip.php?article1" target="_blank" rel="nofollow">GDR Mamovi</a>)
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+</article>
+
+  </div>
+</section>
+
+
+<!-- TOOLBOX -->
+<section class="section" id="toolbox">
+  <header><h2>Toolbox</h2></header>
+  <div class="content">
+
+    <!-- Community Creations -->
+    <h3>My Creations, Content and Interventions</h3>
+    <div class="toolbox-grid" id="community-creations"></div>
+
+    <!-- Community Tips & Reviews -->
+    <h3>Community Tips & Reviews</h3>
+    <div class="toolbox-grid" id="community-tips"></div>
+
+  </div>
+</section>
+
+<style>
+.toolbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.tool-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.tool-card:hover {
+  transform: translateY(-3px);
+  background-color: #f9fcff;
+}
+.tool-image {
+  width: 100%;
+  border-bottom: 1px solid #e0e0e0;
+  object-fit: cover;
+  max-height: 160px;
+}
+.tool-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.tool-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+.tool-desc {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+.tool-link {
+  margin-top: 1rem;
+  align-self: flex-start;
+  color: #007acc;
+  font-weight: 500;
+  text-decoration: none;
+}
+</style>
+
+<script>
+(() => {
+  const communityCreations = [
+    { name: "PK‑Easy Web App", desc: "Shiny-based app for quick comparisons of datasets and PK simulations via a user-friendly web interface. 2/3 compartments under IV/SC dosing, with and without TMDD.", url: "https://aperril.shinyapps.io/PKEASY/", image: "images/img-new2.png" },
+    { name: "Google Colab Immune‑Leukemia Model", desc: "Interactive Colab notebook featuring the multi‑compartment B‑ALL immune‑tumor ODE model for exploration and parameter tuning.", url: "https://colab.research.google.com/drive/1xoIIqmzXOhw8cLvNUQ3imBwLDTWdluU0?authuser=2", image: "images/img-new3.png" },
+    { name: "Matlab ODE Code Collection", desc: "Curated set of MATLAB scripts implementing various ODE-based models, including tumor growth, lactate dynamics, and prion polymerization with different complexities. Each folder contains code to explore, simulate, and modify these systems for teaching or research purposes.", url: "https://github.com/Aperril/Code-sharing/tree/main/Matlab", image: "images/page1-img2.jpg" },
+    { name: "(French) LaTeX Templates Repository", desc: "Collection of LaTeX templates and starter files for visit card, project presentation dossier, and a thesis progress report designed for easy customization in academic and professional settings.", url: "https://github.com/Aperril/Code-sharing/tree/main/Latex", image: "images/img-new1.png" },
+    { name: "(French) Teaching Resources Page", desc: "Explore lectures, materials, and curated content used in courses related to maths basics and maths applied to biology.", url:"teaching.html", image: "images/page1-img3.png" },
+    { name: "(Not limited to french) Science Popularization Projects", desc: "Dive into creative and accessible science communication projects aimed at making complex topics easier to understand for all audiences.", url: "popularization.html", image: "images/page5-img2.jpg" }
+  ];
+
+  const communityTips = [
+{ 
+  name: "Podcasts for QSP & DMPK Nerds (and Their Curious Cats)", 
+  desc: "Ever feel like staying on top of QSP, PBPK, and DMPK trends is like herding cats? Here is a purr-fect roundup of podcasts to keep you entertained and sharp while multitasking.", 
+  url: "https://www.linkedin.com/posts/angelique-perrillat_qsp-pbpk-dmpk-activity-7274694817605898240-URdM?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB33iU0B1YMcybdQYJPeE-Q1hxgFgPsawpo", 
+  image: "images/img-podcast.png" 
+},
+    { name: "Modeler's Toolbox: Game-Changing Websites", desc: "Ever find yourself wishing for quicker and more accurate solutions to those complex modeling challenges? Discover tools that will change your workflow.", url: "https://www.linkedin.com/pulse/modelers-toolbox-game-changing-websites-perrillat-mercerot-phd-wsazf/?trackingId=71A8n6UbSeSajEsvvgdHYg%3D%3D", image: "images/img-gametool.png" },
+    { name: "Exploring Parameters Optimization Algorithms", desc: "Algorithms play a pivotal role in finding efficient solutions to complex optimization problems.", url: "https://www.linkedin.com/pulse/exploring-parameters-optimization-algorithms-overview-ang%25C3%25A9lique-pdocf/?trackingId=71A8n6UbSeSajEsvvgdHYg%3D%3D", image: "images/img-algo.png" },
+    { name: "Why wait to try MOOOOO-CS?", desc: "In a world where knowledge is power, MOOCs are the jetpacks your brain needs to accelerate learning.", url: "https://www.linkedin.com/pulse/why-wait-try-mooooo-cs-ang%25C3%25A9lique-perrillat-mercerot-phd-oscze/?trackingId=71A8n6UbSeSajEsvvgdHYg%3D%3D", image: "images/img-moooo.png" },
+    { name: "How to perform an effective literature search?", desc: "Are you tired of conducting literature searches that leave you feeling overwhelmed and stuck?", url: "https://www.linkedin.com/pulse/how-perform-effective-literature-search-perrillat-mercerot-phd-6voge/?trackingId=71A8n6UbSeSajEsvvgdHYg%3D%3D", image: "images/img-litt.png" },
+    { name: "How and where to start your QSP&PK computational journey", desc: "Embarking on a journey in Quantitative Systems Pharmacology and Pharmacokinetics? Here's a helpful starting guide.", url: "https://www.linkedin.com/pulse/how-where-start-your-qsppk-computational-modeling-ang%25C3%25A9lique/?trackingId=71A8n6UbSeSajEsvvgdHYg%3D%3D", image: "images/img-code.png" },
+    { name: "NCA PK, PKPD, PBPK, QSP, MIDD, WTF ?", desc: "Ever wondered what all those abbreviations like NCA PK, PKPD, and PBPK actually mean? Get the rundown here.", url: "https://www.linkedin.com/pulse/nca-pk-pkpd-pbpk-qsp-midd-wtf-ang%25C3%25A9lique-perrillat-mercerot-phd/?trackingId=71A8n6UbSeSajEsvvgdHYg%3D%3D", image: "images/img-wtf.png" }
+  ];
+
+  function populateGrid(tools, gridId) {
+    const grid = document.getElementById(gridId);
+    tools.forEach(tool => {
+      const card = document.createElement("a");
+      card.className = "tool-card";
+      card.href = tool.url;
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+      card.innerHTML = `
+        <img src="${tool.image}" alt="${tool.name}" class="tool-image" />
+        <div class="tool-body">
+          <div class="tool-name">${tool.name}</div>
+          <div class="tool-desc">${tool.desc}</div>
+          <div class="tool-link">View Resource →</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  populateGrid(communityCreations, "community-creations");
+  populateGrid(communityTips, "community-tips");
+})();
+</script>
+
+
+
+
+
+
+
+    <!-- CONTACT -->
+<section class="section" id="contact">
+  <header>
+    <h2>Contact</h2>
+  </header>
+  <div class="content">
+    <div class="grid">
+
+      <!-- Address & Partner Sites -->
+      <div class="col-6 card">
+        <h3>Address</h3>
+        <p style="margin: 4px 0;">Angélique Perrillat-Mercerot, PhD, Lyon</p>
+        <p style="margin: 4px 0;">Email: <a href="mailto:angelique.perrillat@gmail.com" style="color:#93876d;">angelique.perrillat [at] gmail.com</a></p>
+
+        <h3>Partners</h3>
+        <ul style="padding-left: 16px; margin-top: 4px;">
+          <li><a href="http://wwwmathlabo.univ-poitiers.fr/~miranv/" target="_blank" rel="nofollow" style="color:#93876d;">Alain Miranville</a>, Professor of Mathematics</li>
+          <li><a href="https://laurencedipoi.wixsite.com/site" target="_blank" rel="nofollow" style="color:#93876d;">Laurence Di Poi</a>, PRAG</li>
+          <li><a href="https://ceetaing.github.io/" target="_blank" rel="nofollow" style="color:#93876d;">Cécile Taing</a>, MCF in Mathematics</li>
+          <li><a href="https://firashammami.fr/" target="_blank" rel="nofollow" style="color:#93876d;">Firas Hammami</a>, Biomodeler, PhD</li>
+        </ul>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="col-6 card">
+        <h3>Wanna chat? <a href="mailto:angelique.perrillat@gmail.com" style="color:#93876d;">Contact Me!</a></h3>
+        <form method="post" action="formulaire.php" class="contact-form" style="display:flex; flex-direction:column; gap:10px;">
+          <input type="text" name="nom" placeholder="Name" required style="padding:8px; border-radius:8px; border:1px solid var(--line);" />
+          <input type="email" name="mail" placeholder="Email" required style="padding:8px; border-radius:8px; border:1px solid var(--line);" />
+          <input type="text" name="objet" placeholder="Subject" style="padding:8px; border-radius:8px; border:1px solid var(--line);" />
+          <textarea name="message" placeholder="Message" required style="padding:8px; border-radius:8px; border:1px solid var(--line); min-height:100px;"></textarea>
+          <input type="submit" value="Send" style="padding:10px 16px; border-radius:12px; border:none; background:var(--accent); color:#fff; font-weight:600; cursor:pointer; transition:0.2s;" />
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    </div>
+  </div>
+</section>
+
 <footer>
-    <div class="remonte">
-        <div id="footer">
-            <p><strong>Affiliations : &nbsp; </strong> &nbsp;
-            <a href="https://vantage-research.net/" target="_blank" rel="nofollow" style="color:#93876d;">Vantage-Research</a> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>Aides code HTML : &nbsp; </strong> &nbsp;
-            <a href="http://store.templatemonster.com?aff=netsib1" target="_blank" rel="nofollow" style="color:#93876d;">TemplateMonster</a> &nbsp; | &nbsp;
-            <a href="https://openclassrooms.com/fr/courses/1603881-apprenez-a-creer-votre-site-web-avec-html5-et-css3" target="_blank" rel="nofollow" style="color:#93876d;">OpenClassrooms</a> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <strong>Last update:</strong> 2025-01 </p>
-        </div> 
-    </div> 
-</footer>   
+  <div class="footer-bar" style="display:flex; flex-direction:column; align-items:center; gap:0.5em;">
+
+    <!-- Single line with left, center, right spaced -->
+    <div style="display:flex; align-items:center; justify-content:space-between; width:100%; max-width:1200px; flex-wrap:wrap; gap:1em;">
+
+      <!-- Left: copyright -->
+      <span class="copyright">
+        © <span id="year"></span> Angélique Perrillat-Mercerot • QSP/PK Modeling • Vantage-Research
+      </span>
+
+      <!-- Middle: Buy me a coffee -->
+      <div style="text-align:center; min-width:50px">
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
+          data-name="bmc-button" 
+          data-slug="aperrillat" 
+          data-color="#4D6A6D"  
+          data-emoji=""  
+          data-font="Poppins" 
+          data-text="Help me out-calculate my cats" 
+          data-outline-color="#000000" 
+          data-font-color="#ffffff" 
+          data-coffee-color="#FFDD00">
+        </script>
+      </div>
+
+      <!-- Right: social icons -->
+      <div class="social-icons" style="display:flex; align-items:center; gap:0.5em;">
+        <a href="mailto:angelique.perrillat@gmail.com" class="icon-0" target="_blank" aria-label="Email"></a>
+        <a href="https://www.linkedin.com/in/angelique-perrillat/" class="icon-1" target="_blank" aria-label="LinkedIn"></a>
+        <a href="https://www.researchgate.net/profile/Angelique-Perrillat-Mercerot" class="icon-2" target="_blank" aria-label="ResearchGate"></a>
+        <a href="https://scholar.google.com/citations?user=IST0DUIAAAAJ&hl=fr&oi=ao" class="icon-3" target="_blank" aria-label="Google Scholar"></a>
+        <a href="http://www.theses.fr/2019POIT2285" class="icon-4" target="_blank" aria-label="Thesis"></a>
+        <a href="https://github.com/Aperril" class="icon-5" target="_blank" aria-label="GitHub"></a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CSS fix for button size -->
+  <style>
+    .bmc-btn-container .bmc-btn {
+      font-size: 12px !important;   /* smaller text */
+      padding: 4px 8px !important;  /* tighter padding */
+      height: auto !important;      /* shrink height */
+      line-height: 1.2 !important;  /* compact line height */
+    }
+    .bmc-btn-container .bmc-btn img {
+      height: 14px !important;      /* shrink coffee icon */
+      width: auto !important;
+    }
+  </style>
+</footer>
+
+
+
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+
 </body>
 </html>
