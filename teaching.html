@@ -5,26 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>QSP/PK Modeler – Lead Scientist | Lyon</title>
   <meta name="description" content="Lead Scientist & QSP–PK modeler in Lyon. Biomath expert in mechanistic modeling (ODE/PDE), oncology & neurosciences. Collaboration-driven and results-focused." />
-  <link rel="canonical" href="https://example.com/" />
+  <link rel="canonical" href="https://aperril.github.io/" />
   <meta property="og:title" content="Lead Scientist & QSP–PK Modeler" />
   <meta property="og:description" content="Biomathematics, QSP/PBPK, oncology & neurosciences. Projects, publications, toolbox and contact." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="headshot.jpg" />
   <meta name="theme-color" content="#2a7ae2" />
   <style>
-:root {
-  --bg: #E0F2E9;          /* Honeydew - fond global */
-  --text: #4D6A6D;        /* Payne’s Gray - texte principal */
-  --muted: #5B787A;       /* Freedom’s Green - texte secondaire */
-  --line: #CEB5A7;        /* Pale Dogwood - bordures */
-  --accent: #A1B5D8;      /* Powder Blue - liens & accent */
-  --accent-strong: #B76D68; /* Indian Red - hover & focus */
-  --card: #ffffff;        /* cartes blanches pour contraste */
-  --shadow: 0 10px 25px rgba(0,0,0,.05);
-  --radius-lg: 18px;
-  --radius-xl: 26px;
-  --maxw: 1080px;
-}
+:root { --bg: #E0F2E9; /* Honeydew - fond global */ --text: #4D6A6D; /* Payne’s Gray - texte principal */ --muted: #5B787A; /* Freedom’s Green - texte secondaire */ --line: #CEB5A7; /* Pale Dogwood - bordures */ --accent: #A1B5D8; /* Powder Blue - liens & accent */ --accent-strong: #B76D68; /* Indian Red - hover & focus */ --card: #ffffff; /* cartes blanches pour contraste */ --shadow: 0 10px 25px rgba(0,0,0,.05); --radius-lg: 18px; --radius-xl: 26px; --maxw: 1080px; }
 
     * { box-sizing: border-box; }
     html, body { height: 100%; }
@@ -280,6 +268,39 @@ html {overflow-y: scroll}
   display: inline-block;
 }
 
+/* Hide toggle button on desktop */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+}
+
+/* Mobile nav styles */
+@media (max-width: 720px) {
+  .tabs {
+    display: none;          /* hidden by default */
+    flex-direction: column; /* vertical stack */
+    width: 100%;
+    margin-top: 8px;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 10px;
+  }
+  .tabs.show {
+    display: flex; /* shown when toggled */
+  }
+  .menu-toggle {
+    display: block; /* visible only on mobile */
+    margin-left: auto;
+  }
+  .nav {
+    flex-wrap: wrap;
+  }
+}
 
 
 
@@ -291,6 +312,13 @@ html {overflow-y: scroll}
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   </style>
   <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".menu-toggle");
+  const tabs = document.querySelector(".tabs");
+  toggle.addEventListener("click", () => {
+    tabs.classList.toggle("show");
+  });
+});
     // Simple hash router for tabs, with ARIA current updates
     const routes = ["home","experience","projects","publications","toolbox","contact"]; 
     function activate(target){
@@ -314,34 +342,42 @@ html {overflow-y: scroll}
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Your Lead Scientist - Project Manager - QSP-PK Modeler",
+    "name": "Angélique Perrillat-Mercerot",
     "jobTitle": "Your Lead Scientist - Project Manager - QSP-PK Modeler",
     "address": {"@type":"PostalAddress","addressLocality":"Lyon","addressCountry":"France"},
-    "url": "https://example.com",
-    "knowsAbout": ["QSP","PBPK","PKPD","Mathematical modeling","Oncology","Neurosciences"],
-    "image": "headshot.jpg"
+    "url": "https://aperril.github.io/",
+    "knowsAbout": ["QSP","PBPK","PKPD","ODE","Mathematical modeling","Oncology","Neurosciences"],
+    "image": "images/nova3.JPG"
   }
   </script>
 </head>
 <body>
-  <div class="topbar" role="navigation" aria-label="Primary">
-    <nav class="nav">
-<a class="brand" href="#home">
-  <img src="images/nova3.JPG" alt="Portrait of a QSP–PK modeler in Lyon" />
-  <span>
-    <span style="color: indianred; font-weight:700;">Angélique Perrillat-Mercerot, PhD</span><br/>
-    Driving Scientific Impact & Innovation<br/>
-    <small style="font-weight:500;color:var(--muted);">Lyon • Modeling • QSP/PBPK • Oncology • Neurosciences</small>
-  </span>
-</a>
-      <a class="tab" data-tab="home" href="index.html#home" aria-current="page">Home</a>
-      <a class="tab" data-tab="experience" href="index.html#experience">Experience</a>
-      <a class="tab" data-tab="projects" href="index.html#projects">Projects</a>
-      <a class="tab" data-tab="publications" href="index.html#publications">Publications</a>
-      <a class="tab" data-tab="toolbox" href="index.html#toolbox">Toolbox</a>
-      <a class="tab" data-tab="contact" href="index.html#contact">Contact</a>
-    </nav>
-  </div>
+<div class="topbar" role="navigation" aria-label="Primary">
+  <nav class="nav">
+    <a class="brand" href="#home">
+      <img src="images/nova3.JPG" alt="Portrait of a QSP–PK modeler in Lyon" />
+      <span>
+        <span style="color: indianred; font-weight:700;">Angélique Perrillat-Mercerot, PhD</span><br/>
+        Driving Scientific Impact & Innovation<br/>
+        <small style="font-weight:500;color:var(--muted);">Lyon • Modeling • QSP/PBPK • Oncology • Neurosciences</small>
+      </span>
+    </a>
+
+    <!-- Mobile menu toggle -->
+    <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+
+    <!-- Tabs (nav links) -->
+    <div class="tabs">
+      <a class="tab" data-tab="home" href="#home" aria-current="page">Home</a>
+      <a class="tab" data-tab="experience" href="#experience">Experience</a>
+      <a class="tab" data-tab="projects" href="#projects">Projects</a>
+      <a class="tab" data-tab="publications" href="#publications">Publications</a>
+      <a class="tab" data-tab="toolbox" href="#toolbox">Toolbox</a>
+      <a class="tab" data-tab="contact" href="#contact">Contact</a>
+    </div>
+  </nav>
+</div>
+
 
   <!-- HERO -->
   <header class="hero" id="hero">
@@ -351,6 +387,7 @@ html {overflow-y: scroll}
   Cat-powered researcher geekin' out on pharmacometrics & real-world maths. Accomplished bio-mathematician focused on mechanistic modeling (QSP, PK, ODE) for oncology & neurosciences. Collaboration-minded, results-driven, and ready to push boundaries together. I currently work at 
   <a href="/vantage-research" style="color:#93876d;">Vantage-Research</a>, your partner in drug-dev.
 </p>
+
       <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
         <span class="pill">QSP • PBPK • PKPD</span>
         <span class="pill">Oncology</span>
