@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QSP/PK Digitizer – Lead Scientist</title>
+<style>
+  :root {
+    --bg: #E0F2E9;
+    --text: #4D6A6D;
+    --muted: #5B787A;
+    --line: #CEB5A7;
+    --accent: #A1B5D8;
+    --accent-strong: #B76D68;
+    --card: #ffffff;
+    --shadow: 0 10px 25px rgba(0,0,0,.05);
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    --maxw: 1080px;
+  }
+  body {
+    margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial;
+    background: var(--bg); color: var(--text); line-height:1.6;
+  }
+  main{max-width:var(--maxw);margin:24px auto 60px;padding:0 20px;}
+  canvas{border:1px solid var(--line); display:block; margin-bottom:16px; max-width:100%;}
+  .panel{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-xl); padding:16px;
+    box-shadow:var(--shadow);
+  }
+  .axis-group { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:12px; }
+  fieldset { border:1px solid var(--line); border-radius:var(--radius-lg); padding:12px 16px; flex:1; min-width:200px; }
+  fieldset legend { font-weight:600; }
+  fieldset label { display:block; margin:6px 0; font-size:14px; }
+  .buttons { display:flex; gap:12px; margin-bottom:12px; }
+  table { width:100%; border-collapse:collapse; margin-top:12px; }
+  th, td { border:1px solid var(--line); padding:4px 6px; text-align:right; }
+  th { background:var(--bg); }
+  button { padding:6px 12px; border:none; border-radius:var(--radius-lg); background:var(--accent); color:#fff; cursor:pointer; }
+  button:hover{background:var(--accent-strong);}
+</style>
+</head>
+<body>
+<main>
+  <h2>Plot Digitizer</h2>
+  <input type="file" id="fileInput" accept="image/*"><br><br>
+  <canvas id="canvas" width="600" height="400"></canvas>
+
+  <div class="panel">
+    <h3>Calibration</h3>
+    <div class="axis-group">
+      <fieldset>
+        <legend>X axis</legend>
+        <label>X min<input id="xMin" type="number" step="any"></label>
+        <label>X max<input id="xMax" type="number" step="any"></label>
+        <label>Scale
+          <select id="xScale">
+            <option value="linear">Linear</option>
+            <option value="log">Log</option>
+          </select>
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Y axis</legend>
+        <label>Y min<input id="yMin" type="number" step="any"></label>
+        <label>Y max<input id="yMax" type="number" step="any"></label>
+        <label>Scale
+          <select id="yScale">
+            <option value="linear">Linear</option>
+            <option value="log">Log</option>
+          </select>
+        </label>
+      </fieldset>
+    </div>
+    <div class="buttons">
+      <button id="startCalibration">Start Calibration</button>
+      <button id="resetBtn">Reset calibration & points</button>
+      <button id="copyBtn">Copy CSV</button>
+    </div>
+
+    <h3>Digitized Points</h3>
+    <table id="pointsTable"><thead><tr><th>#</th><th>X</th><th>Y</th></tr></thead><tbody></tbody></table>
+  </div>
+</main>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let img = new Image();
+let imgLoaded = false;
+
+let step = 'idle';
+let xPixMin = null, xPixMax = null;
+let yPixMin = null, yPixMax = null;
+let points = [];
+let axisLocked = false;
+
+function lockAxisInputs() {
+  ['xMin','xMax','xScale','yMin','yMax','yScale'].forEach(id => document.getElementById(id).disabled=true);
+}
+function unlockAxisInputs() {
+  ['xMin','xMax','xScale','yMin','yMax','yScale'].forEach(id => document.getElementById(id).disabled=false);
+}
+
+document.getElementById('fileInput').addEventListener('change', e => {
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    img.onload = ()=>{ imgLoaded=true; canvas.width=img.width; canvas.height=img.height; resetAll(); draw(); }
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('startCalibration').addEventListener('click', ()=>{
+  const xMinVal=parseFloat(document.getElementById('xMin').value);
+  const xMaxVal=parseFloat(document.getElementById('xMax').value);
+  const yMinVal=parseFloat(document.getElementById('yMin').value);
+  const yMaxVal=parseFloat(document.getElementById('yMax').value);
+  const xScale = document.getElementById('xScale').value;
+  const yScale = document.getElementById('yScale').value;
+
+  if([xMinVal,xMaxVal,yMinVal,yMaxVal].some(v=>isNaN(v))){
+    alert('Enter all axis min/max values first!'); return;
+  }
+  if((xScale==='log' && (xMinVal<=0||xMaxVal<=0)) || (yScale==='log' && (yMinVal<=0||yMaxVal<=0))){
+    alert('Log scale axes must have positive min and max values!'); return;
+  }
+  step='x1'; alert('Click X axis minimum point on the image.');
+});
+
+canvas.addEventListener('click', e=>{
+  if(!imgLoaded) return;
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  if(step==='x1'){ xPixMin={x,y}; step='x2'; draw(); alert('Click X axis maximum point.'); return; }
+  if(step==='x2'){ xPixMax={x,y}; step='y1'; draw(); alert('Click Y axis minimum point.'); return; }
+  if(step==='y1'){ yPixMin={x,y}; step='y2'; draw(); alert('Click Y axis maximum point.'); return; }
+  if(step==='y2'){ yPixMax={x,y}; step='points';
+    // Ensure top vs bottom
+    if(yPixMin.y < yPixMax.y){ [yPixMin,yPixMax] = [yPixMax,yPixMin]; }
+    draw(); alert('Calibration complete. Now click data points.'); return; }
+
+  if(step==='points'){
+    const xMinVal=parseFloat(document.getElementById('xMin').value);
+    const xMaxVal=parseFloat(document.getElementById('xMax').value);
+    const yMinVal=parseFloat(document.getElementById('yMin').value);
+    const yMaxVal=parseFloat(document.getElementById('yMax').value);
+    const xScale = document.getElementById('xScale').value;
+    const yScale = document.getElementById('yScale').value;
+
+    let xData = xScale==='linear' ?
+      xMinVal + (x - xPixMin.x)*(xMaxVal - xMinVal)/(xPixMax.x - xPixMin.x) :
+      Math.pow(10, Math.log10(xMinVal) + (x - xPixMin.x)*(Math.log10(xMaxVal)-Math.log10(xMinVal))/(xPixMax.x - xPixMin.x));
+
+    let yData = yScale==='linear' ?
+      yMinVal + (yPixMin.y - y)*(yMaxVal - yMinVal)/(yPixMin.y - yPixMax.y) :
+      Math.pow(10, Math.log10(yMinVal) + (yPixMin.y - y)*(Math.log10(yMaxVal)-Math.log10(yMinVal))/(yPixMin.y - yPixMax.y));
+
+    if((xScale==='log' && xData<=0) || (yScale==='log' && yData<=0)){ alert('Data point cannot be zero/negative on log scale.'); return; }
+
+    if(!axisLocked){ axisLocked=true; lockAxisInputs(); }
+    points.push({x:xData, y:yData}); draw(); updateTable();
+  }
+});
+
+function draw(){
+  if(!imgLoaded) return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  if(xPixMin) drawMarker(xPixMin,'Xmin');
+  if(xPixMax) drawMarker(xPixMax,'Xmax');
+  if(yPixMin) drawMarker(yPixMin,'Ymin');
+  if(yPixMax) drawMarker(yPixMax,'Ymax');
+
+  ctx.fillStyle='red';
+  points.forEach(p=>{
+    const coords = dataToPixel(p.x,p.y);
+    ctx.beginPath(); ctx.arc(coords.x,coords.y,4,0,2*Math.PI); ctx.fill();
+  });
+}
+
+function drawMarker(pos,label){
+  ctx.fillStyle='green';
+  ctx.beginPath(); ctx.arc(pos.x,pos.y,5,0,2*Math.PI); ctx.fill();
+  ctx.fillStyle='white';
+  ctx.fillText(label,pos.x+6,pos.y-6);
+}
+
+function dataToPixel(xVal,yVal){
+  const xMinVal=parseFloat(document.getElementById('xMin').value);
+  const xMaxVal=parseFloat(document.getElementById('xMax').value);
+  const yMinVal=parseFloat(document.getElementById('yMin').value);
+  const yMaxVal=parseFloat(document.getElementById('yMax').value);
+  const xScale = document.getElementById('xScale').value;
+  const yScale = document.getElementById('yScale').value;
+
+  let x = xScale==='linear' ?
+    (xVal - xMinVal)*(xPixMax.x - xPixMin.x)/(xMaxVal - xMinVal)+xPixMin.x :
+    (Math.log10(xVal)-Math.log10(xMinVal))*(xPixMax.x - xPixMin.x)/(Math.log10(xMaxVal)-Math.log10(xMinVal))+xPixMin.x;
+
+  let y = yScale==='linear' ?
+    yPixMin.y - (yVal - yMinVal)*(yPixMin.y - yPixMax.y)/(yMaxVal - yMinVal) :
+    yPixMin.y - (Math.log10(yVal)-Math.log10(yMinVal))*(yPixMin.y - yPixMax.y)/(Math.log10(yMaxVal)-Math.log10(yMinVal));
+
+  return {x,y};
+}
+
+function updateTable(){
+  const tbody=document.querySelector('#pointsTable tbody');
+  tbody.innerHTML='';
+  points.forEach((p,i)=>{
+    const row = document.createElement('tr');
+    row.innerHTML=`<td>${i+1}</td><td>${p.x.toPrecision(6)}</td><td>${p.y.toPrecision(6)}</td>`;
+    tbody.appendChild(row);
+  });
+}
+
+function resetAll(){
+  points=[]; step='idle'; axisLocked=false;
+  xPixMin=xPixMax=yPixMin=yPixMax=null;
+  unlockAxisInputs(); updateTable(); draw();
+}
+
+document.getElementById('resetBtn').addEventListener('click', resetAll);
+document.getElementById('copyBtn').addEventListener('click', ()=>{
+  let csv='X,Y\n'; points.forEach(p=>{ csv+=`${p.x},${p.y}\n`; });
+  navigator.clipboard.writeText(csv);
+  alert('Copied CSV to clipboard');
+});
+</script>
+</body>
+</html>
