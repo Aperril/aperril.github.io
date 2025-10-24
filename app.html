@@ -1,77 +1,488 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>QSP/PK Digitizer – Lead Scientist</title>
-<style>
-  :root {
-    --bg: #E0F2E9;
-    --text: #4D6A6D;
-    --muted: #5B787A;
-    --line: #CEB5A7;
-    --accent: #A1B5D8;
-    --accent-strong: #B76D68;
-    --card: #ffffff;
-    --shadow: 0 10px 25px rgba(0,0,0,.05);
-    --radius-lg: 12px;
-    --radius-xl: 20px;
-    --maxw: 1080px;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QSP/PK Modeler – Lead Scientist | Lyon</title>
+  <meta name="description" content="Lead Scientist & QSP–PK modeler in Lyon. Biomath expert in mechanistic modeling (ODE/PDE), oncology & neurosciences. Collaboration-driven and results-focused." />
+<link rel="canonical" href="https://aperril.github.io/popularization.html" />
+  <meta property="og:title" content="Lead Scientist & QSP–PK Modeler" />
+  <meta property="og:description" content="Biomathematics, QSP/PBPK, oncology & neurosciences. Projects, publications, toolbox and contact." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="headshot.jpg" />
+  <meta name="theme-color" content="#2a7ae2" />
+  <style>
+:root { --bg: #E0F2E9; /* Honeydew - fond global */ --text: #4D6A6D; /* Payne’s Gray - texte principal */ --muted: #5B787A; /* Freedom’s Green - texte secondaire */ --line: #CEB5A7; /* Pale Dogwood - bordures */ --accent: #A1B5D8; /* Powder Blue - liens & accent */ --accent-strong: #B76D68; /* Indian Red - hover & focus */ --card: #ffffff; /* cartes blanches pour contraste */ --shadow: 0 10px 25px rgba(0,0,0,.05); --radius-lg: 18px; --radius-xl: 26px; --maxw: 1080px; }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+html {overflow-y: scroll}
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover, a:focus { color: var(--accent-strong); text-decoration: underline; }
+
+.footer-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: #E0F2E9; 
+  border-top: 1px solid var(--line);
+}
+
+.footer-bar .copyright {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.social-icons {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.social-icons span {
+  font-size: 13px;
+  font-weight: normal;
+  color: var(--muted);
+}
+
+.social-icons a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999px;
+}
+
+.icon-0 { background-image: url('images/social0.png'); }
+.icon-1 { background-image: url('images/social1.png'); }
+.icon-2 { background-image: url('images/social2.png'); }
+.icon-3 { background-image: url('images/social3.png'); }
+.icon-4 { background-image: url('images/social4.png'); }
+.icon-5 { background-image: url('images/social5.png'); }
+
+.social-icons a:hover {
+  background-color: #a1b5d8;
+  border-radius: 4px;
+}
+
+
+    /* Top bar */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.85);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; gap: 12px; padding: 12px 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .3px; }
+.brand img {width: 70px; height: 70px;border-radius: 50%;object-fit: cover;border: 2px solid var(--line);}
+    .tabs { margin-left: auto; display: flex; flex-wrap: wrap; gap: 6px; }
+    .tab {
+      padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line);
+      background: #fff; font-weight: 600; font-size: 14px;
+    }
+    .tab[aria-current="page"] { background: var(--accent); color: #fff; border-color: transparent; box-shadow: var(--shadow); }
+
+  .hero {max-width: var(--maxw);margin: 24px auto 0;padding: 24px 20px 0;display: grid;grid-template-columns: 2.6fr 1fr; 
+  gap: 28px;align-items: center;}
+    .hero h1 { font-size: clamp(20px, 2.2vw, 34px); line-height: 1.15; margin: 0 0 8px; }
+    .hero p.lead { font-size: clamp(16px, 1.6vw, 19px); color: var(--muted); margin: 0; }
+    .hero-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-xl); padding: 15px; box-shadow: var(--shadow); }
+    .hero-card {max-width: 320px; padding: 16px;}
+    .hero-card img { width: 100%; height: auto; border-radius: var(--radius-lg); display: block;}
+
+    /* Section container */
+    main { max-width: var(--maxw); margin: 24px auto 60px; padding: 0 20px; }
+    section[hidden] { display: none !important; }
+
+    .section { margin-top: 24px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-xl); box-shadow: var(--shadow); }
+    .section header { padding: 22px 22px 8px; border-bottom: 1px solid var(--line); }
+    .section header h2 { margin: 0; font-size: clamp(20px, 2.4vw, 28px); }
+    .section .content { padding: 16px 22px 22px; }
+
+    /* Cards grid */
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .col-12 { grid-column: span 12; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+      .col-6, .col-4 { grid-column: span 12; }
+    }
+
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 18px; box-shadow: var(--shadow); height: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .card h3 { margin: 0; font-size: 18px; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; color: var(--muted); background: #fff; }
+
+    .list { display: grid; gap: 10px; }
+    .list li { padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+
+/* Timeline container */
+.timeline {
+  position: relative;
+  margin: 20px 0;
+  border-left: 3px solid #93876d;
+  padding-left: 40px;
+}
+
+.timeline-item {
+  position: relative;
+  margin: 0 0 28px 0;
+}
+
+/* Dot */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  background-color: #93876d;
+  border-radius: 50%;
+}
+
+/* Inline date + title */
+.timeline-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.timeline-date {
+  font-weight: 700;
+  color: #93876d;
+  padding-left: 10px; /* pushes date slightly away from the line/dot */
+
+}
+
+.timeline-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.timeline-content p {
+  margin: 0;
+}
+
+.download-btn-small {
+  display: inline-block;
+  padding: 8px 24px;      /* small size */
+  background-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 20px;
+  transition: background 0.2s;
+}
+
+.download-btn-small:hover,
+.download-btn-small:focus {
+  background-color: var(--accent-strong);
+}
+
+  /* Reduce space between list items and inline text */
+  #publications ul li {
+    margin: 0.3rem 0; /* tighter than default 1rem */
+    line-height: 1.4; /* keeps readability */
   }
-  body {
-    margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial;
-    background: var(--bg); color: var(--text); line-height:1.6;
+
+  /* Reduce gap between date and text if you're using "–" */
+  #publications ul li {
+    display: flex;
+    gap: 0.4rem; /* smaller space between date and text */
   }
-  main{max-width:var(--maxw);margin:24px auto 60px;padding:0 20px;}
-  canvas{border:1px solid var(--line); display:block; margin-bottom:16px; max-width:100%;}
-  .panel{
-    background:#fff; border:1px solid var(--line); border-radius:var(--radius-xl); padding:16px;
-    box-shadow:var(--shadow);
+
+  /* Add more space between cards */
+
+  #publications .card {
+  margin-bottom: 2.5rem;  /* more space between cards */
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+#publications .stats-bar {
+  background-color: #e8f0ff;  /* light bar background */
+  color: #003366;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.2rem;     /* bigger text */
+  font-weight: 600;
+  display: block;
+  margin: 0 auto;
+}
+
+#publications .stats-bar a {
+  color: #003366;
+  text-decoration: none;
+  margin: 0 0.6rem;
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+#publications .stats-bar a:hover {
+  color: #0055aa;
+  border-bottom: 2px solid #0055aa; /* highlight on hover */
+  padding-bottom: 0.1rem;
+}
+
+.tag-label {
+  padding: 0.3em 0.6em;
+  border-radius: var(--radius-lg);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background-color: var(--bg);
+  color: var(--accent-strong);
+  border: 1px solid var(--accent-strong);
+  display: inline-block;
+}
+
+.software-label {
+  padding: 0.3em 0.6em;
+  border-radius: var(--radius-lg);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background-color: var(--accent);
+  color: var(--card);
+  border: 1px solid var(--accent);
+  display: inline-block;
+}
+
+/* Hide toggle button on desktop */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+}
+
+/* Mobile nav styles */
+@media (max-width: 720px) {
+  .tabs {
+    display: none;          /* hidden by default */
+    flex-direction: column; /* vertical stack */
+    width: 100%;
+    margin-top: 8px;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 10px;
   }
-  .axis-group { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:12px; }
-  fieldset { border:1px solid var(--line); border-radius:var(--radius-lg); padding:12px 16px; flex:1; min-width:200px; }
-  fieldset legend { font-weight:600; }
-  fieldset label { display:block; margin:6px 0; font-size:14px; }
-  .buttons { display:flex; gap:12px; margin-bottom:12px; }
-  table { width:100%; border-collapse:collapse; margin-top:12px; }
-  th, td { border:1px solid var(--line); padding:4px 6px; text-align:right; }
-  th { background:var(--bg); }
-  button { padding:6px 12px; border:none; border-radius:var(--radius-lg); background:var(--accent); color:#fff; cursor:pointer; }
-  button:hover{background:var(--accent-strong);}
-</style>
+  .tabs.show {
+    display: flex; /* shown when toggled */
+  }
+  .menu-toggle {
+    display: block; /* visible only on mobile */
+    margin-left: auto;
+  }
+  .nav {
+    flex-wrap: wrap;
+  }
+}
+
+
+
+    /* Footer */
+    footer { max-width: var(--maxw); margin: 30px auto; padding: 0 20px 60px; color: var(--muted); }
+    .foot { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
+
+    /* Accessibility helpers */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  </style>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".menu-toggle");
+  const tabs = document.querySelector(".tabs");
+  toggle.addEventListener("click", () => {
+    tabs.classList.toggle("show");
+  });
+});
+    // Simple hash router for tabs, with ARIA current updates
+    const routes = ["home","experience","projects","publications","toolbox","contact"]; 
+    function activate(target){
+      routes.forEach(id => {
+        const tab = document.querySelector(`[data-tab="${id}"]`);
+        const sec = document.getElementById(id);
+        if (!tab || !sec) return;
+        const on = id === target;
+        tab.setAttribute('aria-current', on ? 'page' : 'false');
+        sec.hidden = !on;
+      });
+    }
+    function syncFromHash(){
+      const h = (location.hash.replace('#','')||'home').toLowerCase();
+      activate(routes.includes(h) ? h : 'home');
+    }
+    window.addEventListener('hashchange', syncFromHash);
+    window.addEventListener('DOMContentLoaded', syncFromHash);
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Angélique Perrillat-Mercerot",
+    "jobTitle": "Your Lead Scientist - Project Manager - QSP-PK Modeler",
+    "address": {"@type":"PostalAddress","addressLocality":"Lyon","addressCountry":"France"},
+    "url": "https://aperril.github.io/",
+    "knowsAbout": ["QSP","PBPK","PKPD","ODE","Mathematical modeling","Oncology","Neurosciences"],
+    "image": "images/nova3.JPG"
+  }
+  </script>
 </head>
 <body>
+<div class="topbar" role="navigation" aria-label="Primary">
+  <nav class="nav">
+    <a class="brand" href="#home">
+      <img src="images/nova3.JPG" alt="Portrait of a QSP–PK modeler in Lyon" />
+      <span>
+        <span style="color: indianred; font-weight:700;">Angélique Perrillat-Mercerot, PhD</span><br/>
+        Driving Scientific Impact & Innovation<br/>
+        <small style="font-weight:500;color:var(--muted);">Lyon • Modeling • QSP/PBPK • Oncology • Neurosciences</small>
+      </span>
+    </a>
+
+    <!-- Mobile menu toggle -->
+    <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+
+    <!-- Tabs (nav links) -->
+    <div class="tabs">
+      <a class="tab" data-tab="home" href="#home" aria-current="page">Home</a>
+      <a class="tab" data-tab="experience" href="#experience">Experience</a>
+      <a class="tab" data-tab="projects" href="#projects">Projects</a>
+      <a class="tab" data-tab="publications" href="#publications">Publications</a>
+      <a class="tab" data-tab="toolbox" href="#toolbox">Toolbox</a>
+      <a class="tab" data-tab="contact" href="#contact">Contact</a>
+    </div>
+  </nav>
+</div>
+
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div>
+      <h1>Your Lead QSP PK - Project Manager</h1>
+<p class="lead">
+  Cat-powered researcher geekin' out on pharmacometrics & real-world maths. Accomplished bio-mathematician focused on mechanistic modeling (QSP, PK, ODE) for oncology & neurosciences. Collaboration-minded, results-driven, and ready to push boundaries together. I currently work at 
+  <a href="/vantage-research" style="color:#93876d;">Vantage-Research</a>, your partner in drug-dev.
+</p>
+
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <span class="pill">QSP • PBPK • PKPD</span>
+        <span class="pill">Oncology</span>
+        <span class="pill">Neurosciences</span>
+        <span class="pill">Open science</span>
+        <span class="pill">Cats 😼</span>
+      </div>
+    </div>
+<div class="hero-card">
+  <img src="images/nova3.JPG" alt="Professional headshot, Lyon - QSP/PK modeler" />
+
+  <div class="social-icons" style="justify-content: center; margin-top: 10px;">
+    <a href="mailto:angelique.perrillat@gmail.com" class="icon-0" target="_blank" aria-label="Email"></a>
+    <a href="https://www.linkedin.com/in/angelique-perrillat/" class="icon-1" target="_blank" aria-label="LinkedIn"></a>
+    <a href="https://www.researchgate.net/profile/Angelique_Perrillat-Mercerot" class="icon-2" target="_blank" aria-label="ResearchGate"></a>
+    <a href="https://scholar.google.com/citations?user=IST0DUIAAAAJ&hl=fr&oi=ao" class="icon-3" target="_blank" aria-label="Google Scholar"></a>
+    <a href="http://www.theses.fr/2019POIT2285" class="icon-4" target="_blank" aria-label="Thesis"></a>
+    <a href="https://github.com/Aperril" class="icon-5" target="_blank" aria-label="GitHub"></a>
+  </div>
+</div>
+
+  </header>
+
+  <main>
+
 <main>
-  <h2>Plot Digitizer</h2>
+  <h2>Catty Plotty Digitizer</h2>
   <input type="file" id="fileInput" accept="image/*"><br><br>
   <canvas id="canvas" width="600" height="400"></canvas>
+  <div id="statusBox">Load an image to begin.</div>
 
   <div class="panel">
     <h3>Calibration</h3>
     <div class="axis-group">
       <fieldset>
         <legend>X axis</legend>
-        <label>X min<input id="xMin" type="number" step="any"></label>
-        <label>X max<input id="xMax" type="number" step="any"></label>
+        <label>X min <input id="xMin" type="number" step="any" placeholder="Enter X min"></label>
+        <label>X max <input id="xMax" type="number" step="any" placeholder="Enter X max"></label>
         <label>Scale
           <select id="xScale">
             <option value="linear">Linear</option>
             <option value="log">Log</option>
           </select>
         </label>
+        <label>Input Unit
+          <select id="xInputUnit">
+            <option value="none">No translation</option>
+            <option value="s">Seconds</option>
+            <option value="min">Minutes</option>
+            <option value="h">Hours</option>
+            <option value="month">Months</option>
+            <option value="year">Years</option>
+          </select>
+        </label>
+        <label>Output Unit
+          <select id="xOutputUnit">
+            <option value="none">No translation</option>
+            <option value="s">Seconds</option>
+            <option value="min">Minutes</option>
+            <option value="h">Hours</option>
+            <option value="month">Months</option>
+            <option value="year">Years</option>
+          </select>
+        </label>
       </fieldset>
+
       <fieldset>
         <legend>Y axis</legend>
-        <label>Y min<input id="yMin" type="number" step="any"></label>
-        <label>Y max<input id="yMax" type="number" step="any"></label>
+        <label>Y min <input id="yMin" type="number" step="any" placeholder="Enter Y min"></label>
+        <label>Y max <input id="yMax" type="number" step="any" placeholder="Enter Y max"></label>
         <label>Scale
           <select id="yScale">
             <option value="linear">Linear</option>
             <option value="log">Log</option>
           </select>
         </label>
+        <label>Input Unit
+          <select id="yInputUnit">
+            <option value="none">No translation</option>
+            <option value="pg_ml">pg/mL</option>
+            <option value="pg_l">pg/L</option>
+            <option value="mg_l">mg/L</option>
+          </select>
+        </label>
+        <label>Output Unit
+          <select id="yOutputUnit">
+            <option value="none">No translation</option>
+            <option value="pg_ml">pg/mL</option>
+            <option value="pg_l">pg/L</option>
+            <option value="mg_l">mg/L</option>
+          </select>
+        </label>
       </fieldset>
     </div>
+
     <div class="buttons">
       <button id="startCalibration">Start Calibration</button>
       <button id="resetBtn">Reset calibration & points</button>
@@ -88,84 +499,141 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 let img = new Image();
 let imgLoaded = false;
-
 let step = 'idle';
 let xPixMin = null, xPixMax = null;
 let yPixMin = null, yPixMax = null;
 let points = [];
 let axisLocked = false;
 
-function lockAxisInputs() {
-  ['xMin','xMax','xScale','yMin','yMax','yScale'].forEach(id => document.getElementById(id).disabled=true);
+// ===== Unit conversions =====
+function convertTime(value, from, to){
+  if(from === 'none' || to === 'none' || from === to) return value;
+  const seconds = { s:1, min:60, h:3600, month:30*24*3600, year:365*24*3600 };
+  return value * (seconds[from] / seconds[to]);
 }
-function unlockAxisInputs() {
-  ['xMin','xMax','xScale','yMin','yMax','yScale'].forEach(id => document.getElementById(id).disabled=false);
+function convertConc(value, from, to){
+  if(from === 'none' || to === 'none' || from === to) return value;
+  const pgPerMl = { pg_ml:1, pg_l:1e-3, mg_l:1e6 };
+  return value * (pgPerMl[from] / pgPerMl[to]);
 }
 
-document.getElementById('fileInput').addEventListener('change', e => {
-  const file = e.target.files[0]; if(!file) return;
+// Shortcuts
+const xMin=document.getElementById('xMin');
+const xMax=document.getElementById('xMax');
+const yMin=document.getElementById('yMin');
+const yMax=document.getElementById('yMax');
+const xScaleEl=document.getElementById('xScale');
+const yScaleEl=document.getElementById('yScale');
+const xInputUnit=document.getElementById('xInputUnit');
+const xOutputUnit=document.getElementById('xOutputUnit');
+const yInputUnit=document.getElementById('yInputUnit');
+const yOutputUnit=document.getElementById('yOutputUnit');
+const statusBox=document.getElementById('statusBox');
+
+function showStatus(msg){ statusBox.textContent = msg; }
+
+function lockAxisInputs() {
+  ['xMin','xMax','xScale','yMin','yMax','yScale',
+   'xInputUnit','xOutputUnit','yInputUnit','yOutputUnit'].forEach(id=>{
+    document.getElementById(id).disabled = true;
+  });
+}
+function unlockAxisInputs() {
+  ['xMin','xMax','xScale','yMin','yMax','yScale',
+   'xInputUnit','xOutputUnit','yInputUnit','yOutputUnit'].forEach(id=>{
+    document.getElementById(id).disabled = false;
+  });
+}
+
+// ===== Image upload =====
+document.getElementById('fileInput').addEventListener('change', e=>{
+  const file = e.target.files[0];
+  if(!file) return;
   const reader = new FileReader();
-  reader.onload = ev => {
-    img.onload = ()=>{ imgLoaded=true; canvas.width=img.width; canvas.height=img.height; resetAll(); draw(); }
+  reader.onload = ev=>{
+    img.onload = ()=>{
+      imgLoaded = true;
+      canvas.width = img.width;
+      canvas.height = img.height;
+      points = [];
+      axisLocked = false;
+      step = 'idle';
+      xPixMin = xPixMax = yPixMin = yPixMax = null;
+      unlockAxisInputs();
+      updateTable();
+      draw();
+      showStatus('Image loaded! Enter axis ranges and click "Start Calibration".');
+    };
     img.src = ev.target.result;
   };
   reader.readAsDataURL(file);
 });
 
+// ===== Start calibration =====
 document.getElementById('startCalibration').addEventListener('click', ()=>{
-  const xMinVal=parseFloat(document.getElementById('xMin').value);
-  const xMaxVal=parseFloat(document.getElementById('xMax').value);
-  const yMinVal=parseFloat(document.getElementById('yMin').value);
-  const yMaxVal=parseFloat(document.getElementById('yMax').value);
-  const xScale = document.getElementById('xScale').value;
-  const yScale = document.getElementById('yScale').value;
-
-  if([xMinVal,xMaxVal,yMinVal,yMaxVal].some(v=>isNaN(v))){
-    alert('Enter all axis min/max values first!'); return;
+  if(!imgLoaded){ showStatus('Wait. Load an image first.'); return; }
+  const xMinVal = parseFloat(xMin.value);
+  const xMaxVal = parseFloat(xMax.value);
+  const yMinVal = parseFloat(yMin.value);
+  const yMaxVal = parseFloat(yMax.value);
+  if([xMinVal,xMaxVal,yMinVal,yMaxVal].some(isNaN)){
+    showStatus('Wait. Please enter all numeric min/max values.');
+    return;
   }
-  if((xScale==='log' && (xMinVal<=0||xMaxVal<=0)) || (yScale==='log' && (yMinVal<=0||yMaxVal<=0))){
-    alert('Log scale axes must have positive min and max values!'); return;
-  }
-  step='x1'; alert('Click X axis minimum point on the image.');
+  step = 'x1';
+  showStatus('Click X-axis minimum point on the image.');
 });
 
+// ===== Canvas click handler (with scaling fix) =====
 canvas.addEventListener('click', e=>{
   if(!imgLoaded) return;
   const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const x = (e.clientX - rect.left) * scaleX;
+  const y = (e.clientY - rect.top) * scaleY;
 
-  if(step==='x1'){ xPixMin={x,y}; step='x2'; draw(); alert('Click X axis maximum point.'); return; }
-  if(step==='x2'){ xPixMax={x,y}; step='y1'; draw(); alert('Click Y axis minimum point.'); return; }
-  if(step==='y1'){ yPixMin={x,y}; step='y2'; draw(); alert('Click Y axis maximum point.'); return; }
-  if(step==='y2'){ yPixMax={x,y}; step='points';
-    // Ensure top vs bottom
+  if(step==='x1'){ xPixMin={x,y}; step='x2'; draw(); showStatus('Click X-axis maximum point.'); return; }
+  if(step==='x2'){ xPixMax={x,y}; step='y1'; draw(); showStatus('Click Y-axis minimum point.'); return; }
+  if(step==='y1'){ yPixMin={x,y}; step='y2'; draw(); showStatus('Click Y-axis maximum point.'); return; }
+  if(step==='y2'){
+    yPixMax={x,y};
     if(yPixMin.y < yPixMax.y){ [yPixMin,yPixMax] = [yPixMax,yPixMin]; }
-    draw(); alert('Calibration complete. Now click data points.'); return; }
+    step='points';
+    axisLocked = true;
+    lockAxisInputs();
+    draw();
+    showStatus('✅ Calibration complete. Now click data points.');
+    return;
+  }
 
   if(step==='points'){
-    const xMinVal=parseFloat(document.getElementById('xMin').value);
-    const xMaxVal=parseFloat(document.getElementById('xMax').value);
-    const yMinVal=parseFloat(document.getElementById('yMin').value);
-    const yMaxVal=parseFloat(document.getElementById('yMax').value);
-    const xScale = document.getElementById('xScale').value;
-    const yScale = document.getElementById('yScale').value;
+    const xScale = xScaleEl.value;
+    const yScale = yScaleEl.value;
+    const xMinVal=parseFloat(xMin.value);
+    const xMaxVal=parseFloat(xMax.value);
+    const yMinVal=parseFloat(yMin.value);
+    const yMaxVal=parseFloat(yMax.value);
 
-    let xData = xScale==='linear' ?
+    // --- Raw (untranslated) values ---
+    let xRaw = xScale==='linear' ?
       xMinVal + (x - xPixMin.x)*(xMaxVal - xMinVal)/(xPixMax.x - xPixMin.x) :
-      Math.pow(10, Math.log10(xMinVal) + (x - xPixMin.x)*(Math.log10(xMaxVal)-Math.log10(xMinVal))/(xPixMax.x - xPixMin.x));
+      Math.pow(10, Math.log10(xMinVal)+(x - xPixMin.x)*(Math.log10(xMaxVal)-Math.log10(xMinVal))/(xPixMax.x - xPixMin.x));
 
-    let yData = yScale==='linear' ?
+    let yRaw = yScale==='linear' ?
       yMinVal + (yPixMin.y - y)*(yMaxVal - yMinVal)/(yPixMin.y - yPixMax.y) :
-      Math.pow(10, Math.log10(yMinVal) + (yPixMin.y - y)*(Math.log10(yMaxVal)-Math.log10(yMinVal))/(yPixMin.y - yPixMax.y));
+      Math.pow(10, Math.log10(yMinVal)+(yPixMin.y - y)*(Math.log10(yMaxVal)-Math.log10(yMinVal))/(yPixMin.y - yPixMax.y));
 
-    if((xScale==='log' && xData<=0) || (yScale==='log' && yData<=0)){ alert('Data point cannot be zero/negative on log scale.'); return; }
+    // --- Translated values (for export/CSV only) ---
+    const xConverted = convertTime(xRaw, xInputUnit.value, xOutputUnit.value);
+    const yConverted = convertConc(yRaw, yInputUnit.value, yOutputUnit.value);
 
-    if(!axisLocked){ axisLocked=true; lockAxisInputs(); }
-    points.push({x:xData, y:yData}); draw(); updateTable();
+    points.push({xRaw, yRaw, xConverted, yConverted});
+    draw(); updateTable();
   }
 });
 
+// ===== Drawing =====
 function draw(){
   if(!imgLoaded) return;
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -174,62 +642,130 @@ function draw(){
   if(xPixMax) drawMarker(xPixMax,'Xmax');
   if(yPixMin) drawMarker(yPixMin,'Ymin');
   if(yPixMax) drawMarker(yPixMax,'Ymax');
-
   ctx.fillStyle='red';
   points.forEach(p=>{
-    const coords = dataToPixel(p.x,p.y);
+    const coords=dataToPixel(p.xRaw,p.yRaw);
     ctx.beginPath(); ctx.arc(coords.x,coords.y,4,0,2*Math.PI); ctx.fill();
   });
 }
 
 function drawMarker(pos,label){
-  ctx.fillStyle='green';
-  ctx.beginPath(); ctx.arc(pos.x,pos.y,5,0,2*Math.PI); ctx.fill();
-  ctx.fillStyle='white';
-  ctx.fillText(label,pos.x+6,pos.y-6);
+  ctx.fillStyle='limegreen';
+  ctx.beginPath();
+  ctx.arc(pos.x,pos.y,6,0,2*Math.PI);
+  ctx.fill();
+  ctx.strokeStyle='black';
+  ctx.lineWidth=1;
+  ctx.stroke();
+  ctx.font='14px sans-serif';
+  ctx.fillStyle='black';
+  ctx.fillText(label,pos.x+8,pos.y-8);
 }
 
 function dataToPixel(xVal,yVal){
-  const xMinVal=parseFloat(document.getElementById('xMin').value);
-  const xMaxVal=parseFloat(document.getElementById('xMax').value);
-  const yMinVal=parseFloat(document.getElementById('yMin').value);
-  const yMaxVal=parseFloat(document.getElementById('yMax').value);
-  const xScale = document.getElementById('xScale').value;
-  const yScale = document.getElementById('yScale').value;
+  const xMinVal=parseFloat(xMin.value);
+  const xMaxVal=parseFloat(xMax.value);
+  const yMinVal=parseFloat(yMin.value);
+  const yMaxVal=parseFloat(yMax.value);
+  const xScale=xScaleEl.value;
+  const yScale=yScaleEl.value;
 
   let x = xScale==='linear' ?
     (xVal - xMinVal)*(xPixMax.x - xPixMin.x)/(xMaxVal - xMinVal)+xPixMin.x :
     (Math.log10(xVal)-Math.log10(xMinVal))*(xPixMax.x - xPixMin.x)/(Math.log10(xMaxVal)-Math.log10(xMinVal))+xPixMin.x;
-
   let y = yScale==='linear' ?
     yPixMin.y - (yVal - yMinVal)*(yPixMin.y - yPixMax.y)/(yMaxVal - yMinVal) :
     yPixMin.y - (Math.log10(yVal)-Math.log10(yMinVal))*(yPixMin.y - yPixMax.y)/(Math.log10(yMaxVal)-Math.log10(yMinVal));
-
   return {x,y};
 }
 
+// ===== Table + Reset =====
 function updateTable(){
   const tbody=document.querySelector('#pointsTable tbody');
   tbody.innerHTML='';
   points.forEach((p,i)=>{
-    const row = document.createElement('tr');
-    row.innerHTML=`<td>${i+1}</td><td>${p.x.toPrecision(6)}</td><td>${p.y.toPrecision(6)}</td>`;
-    tbody.appendChild(row);
+    const r=document.createElement('tr');
+    r.innerHTML=`<td>${i+1}</td><td>${p.xConverted.toPrecision(6)}</td><td>${p.yConverted.toPrecision(6)}</td>`;
+    tbody.appendChild(r);
   });
 }
 
 function resetAll(){
   points=[]; step='idle'; axisLocked=false;
   xPixMin=xPixMax=yPixMin=yPixMax=null;
-  unlockAxisInputs(); updateTable(); draw();
+  ['xMin','xMax','yMin','yMax'].forEach(id=>document.getElementById(id).value='');
+  unlockAxisInputs();
+  updateTable();
+  draw();
+  showStatus('Reset complete. Ready for new calibration.');
 }
 
 document.getElementById('resetBtn').addEventListener('click', resetAll);
 document.getElementById('copyBtn').addEventListener('click', ()=>{
-  let csv='X,Y\n'; points.forEach(p=>{ csv+=`${p.x},${p.y}\n`; });
+  if(points.length===0){ showStatus('⚠️ No points to copy.'); return; }
+  let csv='X (converted),Y (converted)\n';
+  points.forEach(p=> csv+=`${p.xConverted},${p.yConverted}\n`);
   navigator.clipboard.writeText(csv);
-  alert('Copied CSV to clipboard');
+  showStatus('Copied translated CSV to clipboard.');
 });
 </script>
 </body>
+<footer>
+  <div class="footer-bar" style="display:flex; flex-direction:column; align-items:center; gap:0.5em;">
+
+    <!-- Single line with left, center, right spaced -->
+    <div style="display:flex; align-items:center; justify-content:space-between; width:100%; max-width:1200px; flex-wrap:wrap; gap:1em;">
+
+      <!-- Left: copyright -->
+      <span class="copyright">
+        © <span id="year"></span> Angélique Perrillat-Mercerot • QSP/PK Modeling • Vantage-Research
+      </span>
+
+      <!-- Middle: Buy me a coffee -->
+      <div style="text-align:center; min-width:50px">
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" 
+          data-name="bmc-button" 
+          data-slug="aperrillat" 
+          data-color="#4D6A6D"  
+          data-emoji=""  
+          data-font="Poppins" 
+          data-text="Help me out-calculate my cats" 
+          data-font-color="#ffffff" 
+          data-coffee-color="#FFDD00">
+        </script>
+      </div>
+
+      <!-- Right: social icons -->
+      <div class="social-icons" style="display:flex; align-items:center; gap:0.5em;">
+        <a href="mailto:angelique.perrillat@gmail.com" class="icon-0" target="_blank" aria-label="Email"></a>
+        <a href="https://www.linkedin.com/in/angelique-perrillat/" class="icon-1" target="_blank" aria-label="LinkedIn"></a>
+        <a href="https://www.researchgate.net/profile/Angelique-Perrillat-Mercerot" class="icon-2" target="_blank" aria-label="ResearchGate"></a>
+        <a href="https://scholar.google.com/citations?user=IST0DUIAAAAJ&hl=fr&oi=ao" class="icon-3" target="_blank" aria-label="Google Scholar"></a>
+        <a href="http://www.theses.fr/2019POIT2285" class="icon-4" target="_blank" aria-label="Thesis"></a>
+        <a href="https://github.com/Aperril" class="icon-5" target="_blank" aria-label="GitHub"></a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CSS fix for button size -->
+  <style>
+    .bmc-btn-container .bmc-btn {
+      font-size: 12px !important;   /* smaller text */
+      padding: 4px 8px !important;  /* tighter padding */
+      height: auto !important;      /* shrink height */
+      line-height: 1.2 !important;  /* compact line height */
+    }
+    .bmc-btn-container .bmc-btn img {
+      height: 14px !important;      /* shrink coffee icon */
+      width: auto !important;
+    }
+  </style>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
 </html>
+
