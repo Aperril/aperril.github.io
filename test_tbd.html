@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#2a7ae2" />
+<title>In Silico Kitten Chat</title>
+<style>
+:root {
+  --bg: #E0F2E9;
+  --text: #4D6A6D;
+  --muted: #5B787A;
+  --line: #CEB5A7;
+  --accent: #A1B5D8;
+  --accent-strong: #B76D68;
+  --card: #ffffff;
+  --shadow: 0 10px 25px rgba(0,0,0,.05);
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --maxw: 1080px;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 20px;
+}
+h1, p {
+  max-width: var(--maxw);
+  margin: auto;
+}
+#aiGuideButton {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background-color: var(--accent);
+  color: var(--card);
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+}
+#chatbox {
+  position: fixed;
+  bottom: 90px;
+  right: 18px;
+  width: 340px;
+  max-height: 450px;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  border: 1px solid var(--line);
+}
+#chatHeader {
+  background-color: var(--accent);
+  color: var(--card);
+  padding: 12px;
+  font-weight: bold;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  text-align: center;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+#chatMessages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+.message {
+  margin: 5px 0;
+  padding: 8px 12px;
+  border-radius: var(--radius-xl);
+  max-width: 80%;
+  word-wrap: break-word;
+  user-select: text;
+}
+.user {
+  background-color: var(--accent);
+  color: var(--card);
+  align-self: flex-end;
+}
+.ai {
+  background-color: var(--bg);
+  align-self: flex-start;
+}
+.message a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+#chatInput {
+  display: flex;
+  border-top: 1px solid var(--line);
+}
+#chatInput input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 0 0 0 var(--radius-lg);
+}
+#chatInput button {
+  border: none;
+  background-color: var(--accent-strong);
+  color: var(--card);
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 0 0 var(--radius-lg) 0;
+}
+#chatInput input:focus {
+  outline: none;
+}
+</style>
+</head>
+<body>
+
+<h1>In Silico Kitten Chat Demo</h1>
+<p>Click the floating cat button to chat. Ask me anything, and I might suggest a page or just chat like a cat! 🐱</p>
+
+<button id="aiGuideButton">🐾</button>
+
+<div id="chatbox" role="region" aria-live="polite" aria-label="Chatbox">
+  <div id="chatHeader">In Silico Kitten Chat</div>
+  <div id="chatMessages"></div>
+  <div id="chatInput">
+    <input type="text" id="messageInput" placeholder="Type your question..." aria-label="Chat input" />
+    <button id="sendButton" aria-label="Send message">Send</button>
+  </div>
+</div>
+
+<script>
+const aiButton = document.getElementById('aiGuideButton');
+const chatbox = document.getElementById('chatbox');
+const chatMessages = document.getElementById('chatMessages');
+const messageInput = document.getElementById('messageInput');
+const sendButton = document.getElementById('sendButton');
+
+const pages = {
+  projects: "index.html#projects",
+  toolbox: "index.html#toolbox",
+  contact: "index.html#contact",
+  publications: "index.html#publications",
+  home: "index.html#home"
+};
+
+const keywordsMap = {
+  projects: [
+    "project", "projects", "QSP", "PK", "NCA", "PBPK", "research", "pharma",
+    "PKPD", "qualifications", "skills", "matlab", "R", "python", "PKsim"
+  ],
+  toolbox: [
+    "tools", "toolbox", "services", "help", "support", "offer", "features", "options",
+    "utilities", "resources", "solutions", "assist", "assistance", "capabilities", "function", "free"
+    "popularization","teaching","td","tips","start"
+  ],
+  contact: [
+    "contact", "email", "phone", "call", "reach", "message", "support", "address",
+    "location", "inquiry", "feedback", "helpdesk", "connect", "customer service", "communication"
+  ],
+  publications: [
+    "blog", "articles", "news", "posts", "publications", "updates", "stories", "media",
+    "announcements", "reports", "journals", "writeup", "insights", "press", "reviews", "contributions", "posters",
+    "reward","grant", "isop", "conference"
+  ],
+  home: [
+    "home", "welcome", "main", "start", "landing", "frontpage", "dashboard", "overview",
+    "introduction", "opening", "index", "base", "entry", "hub", "portal"
+  ]
+};
+
+const gratitudeReplies = [
+  "*purrs* You’re welcome! 🐾","Meow! Anytime!","Tail wiggle! Glad I helped!","Purr… happy to help!",
+  "Meow meow! No problem!","*tail flick* You're welcome!","Purrs! My pleasure! 🐱","Mee-ow! Don’t mention it!",
+  "*purrs loudly* Anytime friend!","Meow! Happy to assist!"
+];
+
+const negativeReplies = [
+  "Ew, I guess I need to go to the litter 😿, please contact the owner: <a href='" + pages.contact + "'>Contact Section</a>",
+  "*hiss* Something is broken! Contact the owner: <a href='" + pages.contact + "'>Contact Section</a>",
+  "Meow… that’s not good 😿, maybe contact the owner: <a href='" + pages.contact + "'>Contact Section</a>",
+  "Tail flick! Something's off! <a href='" + pages.contact + "'>Contact Section</a>",
+  "Hiss… yikes! Please contact: <a href='" + pages.contact + "'>Contact Section</a>",
+  "Meow… need help? Contact: <a href='" + pages.contact + "'>Contact Section</a>",
+  "*purrs worried* Something went wrong! <a href='" + pages.contact + "'>Contact Section</a>",
+  "Eeek! 😿 Contact the owner: <a href='" + pages.contact + "'>Contact Section</a>",
+  "Hiss hiss! Broken? <a href='" + pages.contact + "'>Contact Section</a>",
+  "Tail wiggle… but not working? <a href='" + pages.contact + "'>Contact Section</a>"
+];
+
+const generalReplies = [
+  "Meow? Can you tell me more? 🐾","*tail flick* I’m listening!","*purrs* Interesting!","Hiss… Just kidding 😸",
+  "*purrs softly* Go on…","Mee-ow! What else?","Tail wiggle! I’m curious!","Purrs! Tell me more 🐱",
+  "*tail flicks* Fascinating!","Meow meow! I’m all ears!"
+];
+
+// Random replies for each page keyword group
+const suggestionReplies = {
+  projects: [
+    "*purrs* I think you want the <a href='" + pages.projects + "'>Projects Section</a> 🐱",
+    "Meow! Maybe try the <a href='" + pages.projects + "'>Projects Section</a>!",
+    "*tail flick* Check out the <a href='" + pages.projects + "'>Projects Section</a>",
+    "Hiss… try the <a href='" + pages.projects + "'>Projects Section</a>",
+    "*purrs loudly* Perhaps the <a href='" + pages.projects + "'>Projects Section</a> is good!",
+    "Meow meow! Take a look at <a href='" + pages.projects + "'>Projects Section</a>!",
+    "Tail wiggle! You might like the <a href='" + pages.projects + "'>Projects Section</a>",
+    "Mee-ow! How about the <a href='" + pages.projects + "'>Projects Section</a>?",
+    "*purrs* Maybe this helps: <a href='" + pages.projects + "'>Projects Section</a>",
+    "Meow! Perhaps the <a href='" + pages.projects + "'>Projects Section</a> 🐾"
+  ],
+  toolbox: [
+    "*purrs* I think you want the <a href='" + pages.toolbox + "'>Toolbox Section</a> 🐱",
+    "Meow! Maybe try the <a href='" + pages.toolbox + "'>Toolbox Section</a>!",
+    "*tail flick* Check out the <a href='" + pages.toolbox + "'>Toolbox Section</a>",
+    "Hiss… try the <a href='" + pages.toolbox + "'>Toolbox Section</a>",
+    "*purrs loudly* Perhaps the <a href='" + pages.toolbox + "'>Toolbox Section</a> is good!",
+    "Meow meow! Take a look at <a href='" + pages.toolbox + "'>Toolbox Section</a>!",
+    "Tail wiggle! You might like the <a href='" + pages.toolbox + "'>Toolbox Section</a>",
+    "Mee-ow! How about the <a href='" + pages.toolbox + "'>Toolbox Section</a>?",
+    "*purrs* Maybe this helps: <a href='" + pages.toolbox + "'>Toolbox Section</a>",
+    "Meow! Perhaps the <a href='" + pages.toolbox + "'>Toolbox Section</a> 🐾"
+  ],
+  contact: [
+    "*purrs* I think you want the <a href='" + pages.contact + "'>Contact Section</a> 🐱",
+    "Meow! Maybe try the <a href='" + pages.contact + "'>Contact Section</a>!",
+    "*tail flick* Check out the <a href='" + pages.contact + "'>Contact Section</a>",
+    "Hiss… try the <a href='" + pages.contact + "'>Contact Section</a>",
+    "*purrs loudly* Perhaps the <a href='" + pages.contact + "'>Contact Section</a> is good!",
+    "Meow meow! Take a look at <a href='" + pages.contact + "'>Contact Section</a>!",
+    "Tail wiggle! You might like the <a href='" + pages.contact + "'>Contact Section</a>",
+    "Mee-ow! How about the <a href='" + pages.contact + "'>Contact Section</a>?",
+    "*purrs* Maybe this helps: <a href='" + pages.contact + "'>Contact Section</a>",
+    "Meow! Perhaps the <a href='" + pages.contact + "'>Contact Section</a> 🐾"
+  ],
+  publications: [
+    "*purrs* I think you want the <a href='" + pages.publications + "'>Publications Section</a> 🐱",
+    "Meow! Maybe try the <a href='" + pages.publications + "'>Publications Section</a>!",
+    "*tail flick* Check out the <a href='" + pages.publications + "'>Publications Section</a>",
+    "Hiss… try the <a href='" + pages.publications + "'>Publications Section</a>",
+    "*purrs loudly* Perhaps the <a href='" + pages.publications + "'>Publications Section</a> is good!",
+    "Meow meow! Take a look at <a href='" + pages.publications + "'>Publications Section</a>!",
+    "Tail wiggle! You might like the <a href='" + pages.publications + "'>Publications Section</a>",
+    "Mee-ow! How about the <a href='" + pages.publications + "'>Publications Section</a>?",
+    "*purrs* Maybe this helps: <a href='" + pages.publications + "'>Publications Section</a>",
+    "Meow! Perhaps the <a href='" + pages.publications + "'>Publications Section</a> 🐾"
+  ],
+  home: [
+    "*purrs* I think you want the <a href='" + pages.home + "'>Home Section</a> 🐱",
+    "Meow! Maybe try the <a href='" + pages.home + "'>Home Section</a>!",
+    "*tail flick* Check out the <a href='" + pages.home + "'>Home Section</a>",
+    "Hiss… try the <a href='" + pages.home + "'>Home Section</a>",
+    "*purrs loudly* Perhaps the <a href='" + pages.home + "'>Home Section</a> is good!",
+    "Meow meow! Take a look at <a href='" + pages.home + "'>Home Section</a>!",
+    "Tail wiggle! You might like the <a href='" + pages.home + "'>Home Section</a>",
+    "Mee-ow! How about the <a href='" + pages.home + "'>Home Section</a>?",
+    "*purrs* Maybe this helps: <a href='" + pages.home + "'>Home Section</a>",
+    "Meow! Perhaps the <a href='" + pages.home + "'>Home Section</a> 🐾"
+  ]
+};
+
+let conversation = [];
+
+aiButton.addEventListener('click', () => {
+  const isVisible = chatbox.style.display === 'flex';
+  chatbox.style.display = isVisible ? 'none' : 'flex';
+  if (!isVisible) {
+    addMessage("Meow! 🐾 Hi there! What would you like to chat about?", "ai");
+  }
+});
+
+function scrollChat() {
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function randomChoice(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// Returns the page key if any keyword matched, else null
+function detectPageKeyword(input) {
+  for (const [page, keys] of Object.entries(keywordsMap)) {
+    for (const kw of keys) {
+      if (input.includes(kw)) return page;
+    }
+  }
+  return null;
+}
+
+function getPageSuggestionReply(pageKey) {
+  if (pageKey && suggestionReplies[pageKey]) {
+    return randomChoice(suggestionReplies[pageKey]);
+  }
+  // fallback generic suggestion from projects
+  return randomChoice(suggestionReplies.projects);
+}
+
+function getAIResponse(userMessage) {
+  conversation.push({ role: "user", content: userMessage });
+  const input = userMessage.toLowerCase();
+
+  // Gratitude keywords
+  const thanksKeywords = ["thank", "thanks", "thx", "wp", "nice"];
+  if (thanksKeywords.some(k => input.includes(k))) {
+    return randomChoice(gratitudeReplies);
+  }
+
+  // Negative keywords
+  const negativeKeywords = ["no", "not working", "doesn't work", "broken", "problem", "issue", ":("];
+  if (negativeKeywords.some(k => input.includes(k))) {
+    return randomChoice(negativeReplies);
+  }
+
+  // Check for page keyword
+  const pageKey = detectPageKeyword(input);
+  if (pageKey) {
+    return getPageSuggestionReply(pageKey);
+  }
+
+  // Default general reply
+  return randomChoice(generalReplies);
+}
+
+function addMessage(text, sender) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${sender}`;
+  chatMessages.appendChild(messageDiv);
+
+  // Type text letter by letter
+  let i = 0;
+  function typeWriter() {
+    if (i < text.length) {
+      // Append next character
+      messageDiv.innerHTML += text.charAt(i);
+      i++;
+      scrollChat();
+      setTimeout(typeWriter, 25); // typing speed
+    }
+  }
+  typeWriter();
+  scrollChat();
+}
+
+sendButton.addEventListener('click', () => {
+  const userText = messageInput.value.trim();
+  if (!userText) return;
+  addMessage(userText, "user");
+  messageInput.value = "";
+  setTimeout(() => {
+    const aiReply = getAIResponse(userText);
+    addMessage(aiReply, "ai");
+  }, 400);
+});
+
+messageInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    sendButton.click();
+  }
+});
+</script>
+
+</body>
+</html>
