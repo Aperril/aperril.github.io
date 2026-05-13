@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QSP/PK Digitizer – Lead Scientist</title>
+<style>
+  :root {
+    --bg: #E0F2E9;
+    --text: #4D6A6D;
+    --line: #CEB5A7;
+    --accent: #A1B5D8;
+    --accent-strong: #B76D68;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    --maxw: 1080px;
+  }
+  body {
+    margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial;
+    background: var(--bg); color: var(--text); line-height:1.6;
+  }
+  main{max-width:var(--maxw);margin:24px auto 60px;padding:0 20px;}
+  canvas{
+    border:1px solid var(--line);
+    display:block;
+    margin-bottom:16px;
+    max-width:100%; /* keep responsive */
+  }
+  .panel{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-xl); padding:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,.05);
+  }
+  .axis-group { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:12px; }
+  fieldset { border:1px solid var(--line); border-radius:var(--radius-lg); padding:12px 16px; flex:1; min-width:240px; }
+  fieldset legend { font-weight:600; }
+  fieldset label { display:block; margin:6px 0; font-size:14px; }
+  .buttons { display:flex; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+  table { width:100%; border-collapse:collapse; margin-top:12px; }
+  th, td { border:1px solid var(--line); padding:4px 6px; text-align:right; }
+  th { background:var(--bg); }
+  button { padding:6px 12px; border:none; border-radius:var(--radius-lg); background:var(--accent); color:#fff; cursor:pointer; }
+  button:hover{background:var(--accent-strong);}
+  #statusBox {
+    padding:8px 12px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    margin-bottom:12px;
+    font-size:15px;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+<main>
+  <h2>Catty Plotty Digitizer</h2>
+  <input type="file" id="fileInput" accept="image/*"><br><br>
+  <canvas id="canvas" width="600" height="400"></canvas>
+  <div id="statusBox">Load an image to begin.</div>
+
+  <div class="panel">
+    <h3>Calibration</h3>
+    <div class="axis-group">
+      <fieldset>
+        <legend>X axis</legend>
+        <label>X min<input id="xMin" type="number" step="any" placeholder="Enter X min"></label>
+        <label>X max<input id="xMax" type="number" step="any" placeholder="Enter X max"></label>
+        <label>Scale
+          <select id="xScale">
+            <option value="linear">Linear</option>
+            <option value="log">Log</option>
+          </select>
+        </label>
+        <label>Input Unit
+          <select id="xInputUnit">
+            <option value="none">No translation</option>
+            <option value="s">Seconds</option>
+            <option value="min">Minutes</option>
+            <option value="h">Hours</option>
+            <option value="month">Months</option>
+            <option value="year">Years</option>
+          </select>
+        </label>
+        <label>Output Unit
+          <select id="xOutputUnit">
+            <option value="none">No translation</option>
+            <option value="s">Seconds</option>
+            <option value="min">Minutes</option>
+            <option value="h">Hours</option>
+            <option value="month">Months</option>
+            <option value="year">Years</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Y axis</legend>
+        <label>Y min<input id="yMin" type="number" step="any" placeholder="Enter Y min"></label>
+        <label>Y max<input id="yMax" type="number" step="any" placeholder="Enter Y max"></label>
+        <label>Scale
+          <select id="yScale">
+            <option value="linear">Linear</option>
+            <option value="log">Log</option>
+          </select>
+        </label>
+        <label>Input Unit
+          <select id="yInputUnit">
+            <option value="none">No translation</option>
+            <option value="pg_ml">pg/mL</option>
+            <option value="pg_l">pg/L</option>
+            <option value="mg_l">mg/L</option>
+          </select>
+        </label>
+        <label>Output Unit
+          <select id="yOutputUnit">
+            <option value="none">No translation</option>
+            <option value="pg_ml">pg/mL</option>
+            <option value="pg_l">pg/L</option>
+            <option value="mg_l">mg/L</option>
+          </select>
+        </label>
+      </fieldset>
+    </div>
+
+    <div class="buttons">
+      <button id="startCalibration">Start Calibration</button>
+      <button id="resetBtn">Reset calibration & points</button>
+      <button id="copyBtn">Copy CSV</button>
+    </div>
+
+    <h3>Digitized Points</h3>
+    <table id="pointsTable"><thead><tr><th>#</th><th>X</th><th>Y</th></tr></thead><tbody></tbody></table>
+  </div>
+</main>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let img = new Image();
+let imgLoaded = false;
+let step = 'idle';
+let xPixMin = null, xPixMax = null;
+let yPixMin = null, yPixMax = null;
+let points = [];
+let axisLocked = false;
+
+// ===== Unit conversions =====
+function convertTime(value, from, to){
+  if(from === 'none' || to === 'none' || from === to) return value;
+  const seconds = { s:1, min:60, h:3600, month:30*24*3600, year:365*24*3600 };
+  return value * (seconds[from] / seconds[to]);
+}
+function convertConc(value, from, to){
+  if(from === 'none' || to === 'none' || from === to) return value;
+  const pgPerMl = { pg_ml:1, pg_l:1e-3, mg_l:1e6 };
+  return value * (pgPerMl[from] / pgPerMl[to]);
+}
+
+// Shortcuts
+const xMin=document.getElementById('xMin');
+const xMax=document.getElementById('xMax');
+const yMin=document.getElementById('yMin');
+const yMax=document.getElementById('yMax');
+const xScaleEl=document.getElementById('xScale');
+const yScaleEl=document.getElementById('yScale');
+const xInputUnit=document.getElementById('xInputUnit');
+const xOutputUnit=document.getElementById('xOutputUnit');
+const yInputUnit=document.getElementById('yInputUnit');
+const yOutputUnit=document.getElementById('yOutputUnit');
+const statusBox=document.getElementById('statusBox');
+
+function showStatus(msg){ statusBox.textContent = msg; }
+
+function lockAxisInputs() {
+  ['xMin','xMax','xScale','yMin','yMax','yScale',
+   'xInputUnit','xOutputUnit','yInputUnit','yOutputUnit'].forEach(id=>{
+    document.getElementById(id).disabled = true;
+  });
+}
+function unlockAxisInputs() {
+  ['xMin','xMax','xScale','yMin','yMax','yScale',
+   'xInputUnit','xOutputUnit','yInputUnit','yOutputUnit'].forEach(id=>{
+    document.getElementById(id).disabled = false;
+  });
+}
+
+// ===== Image upload =====
+document.getElementById('fileInput').addEventListener('change', e=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev=>{
+    img.onload = ()=>{
+      imgLoaded = true;
+      canvas.width = img.width;
+      canvas.height = img.height;
+      points = [];
+      axisLocked = false;
+      step = 'idle';
+      xPixMin = xPixMax = yPixMin = yPixMax = null;
+      unlockAxisInputs();
+      updateTable();
+      draw();
+      showStatus('Image loaded! Enter axis ranges and click "Start Calibration".');
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+// ===== Start calibration =====
+document.getElementById('startCalibration').addEventListener('click', ()=>{
+  if(!imgLoaded){ showStatus('Wait. Load an image first.'); return; }
+  const xMinVal = parseFloat(xMin.value);
+  const xMaxVal = parseFloat(xMax.value);
+  const yMinVal = parseFloat(yMin.value);
+  const yMaxVal = parseFloat(yMax.value);
+  if([xMinVal,xMaxVal,yMinVal,yMaxVal].some(isNaN)){
+    showStatus('Wait. Please enter all numeric min/max values.');
+    return;
+  }
+  step = 'x1';
+  showStatus('Click X-axis minimum point on the image.');
+});
+
+// ===== Canvas click handler (with scaling fix) =====
+canvas.addEventListener('click', e=>{
+  if(!imgLoaded) return;
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const x = (e.clientX - rect.left) * scaleX;
+  const y = (e.clientY - rect.top) * scaleY;
+
+  if(step==='x1'){ xPixMin={x,y}; step='x2'; draw(); showStatus('Click X-axis maximum point.'); return; }
+  if(step==='x2'){ xPixMax={x,y}; step='y1'; draw(); showStatus('Click Y-axis minimum point.'); return; }
+  if(step==='y1'){ yPixMin={x,y}; step='y2'; draw(); showStatus('Click Y-axis maximum point.'); return; }
+  if(step==='y2'){
+    yPixMax={x,y};
+    if(yPixMin.y < yPixMax.y){ [yPixMin,yPixMax] = [yPixMax,yPixMin]; }
+    step='points';
+    axisLocked = true;
+    lockAxisInputs();
+    draw();
+    showStatus('✅ Calibration complete. Now click data points.');
+    return;
+  }
+
+  if(step==='points'){
+    const xScale = xScaleEl.value;
+    const yScale = yScaleEl.value;
+    const xMinVal=parseFloat(xMin.value);
+    const xMaxVal=parseFloat(xMax.value);
+    const yMinVal=parseFloat(yMin.value);
+    const yMaxVal=parseFloat(yMax.value);
+
+    // --- Raw (untranslated) values ---
+    let xRaw = xScale==='linear' ?
+      xMinVal + (x - xPixMin.x)*(xMaxVal - xMinVal)/(xPixMax.x - xPixMin.x) :
+      Math.pow(10, Math.log10(xMinVal)+(x - xPixMin.x)*(Math.log10(xMaxVal)-Math.log10(xMinVal))/(xPixMax.x - xPixMin.x));
+
+    let yRaw = yScale==='linear' ?
+      yMinVal + (yPixMin.y - y)*(yMaxVal - yMinVal)/(yPixMin.y - yPixMax.y) :
+      Math.pow(10, Math.log10(yMinVal)+(yPixMin.y - y)*(Math.log10(yMaxVal)-Math.log10(yMinVal))/(yPixMin.y - yPixMax.y));
+
+    // --- Translated values (for export/CSV only) ---
+    const xConverted = convertTime(xRaw, xInputUnit.value, xOutputUnit.value);
+    const yConverted = convertConc(yRaw, yInputUnit.value, yOutputUnit.value);
+
+    points.push({xRaw, yRaw, xConverted, yConverted});
+    draw(); updateTable();
+  }
+});
+
+// ===== Drawing =====
+function draw(){
+  if(!imgLoaded) return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  if(xPixMin) drawMarker(xPixMin,'Xmin');
+  if(xPixMax) drawMarker(xPixMax,'Xmax');
+  if(yPixMin) drawMarker(yPixMin,'Ymin');
+  if(yPixMax) drawMarker(yPixMax,'Ymax');
+  ctx.fillStyle='red';
+  points.forEach(p=>{
+    const coords=dataToPixel(p.xRaw,p.yRaw);
+    ctx.beginPath(); ctx.arc(coords.x,coords.y,4,0,2*Math.PI); ctx.fill();
+  });
+}
+
+function drawMarker(pos,label){
+  ctx.fillStyle='limegreen';
+  ctx.beginPath();
+  ctx.arc(pos.x,pos.y,6,0,2*Math.PI);
+  ctx.fill();
+  ctx.strokeStyle='black';
+  ctx.lineWidth=1;
+  ctx.stroke();
+  ctx.font='14px sans-serif';
+  ctx.fillStyle='black';
+  ctx.fillText(label,pos.x+8,pos.y-8);
+}
+
+function dataToPixel(xVal,yVal){
+  const xMinVal=parseFloat(xMin.value);
+  const xMaxVal=parseFloat(xMax.value);
+  const yMinVal=parseFloat(yMin.value);
+  const yMaxVal=parseFloat(yMax.value);
+  const xScale=xScaleEl.value;
+  const yScale=yScaleEl.value;
+
+  let x = xScale==='linear' ?
+    (xVal - xMinVal)*(xPixMax.x - xPixMin.x)/(xMaxVal - xMinVal)+xPixMin.x :
+    (Math.log10(xVal)-Math.log10(xMinVal))*(xPixMax.x - xPixMin.x)/(Math.log10(xMaxVal)-Math.log10(xMinVal))+xPixMin.x;
+  let y = yScale==='linear' ?
+    yPixMin.y - (yVal - yMinVal)*(yPixMin.y - yPixMax.y)/(yMaxVal - yMinVal) :
+    yPixMin.y - (Math.log10(yVal)-Math.log10(yMinVal))*(yPixMin.y - yPixMax.y)/(Math.log10(yMaxVal)-Math.log10(yMinVal));
+  return {x,y};
+}
+
+// ===== Table + Reset =====
+function updateTable(){
+  const tbody=document.querySelector('#pointsTable tbody');
+  tbody.innerHTML='';
+  points.forEach((p,i)=>{
+    const r=document.createElement('tr');
+    r.innerHTML=`<td>${i+1}</td><td>${p.xConverted.toPrecision(6)}</td><td>${p.yConverted.toPrecision(6)}</td>`;
+    tbody.appendChild(r);
+  });
+}
+
+function resetAll(){
+  points=[]; step='idle'; axisLocked=false;
+  xPixMin=xPixMax=yPixMin=yPixMax=null;
+  ['xMin','xMax','yMin','yMax'].forEach(id=>document.getElementById(id).value='');
+  unlockAxisInputs();
+  updateTable();
+  draw();
+  showStatus('Reset complete. Ready for new calibration.');
+}
+
+document.getElementById('resetBtn').addEventListener('click', resetAll);
+document.getElementById('copyBtn').addEventListener('click', ()=>{
+  if(points.length===0){ showStatus('⚠️ No points to copy.'); return; }
+  let csv='X (converted),Y (converted)\n';
+  points.forEach(p=> csv+=`${p.xConverted},${p.yConverted}\n`);
+  navigator.clipboard.writeText(csv);
+  showStatus('Copied translated CSV to clipboard.');
+});
+</script>
+</body>
+</html>
